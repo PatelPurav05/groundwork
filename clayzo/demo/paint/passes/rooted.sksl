@@ -1,0 +1,94 @@
+// ROOTED. Several large things that grow from a root and bend in the wind, in one pass: hero
+// flowers, reeds, saplings, a sunflower, a dandelion clock. Each has a head (an ellipse,
+// `headSquash` tall for 1 wide, painted with strokes radiating from its centre) on a stem from a
+// root, usually below the frame. Each bends about its root with the wind there (the bend grows
+// toward the head, so the base stays planted) plus its own small rhythm, and its head strokes
+// flutter. Objects are painted front to back; the first that paints a pixel wins.
+//
+// A stroke belongs to exactly one object: the front-most whose rest shape (head or stem)
+// contains the stroke's centre. Without that, an object behind would carry a patch of the front
+// one's paint and drag it out from under it as they sway apart.
+//
+// paint.ts (rootedPass) fills the three generated sections: one set of uniforms per object,
+// frontOwns() and the unrolled front-to-back calls in main().
+//   per object: A = (head x, head y, head radius, root x)   B = (root y, index, seed, stiffness)
+uniform shader inputImage;
+uniform float phase;
+uniform float windA;
+uniform float windB;
+uniform float windC;
+uniform float windDir;
+uniform float relief;
+uniform float lightAngle;
+uniform float headSquash;     // head height / width (0.62 for a cornflower seen from the side)
+uniform float flutter;        // radians a head stroke flutters (0.07)
+//#generated-uniforms
+uniform float boundsPadding;   // room for the heads to swing
+uniform float2 renderScale;
+//#hooks
+float3 windK() { return float3(windA, windB, windC); }
+float headDistC(float2 c, float4 A) {
+  float2 d = c - A.xy;
+  d.y /= headSquash;
+  return length(d) / A.z;
+}
+float stemDist(float2 c, float4 A, float4 B) {
+  float2 a = float2(A.w, B.x);
+  float2 b = float2(A.x, A.y + 0.3 * A.z);
+  float2 ab = b - a;
+  float t = clamp(dot(c - a, ab) / dot(ab, ab), 0.0, 1.0);
+  return length(c - (a + ab * t));
+}
+bool inObject(float2 c, float4 A, float4 B) {
+  return headDistC(c, A) < 1.3 || stemDist(c, A, B) < max(5.0, A.z * 0.06);
+}
+//#generated-owners
+bool hookAlive(float2 c, float4 A, float4 B) {
+  return src(c).a > 0.5 && inObject(c, A, B) && !frontOwns(c, B.y);
+}
+float3 hookShape(float2 c, float seed, float4 A, float4 B) {
+  float hd = headDistC(c, A);
+  if (hd < 1.4) {
+    if (hd < 0.2) { return float3(seed * 6.2832, 1.05, 0.5); }
+    float2 d = c - A.xy;
+    return float3(atan(d.y / headSquash, d.x) + (seed - 0.5) * 0.55, 1.05, 0.5);   // radiating
+  }
+  return float3(-1.5708 + (seed - 0.5) * 0.12, 1.5, 0.13);                          // along the stem
+}
+float hookSway(float2 c, float2 dir, float seed, float4 A, float4 B) {
+  if (headDistC(c, A) >= 1.4) { return 0.0; }
+  return flutter * sin(windC * phase + seed * 6.2832) * (0.4 + windAt(A.w, phase, windK(), windDir));
+}
+//#main
+// Paint one object at q. hit is false when this object has no paint there.
+half4 paintObject(float2 q, float4 A, float4 B, out bool hit) {
+  hit = false;
+  float stemLen = B.x - A.y;
+  float theta = (B.w * (windAt(A.w, phase, windK(), windDir) - 0.35) + 0.018 * sin(windB * phase + B.z * 6.2832)) * windDir;
+  float sF = clamp((B.x - q.y) / stemLen, 0.0, 1.0);
+  float phi = theta * pow(sF, 1.5);
+  float2 R = float2(A.w, B.x);
+  float2 rq = R + rot(q - R, -phi);
+  if (headDistC(rq, A) > 2.0 && stemDist(rq, A, B) > A.z * 0.14 + 6.0) { return half4(0.0); }
+
+  float pitch = A.z * 0.3;
+  float2 C; float2 D; float2 Da; float2 T; float L; float Wd; float seed; float edge;
+  float z = findStroke(rq, pitch, B.z * 100.0, 0.0, A, B, C, D, Da, T, L, Wd, seed, edge);
+  if (z < 0.0) {
+    if (src(rq).a < 0.02 || !inObject(rq, A, B) || frontOwns(rq, B.y)) { return half4(0.0); }
+    hit = true;
+    return underpaint(rq, q, 0.84, 0.8);
+  }
+  hit = true;
+  float3 col = strokeColour(C, D, T, L, Wd);
+  float3 lit = shadeStroke(col, T, C, seed, L, Wd, rot(Da, phi), edge, relief, lightAngle) + canvasWeave(q) * 0.3;
+  return half4(half3(saturate(lit)), 1.0);
+}
+
+half4 main(float2 p) {
+  float2 q = p / renderScale.x;
+  bool hit;
+  half4 c;
+//#generated-calls
+  return half4(0.0);
+}

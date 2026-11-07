@@ -1,0 +1,1752 @@
+{
+ "total": 57926,
+ "lenses": [
+  {
+   "id": "faith",
+   "name": "Church & college land",
+   "law": "SB 4",
+   "survivors": 90,
+   "steps": [
+    {
+     "id": "pool_worship",
+     "cut": "no place of worship mapped",
+     "kind": "pool",
+     "removed": 57721,
+     "remaining": 205,
+     "cite": {
+      "doc": "SB4",
+      "page": "p1",
+      "section": "Gov Code 65913.16",
+      "caveat": "Proxy: maps show use, not ownership. A lead, not a fact."
+     }
+    },
+    {
+     "id": "x_vhfhsz",
+     "cut": "in a very high fire hazard zone",
+     "kind": "law",
+     "removed": 0,
+     "remaining": 205,
+     "cite": {
+      "doc": "SB4",
+      "page": "p2"
+     }
+    },
+    {
+     "id": "x_sfha",
+     "cut": "in a FEMA flood hazard area",
+     "kind": "law",
+     "removed": 27,
+     "remaining": 178,
+     "cite": {
+      "doc": "SB4",
+      "page": "p2",
+      "caveat": "Treating FEMA A/V zones as the special flood hazard area (unverified)"
+     }
+    },
+    {
+     "id": "p_min_10000",
+     "cut": "smaller than 10,000 sq ft",
+     "kind": "practical",
+     "removed": 78,
+     "remaining": 100
+    }
+   ],
+   "unknowns": [
+    "Owned by the institution since Jan 1, 2024",
+    "Not in an earthquake fault zone",
+    "At least 75% of the edge borders urban uses",
+    "Not within 1,200 ft of heavy industry",
+    "No wetlands, habitat or hazardous waste"
+   ],
+   "top": [
+    {
+     "apn": "396-191-44",
+     "address": "2130 N GRAND AVE",
+     "lot": 270557,
+     "use": "1245 Religious Facilities",
+     "zone": {
+      "local": "R1",
+      "category": "single_family",
+      "generalPlan": "UN-20"
+     },
+     "score": 8.8,
+     "units": 186,
+     "parts": [
+      {
+       "label": "Passes every legal test we can check",
+       "delta": 5
+      },
+      {
+       "label": "~186 homes (assumed estimate)",
+       "delta": 2.2
+      },
+      {
+       "label": "Near frequent transit: likely no parking minimum",
+       "delta": 1
+      },
+      {
+       "label": "Underused: building worth less than land, or lot mostly open",
+       "delta": 0.6
+      }
+     ],
+     "verdict": "likely",
+     "passed": [
+      "A place of worship is mapped on this parcel",
+      "Not in a very high fire hazard zone",
+      "Not in a FEMA special flood hazard area",
+      "At least 10,000 sq ft"
+     ],
+     "failed": [],
+     "unknown": [
+      "Owned by the institution since Jan 1, 2024",
+      "Not in an earthquake fault zone",
+      "At least 75% of the edge borders urban uses",
+      "Not within 1,200 ft of heavy industry",
+      "No wetlands, habitat or hazardous waste"
+     ],
+     "lng": -117.85273,
+     "lat": 33.76529
+    },
+    {
+     "apn": "011-154-11",
+     "address": "1610 E 1ST ST",
+     "lot": 51971,
+     "use": "1245 Religious Facilities",
+     "zone": {
+      "local": "C2",
+      "category": "commercial",
+      "generalPlan": "UN-40"
+     },
+     "score": 8.7,
+     "units": 47,
+     "parts": [
+      {
+       "label": "Passes every legal test we can check",
+       "delta": 5
+      },
+      {
+       "label": "~47 homes (assumed estimate)",
+       "delta": 2.1
+      },
+      {
+       "label": "Near frequent transit: likely no parking minimum",
+       "delta": 1
+      },
+      {
+       "label": "Underused: building worth less than land, or lot mostly open",
+       "delta": 0.6
+      }
+     ],
+     "verdict": "likely",
+     "passed": [
+      "A place of worship is mapped on this parcel",
+      "Not in a very high fire hazard zone",
+      "Not in a FEMA special flood hazard area",
+      "At least 10,000 sq ft"
+     ],
+     "failed": [],
+     "unknown": [
+      "Owned by the institution since Jan 1, 2024",
+      "Not in an earthquake fault zone",
+      "At least 75% of the edge borders urban uses",
+      "Not within 1,200 ft of heavy industry",
+      "No wetlands, habitat or hazardous waste"
+     ],
+     "lng": -117.84602,
+     "lat": 33.74493
+    },
+    {
+     "apn": "400-051-05",
+     "address": "600 N GOLDEN CIRCLE DR",
+     "lot": 39113,
+     "use": "1245 Religious Facilities",
+     "zone": {
+      "local": "P",
+      "category": "commercial",
+      "generalPlan": "DC-3"
+     },
+     "score": 8.6,
+     "units": 35,
+     "parts": [
+      {
+       "label": "Passes every legal test we can check",
+       "delta": 5
+      },
+      {
+       "label": "~35 homes (assumed estimate)",
+       "delta": 2
+      },
+      {
+       "label": "Near frequent transit: likely no parking minimum",
+       "delta": 1
+      },
+      {
+       "label": "Underused: building worth less than land, or lot mostly open",
+       "delta": 0.6
+      }
+     ],
+     "verdict": "likely",
+     "passed": [
+      "A place of worship is mapped on this parcel",
+      "Not in a very high fire hazard zone",
+      "Not in a FEMA special flood hazard area",
+      "At least 10,000 sq ft"
+     ],
+     "failed": [],
+     "unknown": [
+      "Owned by the institution since Jan 1, 2024",
+      "Not in an earthquake fault zone",
+      "At least 75% of the edge borders urban uses",
+      "Not within 1,200 ft of heavy industry",
+      "No wetlands, habitat or hazardous waste"
+     ],
+     "lng": -117.83845,
+     "lat": 33.75017
+    },
+    {
+     "apn": "398-071-68",
+     "address": "1510 N GRAND AVE",
+     "lot": 37706,
+     "use": "1200 Commercial and Services",
+     "zone": {
+      "local": "C5",
+      "category": "commercial",
+      "generalPlan": "UN-30"
+     },
+     "score": 8.6,
+     "units": 34,
+     "parts": [
+      {
+       "label": "Passes every legal test we can check",
+       "delta": 5
+      },
+      {
+       "label": "~34 homes (assumed estimate)",
+       "delta": 2
+      },
+      {
+       "label": "Near frequent transit: likely no parking minimum",
+       "delta": 1
+      },
+      {
+       "label": "Underused: building worth less than land, or lot mostly open",
+       "delta": 0.6
+      }
+     ],
+     "verdict": "likely",
+     "passed": [
+      "A place of worship is mapped on this parcel",
+      "Not in a very high fire hazard zone",
+      "Not in a FEMA special flood hazard area",
+      "At least 10,000 sq ft"
+     ],
+     "failed": [],
+     "unknown": [
+      "Owned by the institution since Jan 1, 2024",
+      "Not in an earthquake fault zone",
+      "At least 75% of the edge borders urban uses",
+      "Not within 1,200 ft of heavy industry",
+      "No wetlands, habitat or hazardous waste"
+     ],
+     "lng": -117.85266,
+     "lat": 33.75825
+    },
+    {
+     "apn": "398-522-09",
+     "address": "1314 N BROADWAY",
+     "lot": 45349,
+     "use": "1245 Religious Facilities",
+     "zone": {
+      "local": "SP3",
+      "category": "mixed_use",
+      "generalPlan": "PAO"
+     },
+     "score": 8.5,
+     "units": 31,
+     "parts": [
+      {
+       "label": "Passes every legal test we can check",
+       "delta": 5
+      },
+      {
+       "label": "~31 homes (assumed estimate)",
+       "delta": 1.9
+      },
+      {
+       "label": "Near frequent transit: likely no parking minimum",
+       "delta": 1
+      },
+      {
+       "label": "Underused: building worth less than land, or lot mostly open",
+       "delta": 0.6
+      }
+     ],
+     "verdict": "likely",
+     "passed": [
+      "A place of worship is mapped on this parcel",
+      "Not in a very high fire hazard zone",
+      "Not in a FEMA special flood hazard area",
+      "At least 10,000 sq ft"
+     ],
+     "failed": [],
+     "unknown": [
+      "Owned by the institution since Jan 1, 2024",
+      "Not in an earthquake fault zone",
+      "At least 75% of the edge borders urban uses",
+      "Not within 1,200 ft of heavy industry",
+      "No wetlands, habitat or hazardous waste"
+     ],
+     "lng": -117.8704,
+     "lat": 33.75624
+    },
+    {
+     "apn": "188-041-06",
+     "address": "288 S HARBOR BLVD",
+     "lot": 198271,
+     "use": "1245 Religious Facilities",
+     "zone": {
+      "local": "SP2",
+      "category": "mixed_use",
+      "generalPlan": "UN-50"
+     },
+     "score": 8.3,
+     "units": 136,
+     "parts": [
+      {
+       "label": "Passes every legal test we can check",
+       "delta": 5
+      },
+      {
+       "label": "~136 homes (assumed estimate)",
+       "delta": 2.2
+      },
+      {
+       "label": "Near frequent transit: likely no parking minimum",
+       "delta": 1
+      },
+      {
+       "label": "Underused: building worth less than land, or lot mostly open",
+       "delta": 0.6
+      },
+      {
+       "label": "Liquefaction zone: deeper foundations cost more",
+       "delta": -0.5
+      }
+     ],
+     "verdict": "likely",
+     "passed": [
+      "A place of worship is mapped on this parcel",
+      "Not in a very high fire hazard zone",
+      "Not in a FEMA special flood hazard area",
+      "At least 10,000 sq ft"
+     ],
+     "failed": [],
+     "unknown": [
+      "Owned by the institution since Jan 1, 2024",
+      "Not in an earthquake fault zone",
+      "At least 75% of the edge borders urban uses",
+      "Not within 1,200 ft of heavy industry",
+      "No wetlands, habitat or hazardous waste"
+     ],
+     "lng": -117.92121,
+     "lat": 33.743
+    }
+   ]
+  },
+  {
+   "id": "public",
+   "name": "Public land for sale",
+   "law": "Surplus Land Act",
+   "survivors": 69,
+   "steps": [
+    {
+     "id": "pool_noa",
+     "cut": "no surplus land notice",
+     "kind": "pool",
+     "removed": 57857,
+     "remaining": 69,
+     "cite": {
+      "doc": "SLAG",
+      "page": "p23"
+     }
+    }
+   ],
+   "unknowns": [
+    "The 60-day response window is still open",
+    "Declared surplus, not exempt surplus"
+   ],
+   "top": [
+    {
+     "apn": "198-291-08",
+     "address": "3017 W 5TH ST",
+     "lot": 4115420,
+     "use": "1810 Golf Courses",
+     "zone": {
+      "local": "O",
+      "category": "open_space",
+      "generalPlan": "OS"
+     },
+     "score": 9.1,
+     "units": 2834,
+     "parts": [
+      {
+       "label": "Passes every legal test we can check",
+       "delta": 5
+      },
+      {
+       "label": "~2834 homes (assumed estimate)",
+       "delta": 2.2
+      },
+      {
+       "label": "Near frequent transit: likely no parking minimum",
+       "delta": 1
+      },
+      {
+       "label": "Underused: building worth less than land, or lot mostly open",
+       "delta": 0.6
+      },
+      {
+       "label": "Agency declared it surplus (notice on file)",
+       "delta": 0.8
+      },
+      {
+       "label": "Liquefaction zone: deeper foundations cost more",
+       "delta": -0.5
+      }
+     ],
+     "verdict": "maybe",
+     "passed": [
+      "A Notice of Availability was filed"
+     ],
+     "failed": [
+      "The 60-day response window is still open"
+     ],
+     "unknown": [
+      "Declared surplus, not exempt surplus"
+     ],
+     "lng": -117.91311,
+     "lat": 33.75124
+    },
+    {
+     "apn": "198-291-04",
+     "address": "3017 W 5TH ST",
+     "lot": 164647,
+     "use": "1810 Golf Courses",
+     "zone": {
+      "local": "O",
+      "category": "open_space",
+      "generalPlan": "OS"
+     },
+     "score": 9.1,
+     "units": 113,
+     "parts": [
+      {
+       "label": "Passes every legal test we can check",
+       "delta": 5
+      },
+      {
+       "label": "~113 homes (assumed estimate)",
+       "delta": 2.2
+      },
+      {
+       "label": "Near frequent transit: likely no parking minimum",
+       "delta": 1
+      },
+      {
+       "label": "Underused: building worth less than land, or lot mostly open",
+       "delta": 0.6
+      },
+      {
+       "label": "Agency declared it surplus (notice on file)",
+       "delta": 0.8
+      },
+      {
+       "label": "Liquefaction zone: deeper foundations cost more",
+       "delta": -0.5
+      }
+     ],
+     "verdict": "maybe",
+     "passed": [
+      "A Notice of Availability was filed"
+     ],
+     "failed": [
+      "The 60-day response window is still open"
+     ],
+     "unknown": [
+      "Declared surplus, not exempt surplus"
+     ],
+     "lng": -117.90966,
+     "lat": 33.74973
+    },
+    {
+     "apn": "398-453-12",
+     "address": null,
+     "lot": 18844,
+     "use": "1900 Urban Vacant",
+     "zone": {
+      "local": "SD84",
+      "category": "mixed_use",
+      "generalPlan": "UN-20"
+     },
+     "score": 9,
+     "units": 12,
+     "parts": [
+      {
+       "label": "Passes every legal test we can check",
+       "delta": 5
+      },
+      {
+       "label": "~12 homes (assumed estimate)",
+       "delta": 1.4
+      },
+      {
+       "label": "Near frequent transit: likely no parking minimum",
+       "delta": 1
+      },
+      {
+       "label": "Vacant: no one to relocate",
+       "delta": 0.8
+      },
+      {
+       "label": "Agency declared it surplus (notice on file)",
+       "delta": 0.8
+      }
+     ],
+     "verdict": "maybe",
+     "passed": [
+      "A Notice of Availability was filed"
+     ],
+     "failed": [
+      "The 60-day response window is still open"
+     ],
+     "unknown": [
+      "Declared surplus, not exempt surplus"
+     ],
+     "lng": -117.85219,
+     "lat": 33.74679
+    },
+    {
+     "apn": "405-274-10",
+     "address": "1111 N BRISTOL ST",
+     "lot": 34221,
+     "use": "1900 Urban Vacant",
+     "zone": {
+      "local": "SP1",
+      "category": "mixed_use",
+      "generalPlan": "GC"
+     },
+     "score": 8.9,
+     "units": 23,
+     "parts": [
+      {
+       "label": "Passes every legal test we can check",
+       "delta": 5
+      },
+      {
+       "label": "~23 homes (assumed estimate)",
+       "delta": 1.8
+      },
+      {
+       "label": "Near frequent transit: likely no parking minimum",
+       "delta": 1
+      },
+      {
+       "label": "Vacant: no one to relocate",
+       "delta": 0.8
+      },
+      {
+       "label": "Agency declared it surplus (notice on file)",
+       "delta": 0.8
+      },
+      {
+       "label": "Liquefaction zone: deeper foundations cost more",
+       "delta": -0.5
+      }
+     ],
+     "verdict": "maybe",
+     "passed": [
+      "A Notice of Availability was filed"
+     ],
+     "failed": [
+      "The 60-day response window is still open"
+     ],
+     "unknown": [
+      "Declared surplus, not exempt surplus"
+     ],
+     "lng": -117.88459,
+     "lat": 33.75505
+    },
+    {
+     "apn": "198-282-03",
+     "address": "3101 W 5TH ST",
+     "lot": 24539,
+     "use": "1810 Golf Courses",
+     "zone": {
+      "local": "O",
+      "category": "open_space",
+      "generalPlan": "OS"
+     },
+     "score": 8.5,
+     "units": 16,
+     "parts": [
+      {
+       "label": "Passes every legal test we can check",
+       "delta": 5
+      },
+      {
+       "label": "~16 homes (assumed estimate)",
+       "delta": 1.6
+      },
+      {
+       "label": "Near frequent transit: likely no parking minimum",
+       "delta": 1
+      },
+      {
+       "label": "Underused: building worth less than land, or lot mostly open",
+       "delta": 0.6
+      },
+      {
+       "label": "Agency declared it surplus (notice on file)",
+       "delta": 0.8
+      },
+      {
+       "label": "Liquefaction zone: deeper foundations cost more",
+       "delta": -0.5
+      }
+     ],
+     "verdict": "maybe",
+     "passed": [
+      "A Notice of Availability was filed"
+     ],
+     "failed": [
+      "The 60-day response window is still open"
+     ],
+     "unknown": [
+      "Declared surplus, not exempt surplus"
+     ],
+     "lng": -117.91082,
+     "lat": 33.7494
+    },
+    {
+     "apn": "405-252-21",
+     "address": "1601 N BRISTOL ST",
+     "lot": 16784,
+     "use": "1900 Urban Vacant",
+     "zone": {
+      "local": "SP1",
+      "category": "mixed_use",
+      "generalPlan": "GC"
+     },
+     "score": 8.5,
+     "units": 11,
+     "parts": [
+      {
+       "label": "Passes every legal test we can check",
+       "delta": 5
+      },
+      {
+       "label": "~11 homes (assumed estimate)",
+       "delta": 1.4
+      },
+      {
+       "label": "Near frequent transit: likely no parking minimum",
+       "delta": 1
+      },
+      {
+       "label": "Vacant: no one to relocate",
+       "delta": 0.8
+      },
+      {
+       "label": "Agency declared it surplus (notice on file)",
+       "delta": 0.8
+      },
+      {
+       "label": "Liquefaction zone: deeper foundations cost more",
+       "delta": -0.5
+      }
+     ],
+     "verdict": "maybe",
+     "passed": [
+      "A Notice of Availability was filed"
+     ],
+     "failed": [
+      "The 60-day response window is still open"
+     ],
+     "unknown": [
+      "Declared surplus, not exempt surplus"
+     ],
+     "lng": -117.88465,
+     "lat": 33.75879
+    }
+   ]
+  },
+  {
+   "id": "commercial",
+   "name": "Underused commercial lots",
+   "law": "AB 2011",
+   "survivors": 926,
+   "steps": [
+    {
+     "id": "pool_commercial",
+     "cut": "not zoned commercial or mixed-use",
+     "kind": "pool",
+     "removed": 52429,
+     "remaining": 5497,
+     "cite": {
+      "doc": "FS",
+      "page": "p5, p53"
+     }
+    },
+    {
+     "id": "p_room",
+     "cut": "already built out",
+     "kind": "practical",
+     "removed": 2195,
+     "remaining": 3302
+    },
+    {
+     "id": "p_min_10000",
+     "cut": "smaller than 10,000 sq ft",
+     "kind": "practical",
+     "removed": 1714,
+     "remaining": 1588
+    }
+   ],
+   "unknowns": [
+    "Passes AB 2011's environmental criteria",
+    "Not next to an industrial use",
+    "Not exempted by Santa Ana's AB 2011 ordinance",
+    "Not a historic resource"
+   ],
+   "top": [
+    {
+     "apn": "400-071-03",
+     "address": "16800 ASTON STE 275",
+     "lot": 121837,
+     "use": "1900 Urban Vacant",
+     "zone": {
+      "local": "SD54",
+      "category": "mixed_use",
+      "generalPlan": "DC-3"
+     },
+     "score": 9,
+     "units": 83,
+     "parts": [
+      {
+       "label": "Passes every legal test we can check",
+       "delta": 5
+      },
+      {
+       "label": "~83 homes (assumed estimate)",
+       "delta": 2.2
+      },
+      {
+       "label": "Near frequent transit: likely no parking minimum",
+       "delta": 1
+      },
+      {
+       "label": "Vacant: no one to relocate",
+       "delta": 0.8
+      }
+     ],
+     "verdict": "likely",
+     "passed": [
+      "Zoned for office, retail or parking",
+      "Room to build: vacant, or the building is worth less than the land",
+      "At least 10,000 sq ft"
+     ],
+     "failed": [],
+     "unknown": [
+      "Passes AB 2011's environmental criteria",
+      "Not next to an industrial use",
+      "Not exempted by Santa Ana's AB 2011 ordinance",
+      "Not a historic resource"
+     ],
+     "lng": -117.84117,
+     "lat": 33.74714
+    },
+    {
+     "apn": "398-453-12",
+     "address": null,
+     "lot": 18844,
+     "use": "1900 Urban Vacant",
+     "zone": {
+      "local": "SD84",
+      "category": "mixed_use",
+      "generalPlan": "UN-20"
+     },
+     "score": 9,
+     "units": 12,
+     "parts": [
+      {
+       "label": "Passes every legal test we can check",
+       "delta": 5
+      },
+      {
+       "label": "~12 homes (assumed estimate)",
+       "delta": 1.4
+      },
+      {
+       "label": "Near frequent transit: likely no parking minimum",
+       "delta": 1
+      },
+      {
+       "label": "Vacant: no one to relocate",
+       "delta": 0.8
+      },
+      {
+       "label": "Agency declared it surplus (notice on file)",
+       "delta": 0.8
+      }
+     ],
+     "verdict": "likely",
+     "passed": [
+      "Zoned for office, retail or parking",
+      "Room to build: vacant, or the building is worth less than the land",
+      "At least 10,000 sq ft"
+     ],
+     "failed": [],
+     "unknown": [
+      "Passes AB 2011's environmental criteria",
+      "Not next to an industrial use",
+      "Not exempted by Santa Ana's AB 2011 ordinance",
+      "Not a historic resource"
+     ],
+     "lng": -117.85219,
+     "lat": 33.74679
+    },
+    {
+     "apn": "005-181-43",
+     "address": "445 W CIVIC CENTER DR",
+     "lot": 141723,
+     "use": "1247 Public Parking Facilities",
+     "zone": {
+      "local": "P",
+      "category": "commercial",
+      "generalPlan": "PAO"
+     },
+     "score": 9,
+     "units": 97,
+     "parts": [
+      {
+       "label": "Passes every legal test we can check",
+       "delta": 5
+      },
+      {
+       "label": "~97 homes (assumed estimate)",
+       "delta": 2.2
+      },
+      {
+       "label": "Near frequent transit: likely no parking minimum",
+       "delta": 1
+      },
+      {
+       "label": "Vacant: no one to relocate",
+       "delta": 0.8
+      }
+     ],
+     "verdict": "likely",
+     "passed": [
+      "Zoned for office, retail or parking",
+      "Room to build: vacant, or the building is worth less than the land",
+      "At least 10,000 sq ft"
+     ],
+     "failed": [],
+     "unknown": [
+      "Passes AB 2011's environmental criteria",
+      "Not next to an industrial use",
+      "Not exempted by Santa Ana's AB 2011 ordinance",
+      "Not a historic resource"
+     ],
+     "lng": -117.87136,
+     "lat": 33.75253
+    },
+    {
+     "apn": "398-361-12",
+     "address": "606 TERMINAL ST",
+     "lot": 92301,
+     "use": "1247 Public Parking Facilities",
+     "zone": {
+      "local": "SD84",
+      "category": "mixed_use",
+      "generalPlan": "UN-40"
+     },
+     "score": 9,
+     "units": 63,
+     "parts": [
+      {
+       "label": "Passes every legal test we can check",
+       "delta": 5
+      },
+      {
+       "label": "~63 homes (assumed estimate)",
+       "delta": 2.2
+      },
+      {
+       "label": "Near frequent transit: likely no parking minimum",
+       "delta": 1
+      },
+      {
+       "label": "Vacant: no one to relocate",
+       "delta": 0.8
+      }
+     ],
+     "verdict": "likely",
+     "passed": [
+      "Zoned for office, retail or parking",
+      "Room to build: vacant, or the building is worth less than the land",
+      "At least 10,000 sq ft"
+     ],
+     "failed": [],
+     "unknown": [
+      "Passes AB 2011's environmental criteria",
+      "Not next to an industrial use",
+      "Not exempted by Santa Ana's AB 2011 ordinance",
+      "Not a historic resource"
+     ],
+     "lng": -117.8552,
+     "lat": 33.75052
+    },
+    {
+     "apn": "398-092-17",
+     "address": null,
+     "lot": 100770,
+     "use": "1900 Urban Vacant",
+     "zone": {
+      "local": "SD84",
+      "category": "mixed_use",
+      "generalPlan": "DC-5"
+     },
+     "score": 9,
+     "units": 69,
+     "parts": [
+      {
+       "label": "Passes every legal test we can check",
+       "delta": 5
+      },
+      {
+       "label": "~69 homes (assumed estimate)",
+       "delta": 2.2
+      },
+      {
+       "label": "Near frequent transit: likely no parking minimum",
+       "delta": 1
+      },
+      {
+       "label": "Vacant: no one to relocate",
+       "delta": 0.8
+      }
+     ],
+     "verdict": "likely",
+     "passed": [
+      "Zoned for office, retail or parking",
+      "Room to build: vacant, or the building is worth less than the land",
+      "At least 10,000 sq ft"
+     ],
+     "failed": [],
+     "unknown": [
+      "Passes AB 2011's environmental criteria",
+      "Not next to an industrial use",
+      "Not exempted by Santa Ana's AB 2011 ordinance",
+      "Not a historic resource"
+     ],
+     "lng": -117.85467,
+     "lat": 33.7551
+    },
+    {
+     "apn": "400-061-08",
+     "address": null,
+     "lot": 267976,
+     "use": "1900 Urban Vacant",
+     "zone": {
+      "local": "P",
+      "category": "commercial",
+      "generalPlan": "DC-3"
+     },
+     "score": 9,
+     "units": 184,
+     "parts": [
+      {
+       "label": "Passes every legal test we can check",
+       "delta": 5
+      },
+      {
+       "label": "~184 homes (assumed estimate)",
+       "delta": 2.2
+      },
+      {
+       "label": "Near frequent transit: likely no parking minimum",
+       "delta": 1
+      },
+      {
+       "label": "Vacant: no one to relocate",
+       "delta": 0.8
+      }
+     ],
+     "verdict": "likely",
+     "passed": [
+      "Zoned for office, retail or parking",
+      "Room to build: vacant, or the building is worth less than the land",
+      "At least 10,000 sq ft"
+     ],
+     "failed": [],
+     "unknown": [
+      "Passes AB 2011's environmental criteria",
+      "Not next to an industrial use",
+      "Not exempted by Santa Ana's AB 2011 ordinance",
+      "Not a historic resource"
+     ],
+     "lng": -117.8415,
+     "lat": 33.74935
+    }
+   ]
+  },
+  {
+   "id": "starter",
+   "name": "Room for 10 starter homes",
+   "law": "SB 684 / SB 1123",
+   "survivors": 2726,
+   "steps": [
+    {
+     "id": "pool_shra",
+     "cut": "not multifamily, and not a vacant single-family lot",
+     "kind": "pool",
+     "removed": 42417,
+     "remaining": 15509,
+     "cite": {
+      "doc": "FS",
+      "page": "p67–68"
+     }
+    },
+    {
+     "id": "shra_size",
+     "cut": "over the lot-size cap",
+     "kind": "law",
+     "removed": 4632,
+     "remaining": 10877,
+     "cite": {
+      "doc": "FS",
+      "page": "p67–68",
+      "caveat": "1.5-acre figure from CalMatters SB 1123 page only"
+     }
+    },
+    {
+     "id": "x_vhfhsz",
+     "cut": "in a very high fire hazard zone",
+     "kind": "law",
+     "removed": 0,
+     "remaining": 10877,
+     "cite": {
+      "doc": "FS",
+      "page": "p67"
+     }
+    },
+    {
+     "id": "p_room",
+     "cut": "already built out",
+     "kind": "practical",
+     "removed": 5754,
+     "remaining": 5123
+    },
+    {
+     "id": "p_min_6000",
+     "cut": "smaller than 6,000 sq ft",
+     "kind": "practical",
+     "removed": 1551,
+     "remaining": 3572
+    }
+   ],
+   "unknowns": [
+    "No tenants in the last 5 years",
+    "Substantially surrounded by urban uses",
+    "No wetlands, farmland or fault zone"
+   ],
+   "top": [
+    {
+     "apn": "398-453-12",
+     "address": null,
+     "lot": 18844,
+     "use": "1900 Urban Vacant",
+     "zone": {
+      "local": "SD84",
+      "category": "mixed_use",
+      "generalPlan": "UN-20"
+     },
+     "score": 8.9,
+     "units": 10,
+     "parts": [
+      {
+       "label": "Passes every legal test we can check",
+       "delta": 5
+      },
+      {
+       "label": "~10 homes (assumed estimate)",
+       "delta": 1.3
+      },
+      {
+       "label": "Near frequent transit: likely no parking minimum",
+       "delta": 1
+      },
+      {
+       "label": "Vacant: no one to relocate",
+       "delta": 0.8
+      },
+      {
+       "label": "Agency declared it surplus (notice on file)",
+       "delta": 0.8
+      }
+     ],
+     "verdict": "likely",
+     "passed": [
+      "Zoned multifamily, or a vacant single-family lot",
+      "Under the size cap (5 acres; 1.5 acres for single-family)",
+      "Not in a very high fire hazard zone",
+      "Room to build: vacant, or the building is worth less than the land",
+      "At least 6,000 sq ft"
+     ],
+     "failed": [],
+     "unknown": [
+      "No tenants in the last 5 years",
+      "Substantially surrounded by urban uses",
+      "No wetlands, farmland or fault zone"
+     ],
+     "lng": -117.85219,
+     "lat": 33.74679
+    },
+    {
+     "apn": "398-385-03",
+     "address": "1222 E 4TH ST",
+     "lot": 6243,
+     "use": "1900 Urban Vacant",
+     "zone": {
+      "local": "SD84",
+      "category": "mixed_use",
+      "generalPlan": "UN-20"
+     },
+     "score": 8.9,
+     "units": 10,
+     "parts": [
+      {
+       "label": "Passes every legal test we can check",
+       "delta": 5
+      },
+      {
+       "label": "~10 homes (assumed estimate)",
+       "delta": 1.3
+      },
+      {
+       "label": "Near frequent transit: likely no parking minimum",
+       "delta": 1
+      },
+      {
+       "label": "Vacant: no one to relocate",
+       "delta": 0.8
+      },
+      {
+       "label": "Agency declared it surplus (notice on file)",
+       "delta": 0.8
+      }
+     ],
+     "verdict": "likely",
+     "passed": [
+      "Zoned multifamily, or a vacant single-family lot",
+      "Under the size cap (5 acres; 1.5 acres for single-family)",
+      "Not in a very high fire hazard zone",
+      "Room to build: vacant, or the building is worth less than the land",
+      "At least 6,000 sq ft"
+     ],
+     "failed": [],
+     "unknown": [
+      "No tenants in the last 5 years",
+      "Substantially surrounded by urban uses",
+      "No wetlands, farmland or fault zone"
+     ],
+     "lng": -117.85224,
+     "lat": 33.74778
+    },
+    {
+     "apn": "109-345-18",
+     "address": "720 S BRISTOL ST",
+     "lot": 6086,
+     "use": "1900 Urban Vacant",
+     "zone": {
+      "local": "SP1",
+      "category": "mixed_use",
+      "generalPlan": "OS"
+     },
+     "score": 8.4,
+     "units": 10,
+     "parts": [
+      {
+       "label": "Passes every legal test we can check",
+       "delta": 5
+      },
+      {
+       "label": "~10 homes (assumed estimate)",
+       "delta": 1.3
+      },
+      {
+       "label": "Near frequent transit: likely no parking minimum",
+       "delta": 1
+      },
+      {
+       "label": "Vacant: no one to relocate",
+       "delta": 0.8
+      },
+      {
+       "label": "Agency declared it surplus (notice on file)",
+       "delta": 0.8
+      },
+      {
+       "label": "Liquefaction zone: deeper foundations cost more",
+       "delta": -0.5
+      }
+     ],
+     "verdict": "likely",
+     "passed": [
+      "Zoned multifamily, or a vacant single-family lot",
+      "Under the size cap (5 acres; 1.5 acres for single-family)",
+      "Not in a very high fire hazard zone",
+      "Room to build: vacant, or the building is worth less than the land",
+      "At least 6,000 sq ft"
+     ],
+     "failed": [],
+     "unknown": [
+      "No tenants in the last 5 years",
+      "Substantially surrounded by urban uses",
+      "No wetlands, farmland or fault zone"
+     ],
+     "lng": -117.88543,
+     "lat": 33.73728
+    },
+    {
+     "apn": "008-081-26",
+     "address": "515 N BRISTOL ST",
+     "lot": 6303,
+     "use": "1900 Urban Vacant",
+     "zone": {
+      "local": "SP1",
+      "category": "mixed_use",
+      "generalPlan": "GC"
+     },
+     "score": 8.4,
+     "units": 10,
+     "parts": [
+      {
+       "label": "Passes every legal test we can check",
+       "delta": 5
+      },
+      {
+       "label": "~10 homes (assumed estimate)",
+       "delta": 1.3
+      },
+      {
+       "label": "Near frequent transit: likely no parking minimum",
+       "delta": 1
+      },
+      {
+       "label": "Vacant: no one to relocate",
+       "delta": 0.8
+      },
+      {
+       "label": "Agency declared it surplus (notice on file)",
+       "delta": 0.8
+      },
+      {
+       "label": "Liquefaction zone: deeper foundations cost more",
+       "delta": -0.5
+      }
+     ],
+     "verdict": "likely",
+     "passed": [
+      "Zoned multifamily, or a vacant single-family lot",
+      "Under the size cap (5 acres; 1.5 acres for single-family)",
+      "Not in a very high fire hazard zone",
+      "Room to build: vacant, or the building is worth less than the land",
+      "At least 6,000 sq ft"
+     ],
+     "failed": [],
+     "unknown": [
+      "No tenants in the last 5 years",
+      "Substantially surrounded by urban uses",
+      "No wetlands, farmland or fault zone"
+     ],
+     "lng": -117.88477,
+     "lat": 33.74939
+    },
+    {
+     "apn": "405-252-21",
+     "address": "1601 N BRISTOL ST",
+     "lot": 16784,
+     "use": "1900 Urban Vacant",
+     "zone": {
+      "local": "SP1",
+      "category": "mixed_use",
+      "generalPlan": "GC"
+     },
+     "score": 8.4,
+     "units": 10,
+     "parts": [
+      {
+       "label": "Passes every legal test we can check",
+       "delta": 5
+      },
+      {
+       "label": "~10 homes (assumed estimate)",
+       "delta": 1.3
+      },
+      {
+       "label": "Near frequent transit: likely no parking minimum",
+       "delta": 1
+      },
+      {
+       "label": "Vacant: no one to relocate",
+       "delta": 0.8
+      },
+      {
+       "label": "Agency declared it surplus (notice on file)",
+       "delta": 0.8
+      },
+      {
+       "label": "Liquefaction zone: deeper foundations cost more",
+       "delta": -0.5
+      }
+     ],
+     "verdict": "likely",
+     "passed": [
+      "Zoned multifamily, or a vacant single-family lot",
+      "Under the size cap (5 acres; 1.5 acres for single-family)",
+      "Not in a very high fire hazard zone",
+      "Room to build: vacant, or the building is worth less than the land",
+      "At least 6,000 sq ft"
+     ],
+     "failed": [],
+     "unknown": [
+      "No tenants in the last 5 years",
+      "Substantially surrounded by urban uses",
+      "No wetlands, farmland or fault zone"
+     ],
+     "lng": -117.88465,
+     "lat": 33.75879
+    },
+    {
+     "apn": "405-262-28",
+     "address": "1003 N BRISTOL ST",
+     "lot": 7541,
+     "use": "1900 Urban Vacant",
+     "zone": {
+      "local": "SP1",
+      "category": "mixed_use",
+      "generalPlan": "GC"
+     },
+     "score": 8.4,
+     "units": 10,
+     "parts": [
+      {
+       "label": "Passes every legal test we can check",
+       "delta": 5
+      },
+      {
+       "label": "~10 homes (assumed estimate)",
+       "delta": 1.3
+      },
+      {
+       "label": "Near frequent transit: likely no parking minimum",
+       "delta": 1
+      },
+      {
+       "label": "Vacant: no one to relocate",
+       "delta": 0.8
+      },
+      {
+       "label": "Agency declared it surplus (notice on file)",
+       "delta": 0.8
+      },
+      {
+       "label": "Liquefaction zone: deeper foundations cost more",
+       "delta": -0.5
+      }
+     ],
+     "verdict": "likely",
+     "passed": [
+      "Zoned multifamily, or a vacant single-family lot",
+      "Under the size cap (5 acres; 1.5 acres for single-family)",
+      "Not in a very high fire hazard zone",
+      "Room to build: vacant, or the building is worth less than the land",
+      "At least 6,000 sq ft"
+     ],
+     "failed": [],
+     "unknown": [
+      "No tenants in the last 5 years",
+      "Substantially surrounded by urban uses",
+      "No wetlands, farmland or fault zone"
+     ],
+     "lng": -117.8847,
+     "lat": 33.75368
+    }
+   ]
+  },
+  {
+   "id": "backyard",
+   "name": "Big backyards",
+   "law": "SB 9",
+   "survivors": 753,
+   "steps": [
+    {
+     "id": "pool_sf",
+     "cut": "not in a single-family zone",
+     "kind": "pool",
+     "removed": 25659,
+     "remaining": 32267,
+     "cite": {
+      "doc": "SB9FS",
+      "page": "p2"
+     }
+    },
+    {
+     "id": "sb9_split",
+     "cut": "too small to split",
+     "kind": "law",
+     "removed": 340,
+     "remaining": 31927,
+     "cite": {
+      "doc": "FS",
+      "page": "p48"
+     }
+    },
+    {
+     "id": "x_vhfhsz",
+     "cut": "in a very high fire hazard zone",
+     "kind": "law",
+     "removed": 0,
+     "remaining": 31927,
+     "cite": {
+      "doc": "SB9FS",
+      "page": "p5"
+     }
+    },
+    {
+     "id": "x_sfha",
+     "cut": "in a FEMA flood hazard area",
+     "kind": "law",
+     "removed": 2658,
+     "remaining": 29269,
+     "cite": {
+      "doc": "SB9FS",
+      "page": "p5",
+      "caveat": "Treating FEMA A/V zones as the special flood hazard area (unverified)"
+     }
+    },
+    {
+     "id": "p_min_9000",
+     "cut": "smaller than 9,000 sq ft",
+     "kind": "practical",
+     "removed": 25321,
+     "remaining": 3948
+    },
+    {
+     "id": "p_room",
+     "cut": "lot already mostly built",
+     "kind": "practical",
+     "removed": 3173,
+     "remaining": 775
+    }
+   ],
+   "unknowns": [
+    "Not rented in the last 3 years",
+    "Not historic",
+    "Not rent-controlled or covenant-restricted"
+   ],
+   "top": [
+    {
+     "apn": "011-154-10",
+     "address": null,
+     "lot": 21569,
+     "use": "1900 Urban Vacant",
+     "zone": {
+      "local": "R1",
+      "category": "single_family",
+      "generalPlan": "UN-40"
+     },
+     "score": 7.7,
+     "units": 4,
+     "parts": [
+      {
+       "label": "Passes every legal test we can check",
+       "delta": 5
+      },
+      {
+       "label": "~4 homes (assumed estimate)",
+       "delta": 0.9
+      },
+      {
+       "label": "Near frequent transit: likely no parking minimum",
+       "delta": 1
+      },
+      {
+       "label": "Vacant: no one to relocate",
+       "delta": 0.8
+      }
+     ],
+     "verdict": "likely",
+     "passed": [
+      "In a single-family zone",
+      "Big enough to split into two 1,200 sq ft lots",
+      "Not in a very high fire hazard zone",
+      "Not in a FEMA special flood hazard area",
+      "At least 9,000 sq ft",
+      "Mostly open lot: buildings cover under 25%"
+     ],
+     "failed": [],
+     "unknown": [
+      "Not rented in the last 3 years",
+      "Not historic",
+      "Not rent-controlled or covenant-restricted"
+     ],
+     "lng": -117.84591,
+     "lat": 33.7443
+    },
+    {
+     "apn": "398-041-18",
+     "address": "416 E VANCE PL",
+     "lot": 9312,
+     "use": "1900 Urban Vacant",
+     "zone": {
+      "local": "SD19",
+      "category": "single_family",
+      "generalPlan": "LR7"
+     },
+     "score": 7.7,
+     "units": 4,
+     "parts": [
+      {
+       "label": "Passes every legal test we can check",
+       "delta": 5
+      },
+      {
+       "label": "~4 homes (assumed estimate)",
+       "delta": 0.9
+      },
+      {
+       "label": "Near frequent transit: likely no parking minimum",
+       "delta": 1
+      },
+      {
+       "label": "Vacant: no one to relocate",
+       "delta": 0.8
+      }
+     ],
+     "verdict": "likely",
+     "passed": [
+      "In a single-family zone",
+      "Big enough to split into two 1,200 sq ft lots",
+      "Not in a very high fire hazard zone",
+      "Not in a FEMA special flood hazard area",
+      "At least 9,000 sq ft",
+      "Mostly open lot: buildings cover under 25%"
+     ],
+     "failed": [],
+     "unknown": [
+      "Not rented in the last 3 years",
+      "Not historic",
+      "Not rent-controlled or covenant-restricted"
+     ],
+     "lng": -117.86299,
+     "lat": 33.75305
+    },
+    {
+     "apn": "003-122-25",
+     "address": null,
+     "lot": 28123,
+     "use": "1900 Urban Vacant",
+     "zone": {
+      "local": "R1",
+      "category": "single_family",
+      "generalPlan": "LR7"
+     },
+     "score": 7.7,
+     "units": 4,
+     "parts": [
+      {
+       "label": "Passes every legal test we can check",
+       "delta": 5
+      },
+      {
+       "label": "~4 homes (assumed estimate)",
+       "delta": 0.9
+      },
+      {
+       "label": "Near frequent transit: likely no parking minimum",
+       "delta": 1
+      },
+      {
+       "label": "Vacant: no one to relocate",
+       "delta": 0.8
+      }
+     ],
+     "verdict": "likely",
+     "passed": [
+      "In a single-family zone",
+      "Big enough to split into two 1,200 sq ft lots",
+      "Not in a very high fire hazard zone",
+      "Not in a FEMA special flood hazard area",
+      "At least 9,000 sq ft",
+      "Mostly open lot: buildings cover under 25%"
+     ],
+     "failed": [],
+     "unknown": [
+      "Not rented in the last 3 years",
+      "Not historic",
+      "Not rent-controlled or covenant-restricted"
+     ],
+     "lng": -117.86446,
+     "lat": 33.76401
+    },
+    {
+     "apn": "396-056-23",
+     "address": "1584 E SANTA CLARA AVE",
+     "lot": 10032,
+     "use": "1900 Urban Vacant",
+     "zone": {
+      "local": "R1",
+      "category": "single_family",
+      "generalPlan": "LR7"
+     },
+     "score": 7.7,
+     "units": 4,
+     "parts": [
+      {
+       "label": "Passes every legal test we can check",
+       "delta": 5
+      },
+      {
+       "label": "~4 homes (assumed estimate)",
+       "delta": 0.9
+      },
+      {
+       "label": "Near frequent transit: likely no parking minimum",
+       "delta": 1
+      },
+      {
+       "label": "Vacant: no one to relocate",
+       "delta": 0.8
+      }
+     ],
+     "verdict": "likely",
+     "passed": [
+      "In a single-family zone",
+      "Big enough to split into two 1,200 sq ft lots",
+      "Not in a very high fire hazard zone",
+      "Not in a FEMA special flood hazard area",
+      "At least 9,000 sq ft",
+      "Mostly open lot: buildings cover under 25%"
+     ],
+     "failed": [],
+     "unknown": [
+      "Not rented in the last 3 years",
+      "Not historic",
+      "Not rent-controlled or covenant-restricted"
+     ],
+     "lng": -117.84569,
+     "lat": 33.76696
+    },
+    {
+     "apn": "003-133-07",
+     "address": "2110 SANTIAGO ST",
+     "lot": 9343,
+     "use": "1110 Single Family Residential",
+     "zone": {
+      "local": "R1",
+      "category": "single_family",
+      "generalPlan": "LR7"
+     },
+     "score": 7.5,
+     "units": 4,
+     "parts": [
+      {
+       "label": "Passes every legal test we can check",
+       "delta": 5
+      },
+      {
+       "label": "~4 homes (assumed estimate)",
+       "delta": 0.9
+      },
+      {
+       "label": "Near frequent transit: likely no parking minimum",
+       "delta": 1
+      },
+      {
+       "label": "Underused: building worth less than land, or lot mostly open",
+       "delta": 0.6
+      }
+     ],
+     "verdict": "likely",
+     "passed": [
+      "In a single-family zone",
+      "Big enough to split into two 1,200 sq ft lots",
+      "Not in a very high fire hazard zone",
+      "Not in a FEMA special flood hazard area",
+      "At least 9,000 sq ft",
+      "Mostly open lot: buildings cover under 25%"
+     ],
+     "failed": [],
+     "unknown": [
+      "Not rented in the last 3 years",
+      "Not historic",
+      "Not rent-controlled or covenant-restricted"
+     ],
+     "lng": -117.8606,
+     "lat": 33.76436
+    },
+    {
+     "apn": "003-120-04",
+     "address": "314 E SANTA CLARA AVE",
+     "lot": 11683,
+     "use": "1110 Single Family Residential",
+     "zone": {
+      "local": "R1",
+      "category": "single_family",
+      "generalPlan": "LR7"
+     },
+     "score": 7.5,
+     "units": 4,
+     "parts": [
+      {
+       "label": "Passes every legal test we can check",
+       "delta": 5
+      },
+      {
+       "label": "~4 homes (assumed estimate)",
+       "delta": 0.9
+      },
+      {
+       "label": "Near frequent transit: likely no parking minimum",
+       "delta": 1
+      },
+      {
+       "label": "Underused: building worth less than land, or lot mostly open",
+       "delta": 0.6
+      }
+     ],
+     "verdict": "likely",
+     "passed": [
+      "In a single-family zone",
+      "Big enough to split into two 1,200 sq ft lots",
+      "Not in a very high fire hazard zone",
+      "Not in a FEMA special flood hazard area",
+      "At least 9,000 sq ft",
+      "Mostly open lot: buildings cover under 25%"
+     ],
+     "failed": [],
+     "unknown": [
+      "Not rented in the last 3 years",
+      "Not historic",
+      "Not rent-controlled or covenant-restricted"
+     ],
+     "lng": -117.86435,
+     "lat": 33.76624
+    }
+   ]
+  }
+ ]
+}

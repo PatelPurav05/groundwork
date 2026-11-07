@@ -1,0 +1,73 @@
+// ---------------------------------------------------------------------------------------------
+// The stroke field. The canvas is a jittered grid; each cell owns one knife stroke, a ragged
+// capsule. The pass's hooks (declared before this file) decide where strokes exist, which way
+// they point, how big they are and how far each one swings about its own tail. Each hook also
+// receives two float4s of context the caller passes through (a pass painting several objects
+// in one go uses them to say which object it is painting):
+//   bool   hookAlive(float2 c, float4 A, float4 B)              paint at this stroke's rest centre?
+//   float3 hookShape(float2 c, float seed, float4 A, float4 B)  (angle, half length, half width),
+//                                                                lengths in pitches
+//   float  hookSway(float2 c, float2 dir, float seed, float4 A, float4 B)  rotation about the tail
+// `q` is the pixel in the paint's rest space. The stroke returned is the topmost covering q;
+// oC/oD are its rest centre and direction (sample colour there, so colour rides with the
+// stroke), oDa its animated direction (light it with that).
+// wrapCells > 0 makes the field repeat every wrapCells cells in x.
+// ---------------------------------------------------------------------------------------------
+
+float findStroke(float2 q, float pitch, float salt, float wrapCells, float4 ctxA, float4 ctxB,
+                 out float2 oC, out float2 oD, out float2 oDa, out float2 oT,
+                 out float oL, out float oW, out float oSeed, out float oEdge) {
+  float2 gid = floor(q / pitch);
+  float bestZ = -1.0;
+  oC = float2(0); oD = float2(1, 0); oDa = float2(1, 0); oT = float2(0);
+  oL = 1.0; oW = 1.0; oSeed = 0.0; oEdge = 0.0;
+  for (int j = -2; j <= 2; j++) {
+    for (int i = -2; i <= 2; i++) {
+      float2 id = gid + float2(float(i), float(j));
+      float2 hid = id;
+      if (wrapCells > 0.0) { hid.x = mod(id.x, wrapCells); }
+      hid += salt;
+      float z = h1(hid + 9.3);
+      if (z <= bestZ) { continue; }
+      float2 c = (id + 0.1 + 0.8 * h2(hid)) * pitch;
+      if (!hookAlive(c, ctxA, ctxB)) { continue; }
+      float seed = h1(hid + 17.0);
+      float3 sh = hookShape(c, seed, ctxA, ctxB);
+      float2 D = float2(cos(sh.x), sin(sh.x));
+      float L = sh.y * pitch * (0.8 + 0.4 * h1(hid + 3.1));
+      float Wd = sh.z * pitch * (0.8 + 0.4 * h1(hid + 5.7));
+      float2 Da = rot(D, hookSway(c, D, seed, ctxA, ctxB));
+      float2 ca = c - D * L + Da * L;          // swung about the tail
+      float2 d = q - ca;
+      float u = dot(d, Da);
+      float v = dot(d, float2(-Da.y, Da.x));
+      float tu = u / L;
+      float rag = 0.88 + 0.08 * sin(u * 6.0 / pitch + seed * 40.0) + 0.04 * sin(u * 18.0 / pitch + seed * 11.0);
+      float taper = 1.0 - smoothstep(0.2, 1.0, -tu) * 0.45;
+      float wE = Wd * rag * taper;
+      float lenE = L * (0.92 + 0.08 * sin(v * 10.0 / pitch + seed * 5.0));
+      float m = (1.0 - smoothstep(wE * 0.86, wE, abs(v))) * (1.0 - smoothstep(lenE * 0.9, lenE, abs(u)));
+      if (m > 0.5) {
+        bestZ = z; oC = c; oD = D; oDa = Da; oT = float2(tu, v / wE); oL = L; oW = wE; oSeed = seed;
+        oEdge = max(abs(v) / wE, abs(u) / lenE);
+      }
+    }
+  }
+  return bestZ;
+}
+
+// Where in the rest picture a point of the stroke takes its colour: near the centre, so the
+// stroke reads as one loaded knife, with a little of the detail along it.
+float2 strokeSamplePoint(float2 C, float2 D, float2 T, float L, float Wd) {
+  return C + D * (T.x * L * 0.45) + float2(-D.y, D.x) * (T.y * Wd * 0.25);
+}
+
+// The stroke's colour at T: sampled near its centre, falling back to the centre itself when the
+// sample lands outside the painted layer (a petal tip past the drawn silhouette).
+float3 strokeColour(float2 C, float2 D, float2 T, float L, float Wd) {
+  half4 a = src(strokeSamplePoint(C, D, T, L, Wd));
+  float3 col = a.a > 0.5 ? float3(a.rgb) : float3(src(C).rgb);
+  half4 pk = src(C - D * L * 0.9);
+  if (pk.a > 0.5) { col = mix(col, float3(pk.rgb), 0.3 * smoothstep(0.6, -1.0, T.x)); }
+  return col;
+}

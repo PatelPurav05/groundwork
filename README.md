@@ -186,6 +186,13 @@ cd scripts/data && npm install && cd ../.. && node scripts/data/build.mjs santa-
 
 Next.js 16 · React 19 · deck.gl · MapLibre · Motion · Zustand · Tailwind CSS 4 · Claude (`claude-opus-5-5`, with server-side web search) · Upstash Redis (optional) · Clayzo for the README animations.
 
+## Demo video
+
+<p align="center">
+  <a href="https://youtu.be/aTXkrO2AlLs"><img src="docs/media/demo-poster.jpg" alt="Watch the Groundwork demo on YouTube: an oil painting of Orange County prints as a riso poster, becomes the Santa Ana parcel map, and is sieved down to the lots worth a call" width="100%"></a><br>
+  <sub><a href="https://youtu.be/aTXkrO2AlLs"><b>Watch the 30-second demo on YouTube</b></a>. Built with Clayzo in <a href="clayzo/demo/"><code>clayzo/demo/</code></a>; its numbers are from the SB 4 rules as of Nov 7, before the lens gained its newer checks.</sub>
+</p>
+
 ---
 
 <p align="center"><sub>Prototype. Not legal, financial or lending advice. Nothing here files an application, emails a city, or contacts an owner.</sub></p>

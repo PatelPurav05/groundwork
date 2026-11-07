@@ -55,5 +55,6 @@ node_modules/
 !.env.example
 
 # raw demo footage (re-record: scripts/demo/record.mjs) and built demo documents
+# (the demo video: see the header of clayzo/demo/demo.ts)
 /clayzo/demo/footage/
 /clayzo/demo/out/

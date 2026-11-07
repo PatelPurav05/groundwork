@@ -1,0 +1,10 @@
+// ---- dither head: the uniform ABI every technique starts with ----
+uniform shader inputImage;
+uniform float cell;      // dither cell / screen pitch, composition px
+uniform float exposure;  // -1..1, added to luminance before thresholding
+uniform float contrast;  // 1 = unchanged, pivots at 0.5
+uniform float gamma;     // >1 pushes toward paper, <1 toward ink
+uniform float invert;    // 0: dark input = ink. 1: bright input = ink
+uniform half4 ink;
+uniform half4 paper;
+uniform float phase;     // 0..1 across the loop
