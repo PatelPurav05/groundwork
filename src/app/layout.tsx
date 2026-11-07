@@ -1,21 +1,23 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Bricolage_Grotesque, Inter_Tight, Geist_Mono } from "next/font/google";
 import "maplibre-gl/dist/maplibre-gl.css";
 import "./globals.css";
 
-const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
-const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
-const serif = Instrument_Serif({ variable: "--font-serif", subsets: ["latin"], weight: "400" });
+const display = Bricolage_Grotesque({ variable: "--font-display", subsets: ["latin"], weight: ["600", "700", "800"] });
+const ui = Inter_Tight({ variable: "--font-ui", subsets: ["latin"], weight: ["400", "500", "600"] });
+const data = Geist_Mono({ variable: "--font-data", subsets: ["latin"], weight: ["400", "500"] });
 
 export const metadata: Metadata = {
-  title: "Groundwork",
+  title: "Groundwork · find land the new housing laws opened",
   description:
-    "Find the land California's new housing laws opened up. Santa Ana prototype, not legal advice.",
+    "Sift every parcel in Santa Ana for land California's housing laws opened up. Every check cites its dataset. Prototype, not legal advice.",
 };
+
+export const viewport: Viewport = { themeColor: "#FBFBF8" };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} ${serif.variable} h-full`}>
+    <html lang="en" className={`${display.variable} ${ui.variable} ${data.variable} h-full`}>
       <body className="h-full overflow-hidden">{children}</body>
     </html>
   );

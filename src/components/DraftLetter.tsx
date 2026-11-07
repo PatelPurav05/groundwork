@@ -4,13 +4,13 @@ import { useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import type { Evaluation } from "@/lib/rules/engine";
 import type { Lens, Row } from "@/lib/rules/lenses";
-import { acres } from "@/lib/format";
+import { acres, displayApn } from "@/lib/format";
 import { Button, IconCopy, IconSparkle } from "./ui";
 
 function factSheet(lens: Lens, ev: Evaluation, row: Row, title: string, city: string, units: number) {
   const s = row.site;
   const lines = [
-    `Parcel: ${title}, ${city}, CA (APN ${row.apn})`,
+    `Parcel: ${title}, ${city}, CA (APN ${displayApn(row.apn)})`,
     row.lot ? `Lot size: ${acres(row.lot)}` : null,
     s?.zoning.local ? `Zoning: ${s.zoning.local}` : null,
     `Pathway being explored: ${lens.law}. ${lens.plain}`,
@@ -89,7 +89,7 @@ export function DraftLetter(props: { lens: Lens; ev: Evaluation; row: Row; title
             initial={{ opacity: 0, transform: "translateY(6px)" }}
             animate={{ opacity: 1, transform: "translateY(0px)" }}
             transition={{ duration: 0.26, ease: [0.23, 1, 0.32, 1] }}
-            className="flex flex-col gap-2 rounded-[18px] bg-paper p-4 shadow-[var(--shadow-card)]"
+            className="flex flex-col gap-2 rounded-[18px] bg-stock-2 p-4 ring-1 ring-hairline"
           >
             <div className="flex items-center justify-between">
               <span className="text-[11.5px] font-medium text-muted">
@@ -106,9 +106,14 @@ export function DraftLetter(props: { lens: Lens; ev: Evaluation; row: Row; title
                   className="h-7 px-2.5 text-[12px]"
                   disabled={!text}
                   onClick={async () => {
-                    await navigator.clipboard.writeText(text);
-                    setCopied(true);
-                    setTimeout(() => setCopied(false), 1400);
+                    try {
+                      await navigator.clipboard.writeText(text);
+                      setCopied(true);
+                      setTimeout(() => setCopied(false), 1400);
+                    } catch {
+                      // Clipboard blocked (permissions / insecure context): leave the text selectable instead.
+                      setCopied(false);
+                    }
                   }}
                 >
                   <IconCopy size={14} />
@@ -120,8 +125,7 @@ export function DraftLetter(props: { lens: Lens; ev: Evaluation; row: Row; title
               value={text}
               onChange={(e) => setText(e.target.value)}
               rows={12}
-              className="scroll-quiet w-full resize-y bg-transparent font-serif text-[15px] leading-relaxed text-ink outline-none"
-              style={{ fontFamily: "var(--font-serif), Georgia, serif" }}
+              className="scroll-quiet w-full resize-y bg-transparent text-[14.5px] leading-relaxed text-ink outline-none"
               aria-label="Letter draft"
             />
             <p className="text-[11px] text-muted">Groundwork never sends anything. Brackets are yours to fill in.</p>

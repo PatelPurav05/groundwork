@@ -5,64 +5,70 @@ import { useStore } from "@/lib/store";
 import { LENSES } from "@/lib/rules/lenses";
 import { n } from "@/lib/format";
 import { LensArt } from "./LensArt";
-import { IconChevron, IconSearch } from "./ui";
+import { IconArrow, IconSearch } from "./ui";
 
 export function Home({ onSearch }: { onSearch: () => void }) {
   const data = useStore((s) => s.data)!;
   const chooseLens = useStore((s) => s.chooseLens);
   const [hot, setHot] = useState<string | null>(null);
+  const count = n(data.parcels.count);
 
   return (
-    <div className="flex flex-col gap-7 px-6 pt-7 pb-6">
-      <header className="flex flex-col gap-3">
-        <p className="tnum text-[11px] font-medium uppercase tracking-[0.12em] text-muted">
-          {data.city.name} · {n(data.parcels.count)} parcels
-        </p>
-        <h1 className="serif text-[34px] leading-[1.05] text-ink">
-          Which of these could become <em className="text-clay not-italic">homes</em>?
+    <div className="flex flex-col">
+      <header className="flex flex-col gap-4 px-6 pt-8 pb-7">
+        <h1 className="flex flex-col gap-2">
+          <span className="display misreg tnum block text-[80px] leading-[0.82]" data-text={count}>
+            <span>{count}</span>
+          </span>
+          <span className="display text-[27px] leading-[1.05] font-bold tracking-[-0.025em] text-ink">
+            parcels in {data.city.name}. Which could hold homes?
+          </span>
         </h1>
-        <p className="text-[14.5px] leading-relaxed text-ink-2">
-          New California laws opened land that used to be off-limits. Pick what you&rsquo;re looking for and we&rsquo;ll sieve the
-          whole city, one legal test at a time.
+        <p className="max-w-[34ch] text-[15px] leading-relaxed text-ink">
+          New state laws opened land that used to be off-limits. Pick what you&rsquo;re after and we&rsquo;ll sift the whole city, one
+          test at a time, citing the data behind every cut.
         </p>
       </header>
 
-      <nav aria-label="What are you looking for?" className="-mx-2 flex flex-col">
-        <p className="px-2 pb-2 text-[12px] font-medium text-muted">What are you looking for?</p>
-        {LENSES.map((lens) => (
-          <button
-            key={lens.id}
-            onClick={() => chooseLens(lens.id)}
-            onMouseEnter={() => setHot(lens.id)}
-            onMouseLeave={() => setHot(null)}
-            onFocus={() => setHot(lens.id)}
-            onBlur={() => setHot(null)}
-            className="press group flex items-center gap-3.5 rounded-[18px] p-2 text-left hover:bg-surface-2 focus-visible:bg-surface-2"
-          >
-            <span className="grid size-[60px] shrink-0 place-items-center overflow-hidden rounded-[14px] bg-paper transition-colors duration-200 group-hover:bg-surface">
-              <LensArt id={lens.id} playing={hot === lens.id} className="size-[60px]" />
-            </span>
-            <span className="flex min-w-0 flex-1 flex-col gap-0.5">
-              <span className="flex items-baseline gap-2">
-                <span className="text-[15px] font-semibold text-ink">{lens.name}</span>
-                <span className="text-[11px] font-medium text-muted">{lens.law}</span>
-              </span>
-              <span className="text-[13px] leading-snug text-ink-2">{lens.hook}</span>
-            </span>
-            <IconChevron className="shrink-0 text-muted opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
-          </button>
-        ))}
+      <nav aria-label="What are you looking for?" className="border-t border-hairline">
+        <h2 className="px-6 pt-5 pb-1 text-[13px] font-medium text-muted">What are you looking for?</h2>
+        <ul>
+          {LENSES.map((lens) => (
+            <li key={lens.id} className="border-b border-hairline last:border-b-0">
+              <button
+                onClick={() => chooseLens(lens.id)}
+                onMouseEnter={() => setHot(lens.id)}
+                onMouseLeave={() => setHot(null)}
+                onFocus={() => setHot(lens.id)}
+                onBlur={() => setHot(null)}
+                className="group flex w-full items-center gap-4 px-6 py-3.5 text-left transition-colors duration-150 hover:bg-stock-2 focus-visible:bg-stock-2"
+              >
+                <LensArt id={lens.id} playing={hot === lens.id} className="w-[84px] shrink-0" />
+                <span className="flex min-w-0 flex-1 flex-col gap-1">
+                  <span className="display text-[19px] leading-tight font-bold tracking-[-0.02em] text-ink">{lens.name}</span>
+                  <span className="text-[13.5px] leading-snug text-muted">{lens.hook}</span>
+                  <span className="font-mono text-[11px] text-blue">{lens.law}</span>
+                </span>
+                <IconArrow
+                  size={18}
+                  className="shrink-0 text-blue opacity-0 transition-[opacity,transform] duration-200 ease-[var(--ease-out)] group-hover:translate-x-0.5 group-hover:opacity-100"
+                />
+              </button>
+            </li>
+          ))}
+        </ul>
       </nav>
 
-      <div className="flex flex-col gap-2 border-t border-hairline pt-5">
-        <p className="text-[13px] text-ink-2">Already have a place in mind?</p>
-        <button
-          onClick={onSearch}
-          className="press flex h-11 items-center gap-2.5 rounded-full bg-surface px-4 text-left text-[14px] text-muted shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)]"
-        >
-          <IconSearch />
-          <span className="flex-1">Check an address or APN</span>
-          <kbd className="rounded-md bg-surface-2 px-1.5 py-0.5 font-mono text-[11px] text-muted">⌘K</kbd>
+      <div className="border-t border-hairline px-6 py-6">
+        <button onClick={onSearch} className="press group flex w-full items-center gap-3 text-left">
+          <span className="grid size-10 shrink-0 place-items-center rounded-full bg-blue-tint text-blue">
+            <IconSearch size={17} />
+          </span>
+          <span className="flex flex-1 flex-col">
+            <span className="text-[14.5px] font-medium text-ink">Already have a lot in mind?</span>
+            <span className="text-[13px] text-muted">Check any address or APN against all five laws</span>
+          </span>
+          <IconArrow size={17} className="text-muted transition-transform duration-200 group-hover:translate-x-0.5" />
         </button>
       </div>
     </div>

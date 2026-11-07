@@ -12,7 +12,7 @@ import { rowForApn } from "@/lib/rules/engine";
 setWorkerUrl("/maplibre/maplibre-gl-worker.mjs");
 
 const BASEMAP = "https://tiles.openfreemap.org/styles/positron";
-const PANEL_PAD = { left: 460, top: 24, right: 24, bottom: 24 };
+const PANEL_PAD = { left: 48, top: 48, right: 48, bottom: 48 };
 
 function Overlay({ onReady }: { onReady: (o: MapboxOverlay) => void }) {
   const overlay = useControl(() => new MapboxOverlay({ interleaved: false }));
@@ -22,13 +22,12 @@ function Overlay({ onReady }: { onReady: (o: MapboxOverlay) => void }) {
 
 function padding() {
   if (typeof window !== "undefined" && window.innerWidth < 768)
-    return { left: 16, top: 16, right: 16, bottom: Math.round(window.innerHeight * 0.64) };
+    return { left: 16, top: 16, right: 16, bottom: Math.round(window.innerHeight * 0.6) };
   return PANEL_PAD;
 }
 
 function initialPad() {
-  const p = padding();
-  return p === PANEL_PAD ? { ...PANEL_PAD, left: 480 } : p;
+  return padding();
 }
 
 export function CityMap() {
@@ -60,7 +59,7 @@ export function CityMap() {
       if (at) map.flyTo({ center: at as [number, number], zoom: 17.2, duration: reduce ? 0 : 1400, padding: pad, essential: true });
     } else if (mode === "home" || mode === "sieve") {
       const [w, so, e, n] = data.city.bbox;
-      map.fitBounds([w, so, e, n], { padding: { ...pad, left: pad.left + 20, top: pad.top + 30, right: pad.right + 30 }, duration: reduce ? 0 : 1100 });
+      map.fitBounds([w, so, e, n], { padding: pad, duration: reduce ? 0 : 1100 });
     }
   }, [selectedApn, mode, data]);
 

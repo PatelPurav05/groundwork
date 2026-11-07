@@ -2,8 +2,6 @@ import Anthropic from "@anthropic-ai/sdk";
 import { z } from "zod";
 import { zodOutputFormat } from "@anthropic-ai/sdk/helpers/zod";
 
-export const runtime = "nodejs";
-
 /** Turns "church land near a bus line, 10+ homes" into the same transparent filters the UI exposes. */
 const Query = z.object({
   lens: z.enum(["faith", "public", "commercial", "starter", "backyard", "none"]),

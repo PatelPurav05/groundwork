@@ -36,18 +36,19 @@ over-printed in coral. Nothing else on the map competes.
 |---|---|---|
 | Stock | `--stock` | Page and sheet ground |
 | Stock 2 | `--stock-2` | Pressed / hover ground, inset rows |
-| Ink | `--ink` | Body text (blue-black, 15.9:1 on stock) |
-| Blue | `--blue` | Headings, primary buttons, pass marks, map dots |
-| Coral | `--coral` | The found thing: survivors, the score of the top site, the sieve's cut numbers, selection. Fills and large type only (3:1 on stock) |
-| Coral ink | `--coral-ink` | Coral when it must be small text (4.6:1) |
-| Muted | `--muted` | Secondary text (6.0:1) |
+| Ink | `--ink` | Body text (blue-black, 16.2:1 on stock) |
+| Blue | `--blue` | Display numbers, primary buttons, pass marks, links, map dots (9.0:1) |
+| Coral | `--coral` | The found thing: survivors on the map, the top stamp, fail marks, selection. Fills only (2.97:1 on stock); text on coral is ink (5.45:1) |
+| Coral ink | `--coral-ink` | Coral as text: cut counts, warnings (4.98:1) |
+| Muted | `--muted` | Secondary text (5.93:1) |
 | Tints | `--blue-tint`, `--coral-tint` | Badges, verdict grounds |
 
 Pass = blue. Fail = coral. Unknown = no ink: a dotted halftone ring in muted. No green, no amber,
 no third hue. No violet as a token (overprint appears only inside illustrations, via multiply).
 
 ## Type
-- **Display: Bricolage Grotesque**, 700-800. Big, tight, poster-like. Sizes 28 / 40 / 64 / 88.
+- **Display: Bricolage Grotesque**, 700-800. Big, tight, poster-like. Poster numbers 80-88 in
+  blue; headings 17 / 21 / 27 / 32-34 in ink.
 - **UI: Inter Tight**, 400-600 at 13-16px. Sentence case everywhere. No uppercase eyebrows.
 - **Data: Geist Mono**, only for APNs, acreage and counts that sit in lists. Not as decoration.
 - Numerals tabular wherever they change or align.
@@ -63,10 +64,10 @@ no third hue. No violet as a token (overprint appears only inside illustrations,
   illustrations only, never as a page background.
 
 ## Components
-- **Score stamp:** a filled blue circle with the score in stock-white Bricolage; a coral ring
-  printed 1.5px out of register behind it. Top-ranked site: coral fill.
-- **Check row:** mark + label + detail; source and date on expand. Pass mark: blue check in a blue
-  tint disc. Fail: coral cross in a coral tint disc. Unknown: dotted ring with "?".
+- **Score stamp:** a filled blue disc with the score in stock-white Bricolage; a coral disc
+  printed ~1.5px out of register behind it. Top-ranked lot: coral disc, ink numeral, blue behind.
+- **Check row:** mark + label + detail; source and date on expand. Pass mark: stock check on a solid
+  blue disc. Fail: ink cross on a solid coral disc. Unknown: dotted muted ring with "?".
 - **Buttons:** primary = blue fill, stock text, pill; secondary = stock-2 fill, ink text; ghost =
   text only. Press scales to .97 in 140ms.
 - **Tags:** small pills in tints; "assumed" and "our call" in a dotted outline (no ink).
@@ -84,3 +85,4 @@ register. Wordmark "Groundwork" in Bricolage Grotesque 800, tracking -0.03em, bl
 
 ## Changelog
 - 2026-11-07: Replaced the beige / serif first pass with the riso world (user's choice).
+- 2026-11-07: Map survivor stamps scale with list size (2.6–6.5px) so large lists stay readable.

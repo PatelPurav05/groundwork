@@ -16,7 +16,7 @@ export function BoardBrief() {
 
   return (
     <div className="hidden print:block print:p-10 text-ink">
-      <h1 className="serif text-[30px]">Sites worth a call · {data.city.name}</h1>
+      <h1 className="display text-[30px] text-blue">Sites worth a call · {data.city.name}</h1>
       <p className="mb-6 text-[11px] text-muted">
         Prepared with Groundwork on {shortDate(new Date().toISOString())}. Rules and data checked {shortDate(CHECKED)}. Screening only. Not legal advice.
         Every &ldquo;?&rdquo; must be confirmed before any commitment.

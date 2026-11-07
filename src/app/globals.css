@@ -1,70 +1,43 @@
 @import "tailwindcss";
 
-/* Groundwork tokens. Warm paper, ink, one clay accent. */
+/* Groundwork · riso housing poster. Two inks (blue, coral) on white stock. See DESIGN.md. */
 :root {
-  --paper: #f5f2ec;
-  --surface: #fffefb;
-  --surface-2: #efebe3;
-  --ink: #1b1a17;
-  --ink-2: #4a4740;
-  --muted: #6f6a60;
-  --hairline: rgb(27 26 23 / 0.09);
-  --hairline-strong: rgb(27 26 23 / 0.16);
+  --stock: #fbfbf8;
+  --stock-2: #f2f3ef;
+  --stock-3: #e9ebe5;
+  --ink: #141b3c;
+  --muted: #5a6178;
+  --blue: #1d3ba8;
+  --blue-ink: #16308e;
+  --blue-tint: #e4e8f6;
+  --coral: #ff5a4e;
+  --coral-ink: #c9372d;
+  --coral-tint: #ffe6e2;
+  --hairline: rgb(20 27 60 / 0.12);
+  --hairline-strong: rgb(20 27 60 / 0.22);
 
-  --clay: #c8553a;
-  --clay-ink: #8f3420;
-  --clay-soft: #f6e2da;
-
-  --pass: #2f7a57;
-  --pass-soft: #e1efe6;
-  --fail: #b4472f;
-  --fail-soft: #f6e0d9;
-  --unknown: #8a7a52;
-  --unknown-soft: #f1ead8;
-
-  --score-high: #2f7a57;
-  --score-mid: #c48a1e;
-  --score-low: #b4472f;
-
-  --radius-sm: 10px;
-  --radius: 16px;
-  --radius-lg: 24px;
-
-  --shadow-panel: 0 1px 0 rgb(255 255 255 / 0.6) inset, 0 0 0 1px var(--hairline),
-    0 12px 40px -12px rgb(40 30 20 / 0.18), 0 2px 6px rgb(40 30 20 / 0.05);
-  --shadow-card: 0 0 0 1px var(--hairline), 0 1px 2px rgb(40 30 20 / 0.04);
-  --shadow-card-hover: 0 0 0 1px var(--hairline-strong), 0 6px 20px -8px rgb(40 30 20 / 0.18);
+  --shadow-float: 0 18px 50px -18px rgb(20 27 60 / 0.35), 0 2px 6px rgb(20 27 60 / 0.06);
 
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
-  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
-  --dur-press: 140ms;
-  --dur-ui: 200ms;
-  --dur-panel: 320ms;
 }
 
 @theme inline {
-  --color-paper: var(--paper);
-  --color-surface: var(--surface);
-  --color-surface-2: var(--surface-2);
+  --color-stock: var(--stock);
+  --color-stock-2: var(--stock-2);
+  --color-stock-3: var(--stock-3);
   --color-ink: var(--ink);
-  --color-ink-2: var(--ink-2);
   --color-muted: var(--muted);
+  --color-blue: var(--blue);
+  --color-blue-ink: var(--blue-ink);
+  --color-blue-tint: var(--blue-tint);
+  --color-coral: var(--coral);
+  --color-coral-ink: var(--coral-ink);
+  --color-coral-tint: var(--coral-tint);
   --color-hairline: var(--hairline);
-  --color-clay: var(--clay);
-  --color-clay-ink: var(--clay-ink);
-  --color-clay-soft: var(--clay-soft);
-  --color-pass: var(--pass);
-  --color-pass-soft: var(--pass-soft);
-  --color-fail: var(--fail);
-  --color-fail-soft: var(--fail-soft);
-  --color-unknown: var(--unknown);
-  --color-unknown-soft: var(--unknown-soft);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-serif: var(--font-serif);
-  --ease-out: var(--ease-out);
-  --ease-in-out: var(--ease-in-out);
+  --font-sans: var(--font-ui);
+  --font-display: var(--font-display);
+  --font-mono: var(--font-data);
 }
 
 html,
@@ -73,47 +46,92 @@ body {
 }
 
 body {
-  background: var(--paper);
+  background: var(--stock);
   color: var(--ink);
-  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-ui), ui-sans-serif, system-ui, sans-serif;
+  font-size: 15px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--coral);
+  color: var(--ink);
+}
+
+.display {
+  font-family: var(--font-display), ui-sans-serif, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  font-optical-sizing: auto;
+  text-wrap: balance;
 }
 
 .tnum {
   font-variant-numeric: tabular-nums;
 }
 
-.serif {
-  font-family: var(--font-serif), ui-serif, Georgia, serif;
-  font-weight: 400;
-  letter-spacing: -0.01em;
+/* Riso misregistration: the coral pass printed a hair off the blue one. Logo, counter, art only. */
+.misreg {
+  position: relative;
+  color: var(--blue);
+}
+.misreg::before {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  color: var(--coral);
+  transform: translate(0.045em, 0.03em);
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+.misreg > span {
+  position: relative;
+  mix-blend-mode: multiply;
 }
 
-/* Pressables: instant feedback, never animate from nothing. */
+/* Halftone: a printed dot screen in blue tint, for verdict blocks and art grounds only. */
+.halftone {
+  background-image: radial-gradient(rgb(29 59 168 / 0.16) 0.9px, transparent 1.15px);
+  background-size: 5px 5px;
+}
+.halftone-coral {
+  background-image: radial-gradient(rgb(255 90 78 / 0.22) 0.9px, transparent 1.15px);
+  background-size: 5px 5px;
+}
+
 .press {
-  transition: transform var(--dur-press) var(--ease-out), background-color var(--dur-ui) ease,
-    box-shadow var(--dur-ui) ease, color var(--dur-ui) ease;
+  transition: transform 140ms var(--ease-out), background-color 180ms ease, color 180ms ease,
+    box-shadow 180ms ease, opacity 180ms ease;
 }
 .press:active {
   transform: scale(0.97);
 }
 
 :focus-visible {
-  outline: 2px solid var(--clay);
+  outline: 2px solid var(--blue);
   outline-offset: 2px;
-  border-radius: 8px;
+  border-radius: 6px;
+}
+input:focus-visible,
+textarea:focus-visible {
+  outline: none;
 }
 
-/* Map: mute the basemap into warm paper so the dots carry the story. */
+a {
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+
+/* The basemap recedes to bare stock; the printed dots carry the city. */
 .basemap-muted .maplibregl-canvas {
-  filter: grayscale(1) sepia(0.2) contrast(0.7) brightness(1.06);
-  opacity: 0.6;
+  filter: grayscale(1) contrast(0.6) brightness(1.08);
+  opacity: 0.55;
 }
 .maplibregl-ctrl-attrib {
   font-size: 10px !important;
-  background: rgb(245 242 236 / 0.8) !important;
+  background: rgb(251 251 248 / 0.85) !important;
+  color: var(--muted) !important;
 }
 
 .scroll-quiet {

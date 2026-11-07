@@ -45,13 +45,13 @@ export function SearchPalette({ onClose }: { onClose: () => void }) {
 
   useEffect(() => {
     let live = true;
-    loadAddresses(data.city)
+    loadAddresses(data)
       .then((a) => live && setAddr(a))
       .catch(() => live && setAddr({ apn: [], address: [] }));
     return () => {
       live = false;
     };
-  }, [data.city]);
+  }, [data]);
 
   const results = useMemo<Result[]>(() => {
     const t = q.trim();
@@ -110,7 +110,7 @@ export function SearchPalette({ onClose }: { onClose: () => void }) {
         role="dialog"
         aria-label="Search"
         onMouseDown={(e) => e.stopPropagation()}
-        className="flex w-full max-w-[560px] flex-col overflow-hidden rounded-[22px] bg-surface shadow-[var(--shadow-panel)]"
+        className="flex w-full max-w-[560px] flex-col overflow-hidden rounded-[22px] bg-stock shadow-[var(--shadow-float)] ring-1 ring-hairline"
       >
         <div className="flex items-center gap-3 border-b border-hairline px-5">
           <IconSearch className="text-muted" />
@@ -139,9 +139,9 @@ export function SearchPalette({ onClose }: { onClose: () => void }) {
               <button
                 onMouseMove={() => setSel(i)}
                 onClick={() => run(r)}
-                className={clsx("flex w-full items-center gap-3 rounded-[12px] px-3 py-2.5 text-left", i === sel && "bg-surface-2")}
+                className={clsx("flex w-full items-center gap-3 rounded-[12px] px-3 py-2.5 text-left", i === sel && "bg-stock-2")}
               >
-                <span className="grid size-8 shrink-0 place-items-center rounded-[9px] bg-paper text-ink-2">
+                <span className="grid size-8 shrink-0 place-items-center rounded-[9px] bg-stock-2 text-ink">
                   {r.kind === "ask" ? <IconSparkle size={16} /> : r.kind === "lens" ? <span className="text-[10px] font-semibold">{LENS_BY_ID[r.id].law.split(" ")[0]}</span> : <IconSearch size={15} />}
                 </span>
                 <span className="flex min-w-0 flex-1 flex-col">
@@ -153,7 +153,7 @@ export function SearchPalette({ onClose }: { onClose: () => void }) {
             </li>
           ))}
         </ul>
-        {note && <p className="border-t border-hairline px-5 py-3 text-[12.5px] text-ink-2">{note}</p>}
+        {note && <p className="border-t border-hairline px-5 py-3 text-[12.5px] text-ink">{note}</p>}
       </div>
     </div>
   );

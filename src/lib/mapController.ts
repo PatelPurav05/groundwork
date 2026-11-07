@@ -7,8 +7,10 @@ import { useStore } from "./store";
 import { getSieve, type SieveResult } from "./useSieve";
 import { scoreSite } from "./score";
 
-const INK: [number, number, number] = [27, 26, 23];
-const CLAY: [number, number, number] = [200, 85, 58];
+/** Riso inks: the city printed in blue, survivors over-printed in coral. */
+const INK: [number, number, number] = [29, 59, 168];
+const CLAY: [number, number, number] = [255, 90, 78];
+const DARK: [number, number, number] = [20, 27, 60];
 
 /** Dot radius in meters: a typical Santa Ana lot is ~15 m wide, so dots scale like lots. */
 const R = 6;
@@ -78,8 +80,21 @@ export class MapController {
     }
   };
 
+  private failed = false;
+
   private frame = (now: number) => {
     this.raf = null;
+    if (this.failed) return;
+    try {
+      this.paint(now);
+    } catch (e) {
+      // Never let a bad frame spin: log once, stop animating, keep the last good frame on screen.
+      this.failed = true;
+      console.error("[Groundwork] map frame failed:", e);
+    }
+  };
+
+  private paint(now: number) {
     const st = useStore.getState();
     if (!this.introStart) this.introStart = now;
     const intro = this.reduce ? 1.4 : Math.min(1.4, (now - this.introStart) / 1400);
@@ -108,7 +123,7 @@ export class MapController {
     });
     const moving = intro < 1.4 || this.doneT !== want || st.mode === "sieve";
     if (moving) this.raf = requestAnimationFrame(this.frame);
-  };
+  }
 
   private dots(sieve: SieveResult | null, progress: number, intro: number): Layer {
     this.flip ^= 1;
@@ -177,16 +192,18 @@ export class MapController {
     if (sieve && this.doneT > 0) {
       const t = easeOut(clamp01(this.doneT));
       const sites = sieve.survivorApns.map((a) => this.data.siteByApn.get(a)).filter((s): s is Site => !!s);
+      // Fewer survivors get bigger stamps; thousands stay small enough to read the city through.
+      const base = Math.max(2.6, Math.min(6.5, 9.2 - Math.log10(Math.max(10, sites.length)) * 1.9));
       layers.push(
         new ScatterplotLayer<Site>({
           id: "sites",
           data: sites,
           getPosition: (s) => [s.lng, s.lat],
           getRadius: (s) =>
-            (s.apn === st.selectedApn ? 10 : s.apn === st.hoveredApn ? 9 : 4.5 + scoreSite(s, st.lensId).score * 0.3) * t,
-          getFillColor: (s) => (s.apn === st.selectedApn || s.apn === st.hoveredApn ? [...INK, 255] : [...CLAY, 235]),
-          getLineColor: [255, 254, 251, 255],
-          lineWidthMinPixels: 1.5,
+            (s.apn === st.selectedApn ? 10 : s.apn === st.hoveredApn ? 9 : base + (scoreSite(s, st.lensId).score - 6) * 0.35) * t,
+          getFillColor: (s) => (s.apn === st.selectedApn || s.apn === st.hoveredApn ? [...DARK, 255] : [...CLAY, 240]),
+          getLineColor: [251, 251, 248, 255],
+          lineWidthMinPixels: 1,
           stroked: true,
           radiusUnits: "pixels",
           pickable: true,
@@ -204,7 +221,7 @@ export class MapController {
           id: "outline",
           data: [target],
           getPolygon: (s) => s.outline,
-          getFillColor: [...CLAY, 34],
+          getFillColor: [...CLAY, 46],
           getLineColor: [...CLAY, 255],
           lineWidthMinPixels: 2,
           stroked: true,

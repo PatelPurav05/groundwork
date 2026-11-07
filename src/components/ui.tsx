@@ -2,70 +2,56 @@
 
 import clsx from "clsx";
 import type { ComponentProps, ReactNode } from "react";
-import { scoreTone } from "@/lib/score";
 import type { CheckStatus } from "@/lib/types";
 
-/* ---------- Score ring (the Beli move: one number, one colour) ---------- */
+/* ---------- Score stamp: a printed blue disc, coral pass a hair out of register ---------- */
 
-const TONE = {
-  high: "var(--score-high)",
-  mid: "var(--score-mid)",
-  low: "var(--score-low)",
-} as const;
-
-export function ScoreRing({ score, size = 44, className }: { score: number; size?: number; className?: string }) {
-  const tone = scoreTone(score);
-  const stroke = Math.max(2.5, size / 15);
-  const r = (size - stroke) / 2;
-  const c = 2 * Math.PI * r;
+export function ScoreStamp({ score, size = 44, top = false, className }: { score: number; size?: number; top?: boolean; className?: string }) {
+  const off = Math.max(1.5, size / 28);
   return (
-    <div className={clsx("relative shrink-0", className)} style={{ width: size, height: size }} aria-label={`Score ${score.toFixed(1)} out of 10`}>
-      <svg width={size} height={size} className="-rotate-90">
-        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="var(--hairline)" strokeWidth={stroke} />
-        <circle
-          cx={size / 2}
-          cy={size / 2}
-          r={r}
-          fill="none"
-          stroke={TONE[tone]}
-          strokeWidth={stroke}
-          strokeLinecap="round"
-          strokeDasharray={c}
-          strokeDashoffset={c * (1 - score / 10)}
-        />
-      </svg>
+    <span
+      className={clsx("relative inline-grid shrink-0 place-items-center", className)}
+      style={{ width: size, height: size }}
+      aria-label={`Score ${score.toFixed(1)} out of 10`}
+    >
       <span
-        className="tnum absolute inset-0 grid place-items-center font-semibold"
-        style={{ color: TONE[tone], fontSize: size * 0.32, letterSpacing: "-0.02em" }}
+        aria-hidden
+        className="absolute inset-0 rounded-full"
+        style={{ background: top ? "var(--blue)" : "var(--coral)", transform: `translate(${off}px, ${off * 0.7}px)` }}
+      />
+      <span aria-hidden className="absolute inset-0 rounded-full" style={{ background: top ? "var(--coral)" : "var(--blue)" }} />
+      <span
+        className="display tnum relative leading-none"
+        style={{ fontSize: size * 0.36, color: top ? "var(--ink)" : "var(--stock)", fontWeight: 800 }}
       >
         {score.toFixed(1)}
       </span>
-    </div>
+    </span>
   );
 }
 
-/* ---------- Check status marks ---------- */
+/* ---------- Check marks: blue = pass, coral = fail, no ink = unknown ---------- */
 
 export function StatusMark({ status, size = 20 }: { status: CheckStatus; size?: number }) {
-  const common = { width: size, height: size, viewBox: "0 0 20 20", "aria-hidden": true } as const;
+  const common = { width: size, height: size, viewBox: "0 0 20 20", "aria-hidden": true, className: "shrink-0" } as const;
   if (status === "pass")
     return (
       <svg {...common}>
-        <circle cx="10" cy="10" r="10" fill="var(--pass-soft)" />
-        <path d="M6 10.4l2.6 2.6L14 7.6" fill="none" stroke="var(--pass)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+        <circle cx="10" cy="10" r="10" fill="var(--blue)" />
+        <path d="M6 10.3l2.6 2.6L14 7.5" fill="none" stroke="var(--stock)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     );
   if (status === "fail")
     return (
       <svg {...common}>
-        <circle cx="10" cy="10" r="10" fill="var(--fail-soft)" />
-        <path d="M7 7l6 6M13 7l-6 6" stroke="var(--fail)" strokeWidth="1.8" strokeLinecap="round" />
+        <circle cx="10" cy="10" r="10" fill="var(--coral)" />
+        <path d="M7 7l6 6M13 7l-6 6" stroke="var(--ink)" strokeWidth="2" strokeLinecap="round" />
       </svg>
     );
   return (
     <svg {...common}>
-      <circle cx="10" cy="10" r="9.25" fill="var(--unknown-soft)" stroke="var(--unknown)" strokeWidth="1" strokeDasharray="2.2 2" />
-      <text x="10" y="14" textAnchor="middle" fontSize="11" fontWeight="600" fill="var(--unknown)">?</text>
+      <circle cx="10" cy="10" r="9" fill="none" stroke="var(--muted)" strokeWidth="1.4" strokeDasharray="0.1 3" strokeLinecap="round" />
+      <path d="M8.2 8a1.9 1.9 0 113 1.5c-.7.5-1.2.9-1.2 1.8M10 13.7v.1" fill="none" stroke="var(--muted)" strokeWidth="1.5" strokeLinecap="round" />
     </svg>
   );
 }
@@ -74,23 +60,22 @@ export function StatusMark({ status, size = 20 }: { status: CheckStatus; size?: 
 
 export function Tag({
   children,
-  tone = "neutral",
+  tone = "plain",
   className,
 }: {
   children: ReactNode;
-  tone?: "neutral" | "clay" | "pass" | "fail" | "unknown" | "ink";
+  tone?: "plain" | "blue" | "coral" | "dotted" | "ink";
   className?: string;
 }) {
   return (
     <span
       className={clsx(
-        "inline-flex items-center gap-1 rounded-full px-2 py-[3px] text-[11px] font-medium leading-none whitespace-nowrap",
-        tone === "neutral" && "bg-surface-2 text-ink-2",
-        tone === "clay" && "bg-clay-soft text-clay-ink",
-        tone === "pass" && "bg-pass-soft text-pass",
-        tone === "fail" && "bg-fail-soft text-fail",
-        tone === "unknown" && "bg-unknown-soft text-unknown",
-        tone === "ink" && "bg-ink text-paper",
+        "inline-flex h-[22px] items-center gap-1 rounded-full px-2 text-[11.5px] font-medium leading-none whitespace-nowrap",
+        tone === "plain" && "bg-stock-2 text-muted",
+        tone === "blue" && "bg-blue-tint text-blue-ink",
+        tone === "coral" && "bg-coral-tint text-coral-ink",
+        tone === "ink" && "bg-ink text-stock",
+        tone === "dotted" && "border border-dashed border-muted/60 text-muted",
         className,
       )}
     >
@@ -99,29 +84,25 @@ export function Tag({
   );
 }
 
-export function AssumedTag() {
-  return (
-    <Tag tone="unknown" className="uppercase tracking-[0.06em] text-[9.5px]">
-      assumed
-    </Tag>
-  );
-}
+export const AssumedTag = () => <Tag tone="dotted">assumed</Tag>;
 
 /* ---------- Buttons ---------- */
 
 export function Button({
   variant = "primary",
+  size = "md",
   className,
   ...props
-}: ComponentProps<"button"> & { variant?: "primary" | "secondary" | "ghost" }) {
+}: ComponentProps<"button"> & { variant?: "primary" | "secondary" | "ghost"; size?: "sm" | "md" }) {
   return (
     <button
       {...props}
       className={clsx(
-        "press inline-flex h-10 items-center justify-center gap-2 rounded-full px-4 text-[14px] font-medium disabled:opacity-50 disabled:pointer-events-none",
-        variant === "primary" && "bg-ink text-paper hover:bg-[#2c2a26]",
-        variant === "secondary" && "bg-surface text-ink shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)]",
-        variant === "ghost" && "text-ink-2 hover:bg-surface-2",
+        "press inline-flex items-center justify-center gap-2 rounded-full font-medium disabled:pointer-events-none disabled:opacity-45",
+        size === "md" ? "h-10 px-4 text-[14px]" : "h-8 px-3 text-[13px]",
+        variant === "primary" && "bg-blue text-stock hover:bg-blue-ink",
+        variant === "secondary" && "bg-stock-2 text-ink hover:bg-stock-3",
+        variant === "ghost" && "text-muted hover:bg-stock-2 hover:text-ink",
         className,
       )}
     />
@@ -134,10 +115,21 @@ export function IconButton({ label, className, children, ...props }: ComponentPr
       {...props}
       aria-label={label}
       title={label}
-      className={clsx("press grid size-9 place-items-center rounded-full text-ink-2 hover:bg-surface-2 hover:text-ink", className)}
+      className={clsx("press grid size-9 shrink-0 place-items-center rounded-full text-muted hover:bg-stock-2 hover:text-ink", className)}
     >
       {children}
     </button>
+  );
+}
+
+/* ---------- Section heading inside the sheet (sentence case, no eyebrow) ---------- */
+
+export function SheetHeading({ children, aside }: { children: ReactNode; aside?: ReactNode }) {
+  return (
+    <div className="flex items-baseline justify-between gap-3 pb-1">
+      <h3 className="display text-[17px] font-bold tracking-[-0.02em] text-ink">{children}</h3>
+      {aside}
+    </div>
   );
 }
 
@@ -147,18 +139,7 @@ type IconProps = { size?: number; className?: string };
 const icon = (path: ReactNode) =>
   function Icon({ size = 18, className }: IconProps) {
     return (
-      <svg
-        width={size}
-        height={size}
-        viewBox="0 0 20 20"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className={className}
-        aria-hidden
-      >
+      <svg width={size} height={size} viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden>
         {path}
       </svg>
     );
@@ -181,17 +162,11 @@ export const IconBookmarkFilled = ({ size = 18, className }: IconProps) => (
 export const IconX = icon(<path d="M5.5 5.5l9 9M14.5 5.5l-9 9" />);
 export const IconChevron = icon(<path d="M8 5.5l4.5 4.5L8 14.5" />);
 export const IconExternal = icon(<path d="M8 4.5H4.5v11h11V12M11 4.5h4.5V9M15.5 4.5L9 11" />);
-export const IconSparkle = icon(<path d="M10 3v3M10 14v3M3 10h3M14 10h3M5.5 5.5l2 2M12.5 12.5l2 2M14.5 5.5l-2 2M7.5 12.5l-2 2" />);
+export const IconSparkle = icon(<path d="M10 3.5l1.6 4.9 4.9 1.6-4.9 1.6L10 16.5l-1.6-4.9L3.5 10l4.9-1.6z" />);
 export const IconCopy = icon(
   <>
     <rect x="7" y="7" width="9" height="9" rx="2" />
     <path d="M4 12.5V5.5A1.5 1.5 0 015.5 4h7" />
-  </>,
-);
-export const IconTransit = icon(
-  <>
-    <rect x="5" y="3.5" width="10" height="11" rx="2.5" />
-    <path d="M5 10h10M7.5 17l1-2.5M12.5 17l-1-2.5" />
   </>,
 );
 export const IconPrint = icon(<path d="M6 7.5V3.5h8v4M6 13.5H4.5v-6h11v6H14M6 11.5h8v5H6z" />);

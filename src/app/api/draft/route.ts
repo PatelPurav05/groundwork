@@ -1,7 +1,5 @@
 import Anthropic from "@anthropic-ai/sdk";
 
-export const runtime = "nodejs";
-
 const SYSTEM = `You draft a short first-contact letter from a small affordable-housing nonprofit to a property owner or public agency, about one parcel.
 
 Rules:
