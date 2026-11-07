@@ -1,0 +1,14 @@
+{
+  "name": "groundwork-data-pipeline",
+  "private": true,
+  "type": "module",
+  "description": "Offline data pipeline for Groundwork (Santa Ana). Run from repo root: node scripts/data/build.mjs",
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "devDependencies": {
+    "@turf/turf": "^7.4.0",
+    "csv-parse": "^7.0.3",
+    "flatbush": "^4.7.0"
+  }
+}

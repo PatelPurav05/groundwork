@@ -1,0 +1,1183 @@
+{
+  "version": 2,
+  "id": "lens-backyard",
+  "revision": "sha256:ac8743ad9fc04287c3c637b7fe1ca4e6f17194e5a110ed5ff80b770bce3f25b1",
+  "name": "Lot splits (SB 9)",
+  "canvas": {
+    "width": 288,
+    "height": 288,
+    "pixelAspectRatio": 1,
+    "backgroundColor": {
+      "r": 0.9607843137254902,
+      "g": 0.9490196078431372,
+      "b": 0.9254901960784314,
+      "a": 0
+    }
+  },
+  "timing": {
+    "ticksPerSecond": 240,
+    "frameRate": {
+      "numerator": 60,
+      "denominator": 1
+    },
+    "durationTicks": 320,
+    "displayStartTick": 0
+  },
+  "assets": {},
+  "compositions": {
+    "main": {
+      "id": "main",
+      "name": "Main",
+      "width": 288,
+      "height": 288,
+      "durationTicks": 320,
+      "nodes": {
+        "lot": {
+          "id": "lot",
+          "name": "lot",
+          "visible": true,
+          "inTick": 0,
+          "outTick": 320,
+          "opacity": {
+            "kind": "constant",
+            "value": 1
+          },
+          "transform": {
+            "position": {
+              "kind": "constant",
+              "value": {
+                "x": 144,
+                "y": 160,
+                "z": 0
+              }
+            },
+            "anchor": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "scale": {
+              "kind": "constant",
+              "value": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+              }
+            },
+            "rotation": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "skew": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0
+              }
+            }
+          },
+          "blendMode": "normal",
+          "type": "rect",
+          "size": {
+            "kind": "constant",
+            "value": {
+              "width": 232,
+              "height": 148
+            }
+          },
+          "cornerRadius": {
+            "kind": "constant",
+            "value": 20
+          },
+          "style": {
+            "fill": {
+              "color": {
+                "kind": "constant",
+                "value": {
+                  "r": 0.8823529411764706,
+                  "g": 0.9372549019607843,
+                  "b": 0.9019607843137255,
+                  "a": 1
+                }
+              },
+              "opacity": {
+                "kind": "constant",
+                "value": 1
+              }
+            }
+          }
+        },
+        "split": {
+          "id": "split",
+          "name": "split",
+          "visible": true,
+          "inTick": 0,
+          "outTick": 320,
+          "opacity": {
+            "kind": "constant",
+            "value": 1
+          },
+          "transform": {
+            "position": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "anchor": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "scale": {
+              "kind": "constant",
+              "value": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+              }
+            },
+            "rotation": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "skew": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0
+              }
+            }
+          },
+          "blendMode": "normal",
+          "type": "path",
+          "path": {
+            "kind": "constant",
+            "value": {
+              "contours": [
+                {
+                  "closed": false,
+                  "vertices": [
+                    {
+                      "point": {
+                        "x": 160,
+                        "y": 98
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 160,
+                        "y": 222
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "style": {
+            "stroke": {
+              "color": {
+                "kind": "constant",
+                "value": {
+                  "r": 0.10588235294117647,
+                  "g": 0.10196078431372549,
+                  "b": 0.09019607843137255,
+                  "a": 1
+                }
+              },
+              "opacity": {
+                "kind": "keyframed",
+                "keyframes": [
+                  {
+                    "id": "split.op.0",
+                    "tick": 0,
+                    "value": 0.55,
+                    "interpolation": "hold"
+                  },
+                  {
+                    "id": "split.op.1",
+                    "tick": 36,
+                    "value": 0.55,
+                    "interpolation": "bezier",
+                    "easing": {
+                      "x1": 0.55,
+                      "y1": 0,
+                      "x2": 0.8,
+                      "y2": 0.4
+                    }
+                  },
+                  {
+                    "id": "split.op.2",
+                    "tick": 48,
+                    "value": 0,
+                    "interpolation": "hold"
+                  },
+                  {
+                    "id": "split.op.3",
+                    "tick": 104,
+                    "value": 0,
+                    "interpolation": "linear"
+                  },
+                  {
+                    "id": "split.op.4",
+                    "tick": 120,
+                    "value": 0.55,
+                    "interpolation": "hold"
+                  }
+                ]
+              },
+              "width": {
+                "kind": "constant",
+                "value": 5
+              },
+              "lineCap": "round",
+              "lineJoin": "round",
+              "miterLimit": 4,
+              "dash": {
+                "kind": "constant",
+                "value": [
+                  9,
+                  10
+                ]
+              }
+            }
+          },
+          "operators": [
+            {
+              "id": "split.trim",
+              "type": "trim",
+              "start": {
+                "kind": "constant",
+                "value": 0
+              },
+              "end": {
+                "kind": "keyframed",
+                "keyframes": [
+                  {
+                    "id": "split.end.0",
+                    "tick": 0,
+                    "value": 1,
+                    "interpolation": "bezier",
+                    "easing": {
+                      "x1": 0.55,
+                      "y1": 0,
+                      "x2": 0.8,
+                      "y2": 0.4
+                    }
+                  },
+                  {
+                    "id": "split.end.1",
+                    "tick": 48,
+                    "value": 0,
+                    "interpolation": "hold"
+                  },
+                  {
+                    "id": "split.end.2",
+                    "tick": 104,
+                    "value": 0,
+                    "interpolation": "bezier",
+                    "easing": {
+                      "x1": 0.23,
+                      "y1": 1,
+                      "x2": 0.32,
+                      "y2": 1
+                    }
+                  },
+                  {
+                    "id": "split.end.3",
+                    "tick": 200,
+                    "value": 1,
+                    "interpolation": "hold"
+                  }
+                ]
+              },
+              "offset": {
+                "kind": "constant",
+                "value": 0
+              }
+            }
+          ]
+        },
+        "home": {
+          "id": "home",
+          "name": "home",
+          "visible": true,
+          "inTick": 0,
+          "outTick": 320,
+          "opacity": {
+            "kind": "constant",
+            "value": 1
+          },
+          "transform": {
+            "position": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "anchor": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "scale": {
+              "kind": "constant",
+              "value": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+              }
+            },
+            "rotation": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "skew": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0
+              }
+            }
+          },
+          "blendMode": "normal",
+          "type": "path",
+          "path": {
+            "kind": "constant",
+            "value": {
+              "contours": [
+                {
+                  "closed": true,
+                  "vertices": [
+                    {
+                      "point": {
+                        "x": 59,
+                        "y": 210
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": -3.8500000000000005,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 52,
+                        "y": 203
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 3.8500000000000005
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 52,
+                        "y": 157
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": -3.8500000000000005
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 57.4407140949524,
+                        "y": 145.59561239932424
+                      },
+                      "inTangent": {
+                        "x": -2.992392752223819,
+                        "y": 2.422413180371669
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 88.5592859050476,
+                        "y": 120.40438760067575
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 2.992392752223819,
+                        "y": -2.4224131803716613
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 99.4407140949524,
+                        "y": 120.40438760067575
+                      },
+                      "inTangent": {
+                        "x": -2.992392752223819,
+                        "y": -2.4224131803716613
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 130.5592859050476,
+                        "y": 145.59561239932424
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 2.992392752223819,
+                        "y": 2.422413180371669
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 136,
+                        "y": 157
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": -3.8500000000000005
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 136,
+                        "y": 203
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 3.8500000000000005
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 129,
+                        "y": 210
+                      },
+                      "inTangent": {
+                        "x": 3.8500000000000005,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "style": {
+            "fill": {
+              "color": {
+                "kind": "constant",
+                "value": {
+                  "r": 0.10588235294117647,
+                  "g": 0.10196078431372549,
+                  "b": 0.09019607843137255,
+                  "a": 1
+                }
+              },
+              "opacity": {
+                "kind": "constant",
+                "value": 1
+              }
+            }
+          }
+        },
+        "homeDoor": {
+          "id": "homeDoor",
+          "name": "homeDoor",
+          "visible": true,
+          "inTick": 0,
+          "outTick": 320,
+          "opacity": {
+            "kind": "constant",
+            "value": 1
+          },
+          "transform": {
+            "position": {
+              "kind": "constant",
+              "value": {
+                "x": 94,
+                "y": 193,
+                "z": 0
+              }
+            },
+            "anchor": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "scale": {
+              "kind": "constant",
+              "value": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+              }
+            },
+            "rotation": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "skew": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0
+              }
+            }
+          },
+          "blendMode": "normal",
+          "type": "rect",
+          "size": {
+            "kind": "constant",
+            "value": {
+              "width": 20,
+              "height": 32
+            }
+          },
+          "cornerRadius": {
+            "kind": "constant",
+            "value": 7
+          },
+          "style": {
+            "fill": {
+              "color": {
+                "kind": "constant",
+                "value": {
+                  "r": 0.9607843137254902,
+                  "g": 0.9490196078431372,
+                  "b": 0.9254901960784314,
+                  "a": 1
+                }
+              },
+              "opacity": {
+                "kind": "constant",
+                "value": 1
+              }
+            }
+          }
+        },
+        "adu": {
+          "id": "adu",
+          "name": "adu",
+          "visible": true,
+          "inTick": 0,
+          "outTick": 320,
+          "opacity": {
+            "kind": "keyframed",
+            "keyframes": [
+              {
+                "id": "adu.op.0",
+                "tick": 0,
+                "value": 1,
+                "interpolation": "bezier",
+                "easing": {
+                  "x1": 0.55,
+                  "y1": 0,
+                  "x2": 0.8,
+                  "y2": 0.4
+                }
+              },
+              {
+                "id": "adu.op.1",
+                "tick": 56,
+                "value": 0,
+                "interpolation": "hold"
+              },
+              {
+                "id": "adu.op.2",
+                "tick": 168,
+                "value": 0,
+                "interpolation": "bezier",
+                "easing": {
+                  "x1": 0.4,
+                  "y1": 0,
+                  "x2": 0.2,
+                  "y2": 1
+                }
+              },
+              {
+                "id": "adu.op.3",
+                "tick": 216,
+                "value": 1,
+                "interpolation": "hold"
+              }
+            ]
+          },
+          "transform": {
+            "position": {
+              "kind": "keyframed",
+              "keyframes": [
+                {
+                  "id": "adu.pos.0",
+                  "tick": 0,
+                  "value": {
+                    "x": 210,
+                    "y": 210,
+                    "z": 0
+                  },
+                  "interpolation": "hold"
+                },
+                {
+                  "id": "adu.pos.1",
+                  "tick": 168,
+                  "value": {
+                    "x": 210,
+                    "y": 224,
+                    "z": 0
+                  },
+                  "interpolation": "bezier",
+                  "easing": {
+                    "x1": 0.23,
+                    "y1": 1,
+                    "x2": 0.32,
+                    "y2": 1
+                  }
+                },
+                {
+                  "id": "adu.pos.2",
+                  "tick": 272,
+                  "value": {
+                    "x": 210,
+                    "y": 210,
+                    "z": 0
+                  },
+                  "interpolation": "hold"
+                }
+              ]
+            },
+            "anchor": {
+              "kind": "constant",
+              "value": {
+                "x": 210,
+                "y": 210,
+                "z": 0
+              }
+            },
+            "scale": {
+              "kind": "keyframed",
+              "keyframes": [
+                {
+                  "id": "adu.scale.0",
+                  "tick": 0,
+                  "value": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                  },
+                  "interpolation": "bezier",
+                  "easing": {
+                    "x1": 0.55,
+                    "y1": 0,
+                    "x2": 0.8,
+                    "y2": 0.4
+                  }
+                },
+                {
+                  "id": "adu.scale.1",
+                  "tick": 56,
+                  "value": {
+                    "x": 0.6,
+                    "y": 0.6,
+                    "z": 1
+                  },
+                  "interpolation": "hold"
+                },
+                {
+                  "id": "adu.scale.2",
+                  "tick": 168,
+                  "value": {
+                    "x": 0.6,
+                    "y": 0.6,
+                    "z": 1
+                  },
+                  "interpolation": "bezier",
+                  "easing": {
+                    "x1": 0.34,
+                    "y1": 1.28,
+                    "x2": 0.64,
+                    "y2": 1
+                  }
+                },
+                {
+                  "id": "adu.scale.3",
+                  "tick": 272,
+                  "value": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                  },
+                  "interpolation": "hold"
+                }
+              ]
+            },
+            "rotation": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "skew": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0
+              }
+            }
+          },
+          "blendMode": "normal",
+          "type": "group",
+          "children": [
+            "aduBody",
+            "aduDoor"
+          ],
+          "isolation": true
+        },
+        "aduBody": {
+          "id": "aduBody",
+          "name": "aduBody",
+          "visible": true,
+          "inTick": 0,
+          "outTick": 320,
+          "opacity": {
+            "kind": "constant",
+            "value": 1
+          },
+          "transform": {
+            "position": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "anchor": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "scale": {
+              "kind": "constant",
+              "value": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+              }
+            },
+            "rotation": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "skew": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0
+              }
+            }
+          },
+          "blendMode": "normal",
+          "type": "path",
+          "path": {
+            "kind": "constant",
+            "value": {
+              "contours": [
+                {
+                  "closed": true,
+                  "vertices": [
+                    {
+                      "point": {
+                        "x": 188,
+                        "y": 210
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": -3.3000000000000003,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 182,
+                        "y": 204
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 3.3000000000000003
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 182,
+                        "y": 176
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": -3.3000000000000003
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 186.5555396141918,
+                        "y": 166.0952517592642
+                      },
+                      "inTangent": {
+                        "x": -2.505546787805483,
+                        "y": 2.1476115324046976
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 205.4444603858082,
+                        "y": 149.9047482407358
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 2.505546787805483,
+                        "y": -2.1476115324046976
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 214.5555396141918,
+                        "y": 149.9047482407358
+                      },
+                      "inTangent": {
+                        "x": -2.505546787805483,
+                        "y": -2.1476115324046976
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 233.4444603858082,
+                        "y": 166.0952517592642
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 2.505546787805483,
+                        "y": 2.1476115324046976
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 238,
+                        "y": 176
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": -3.3000000000000003
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 238,
+                        "y": 204
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 3.3000000000000003
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 232,
+                        "y": 210
+                      },
+                      "inTangent": {
+                        "x": 3.3000000000000003,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "style": {
+            "fill": {
+              "color": {
+                "kind": "constant",
+                "value": {
+                  "r": 0.7843137254901961,
+                  "g": 0.3333333333333333,
+                  "b": 0.22745098039215686,
+                  "a": 1
+                }
+              },
+              "opacity": {
+                "kind": "constant",
+                "value": 1
+              }
+            }
+          }
+        },
+        "aduDoor": {
+          "id": "aduDoor",
+          "name": "aduDoor",
+          "visible": true,
+          "inTick": 0,
+          "outTick": 320,
+          "opacity": {
+            "kind": "constant",
+            "value": 1
+          },
+          "transform": {
+            "position": {
+              "kind": "constant",
+              "value": {
+                "x": 210,
+                "y": 198,
+                "z": 0
+              }
+            },
+            "anchor": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "scale": {
+              "kind": "constant",
+              "value": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+              }
+            },
+            "rotation": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "skew": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0
+              }
+            }
+          },
+          "blendMode": "normal",
+          "type": "rect",
+          "size": {
+            "kind": "constant",
+            "value": {
+              "width": 14,
+              "height": 22
+            }
+          },
+          "cornerRadius": {
+            "kind": "constant",
+            "value": 5
+          },
+          "style": {
+            "fill": {
+              "color": {
+                "kind": "constant",
+                "value": {
+                  "r": 0.9607843137254902,
+                  "g": 0.9490196078431372,
+                  "b": 0.9254901960784314,
+                  "a": 1
+                }
+              },
+              "opacity": {
+                "kind": "constant",
+                "value": 1
+              }
+            }
+          }
+        }
+      },
+      "rootNodeIds": [
+        "lot",
+        "split",
+        "home",
+        "homeDoor",
+        "adu"
+      ]
+    }
+  },
+  "rootCompositionId": "main",
+  "components": {},
+  "markers": [
+    {
+      "id": "rest",
+      "name": "Rest",
+      "tick": 0,
+      "durationTicks": 0
+    },
+    {
+      "id": "play",
+      "name": "Play",
+      "tick": 0,
+      "durationTicks": 312
+    }
+  ],
+  "design": {
+    "tokens": {
+      "looping": false
+    }
+  },
+  "capabilities": {
+    "required": [],
+    "optional": [],
+    "unsupportedPolicy": "warn"
+  },
+  "stateMachine": {
+    "version": 1,
+    "initialStateId": "state-rest",
+    "states": [
+      {
+        "id": "state-rest",
+        "name": "rest",
+        "entryMarkerId": "rest"
+      },
+      {
+        "id": "state-play",
+        "name": "play",
+        "entryMarkerId": "play",
+        "playback": "once"
+      }
+    ],
+    "transitions": [
+      {
+        "id": "transition-play-to-rest-complete",
+        "fromStateId": "state-play",
+        "toStateId": "state-rest",
+        "trigger": "complete"
+      }
+    ]
+  }
+}

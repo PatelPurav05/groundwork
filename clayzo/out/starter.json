@@ -1,0 +1,3071 @@
+{
+  "version": 2,
+  "id": "lens-starter",
+  "revision": "sha256:81c262f1090743b8727a182017634a2bd40df050e8a1c226c791e3094a215024",
+  "name": "Starter homes (SB 684 / SB 1123)",
+  "canvas": {
+    "width": 288,
+    "height": 288,
+    "pixelAspectRatio": 1,
+    "backgroundColor": {
+      "r": 0.9607843137254902,
+      "g": 0.9490196078431372,
+      "b": 0.9254901960784314,
+      "a": 0
+    }
+  },
+  "timing": {
+    "ticksPerSecond": 240,
+    "frameRate": {
+      "numerator": 60,
+      "denominator": 1
+    },
+    "durationTicks": 336,
+    "displayStartTick": 0
+  },
+  "assets": {},
+  "compositions": {
+    "main": {
+      "id": "main",
+      "name": "Main",
+      "width": 288,
+      "height": 288,
+      "durationTicks": 336,
+      "nodes": {
+        "lotClip": {
+          "id": "lotClip",
+          "name": "lotClip",
+          "visible": true,
+          "inTick": 0,
+          "outTick": 336,
+          "opacity": {
+            "kind": "constant",
+            "value": 1
+          },
+          "transform": {
+            "position": {
+              "kind": "constant",
+              "value": {
+                "x": 144,
+                "y": 150,
+                "z": 0
+              }
+            },
+            "anchor": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "scale": {
+              "kind": "constant",
+              "value": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+              }
+            },
+            "rotation": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "skew": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0
+              }
+            }
+          },
+          "blendMode": "normal",
+          "type": "rect",
+          "size": {
+            "kind": "constant",
+            "value": {
+              "width": 216,
+              "height": 156
+            }
+          },
+          "cornerRadius": {
+            "kind": "constant",
+            "value": 22
+          },
+          "style": {}
+        },
+        "tile0": {
+          "id": "tile0",
+          "name": "tile0",
+          "visible": true,
+          "inTick": 0,
+          "outTick": 336,
+          "opacity": {
+            "kind": "constant",
+            "value": 1
+          },
+          "transform": {
+            "position": {
+              "kind": "constant",
+              "value": {
+                "x": 68.66666666666666,
+                "y": 108.5,
+                "z": 0
+              }
+            },
+            "anchor": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "scale": {
+              "kind": "constant",
+              "value": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+              }
+            },
+            "rotation": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "skew": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0
+              }
+            }
+          },
+          "blendMode": "normal",
+          "type": "rect",
+          "size": {
+            "kind": "keyframed",
+            "keyframes": [
+              {
+                "id": "tile0.size.0",
+                "tick": 0,
+                "value": {
+                  "width": 65.33333333333333,
+                  "height": 73
+                },
+                "interpolation": "bezier",
+                "easing": {
+                  "x1": 0.4,
+                  "y1": 0,
+                  "x2": 0.2,
+                  "y2": 1
+                }
+              },
+              {
+                "id": "tile0.size.1",
+                "tick": 80,
+                "value": {
+                  "width": 76.33333333333333,
+                  "height": 84
+                },
+                "interpolation": "hold"
+              },
+              {
+                "id": "tile0.size.2",
+                "tick": 112,
+                "value": {
+                  "width": 76.33333333333333,
+                  "height": 84
+                },
+                "interpolation": "bezier",
+                "easing": {
+                  "x1": 0.23,
+                  "y1": 1,
+                  "x2": 0.32,
+                  "y2": 1
+                }
+              },
+              {
+                "id": "tile0.size.3",
+                "tick": 200,
+                "value": {
+                  "width": 65.33333333333333,
+                  "height": 73
+                },
+                "interpolation": "hold"
+              }
+            ]
+          },
+          "cornerRadius": {
+            "kind": "keyframed",
+            "keyframes": [
+              {
+                "id": "tile0.r.0",
+                "tick": 0,
+                "value": 12,
+                "interpolation": "bezier",
+                "easing": {
+                  "x1": 0.4,
+                  "y1": 0,
+                  "x2": 0.2,
+                  "y2": 1
+                }
+              },
+              {
+                "id": "tile0.r.1",
+                "tick": 80,
+                "value": 0,
+                "interpolation": "hold"
+              },
+              {
+                "id": "tile0.r.2",
+                "tick": 112,
+                "value": 0,
+                "interpolation": "bezier",
+                "easing": {
+                  "x1": 0.23,
+                  "y1": 1,
+                  "x2": 0.32,
+                  "y2": 1
+                }
+              },
+              {
+                "id": "tile0.r.3",
+                "tick": 200,
+                "value": 12,
+                "interpolation": "hold"
+              }
+            ]
+          },
+          "style": {
+            "fill": {
+              "color": {
+                "kind": "constant",
+                "value": {
+                  "r": 0.8823529411764706,
+                  "g": 0.9372549019607843,
+                  "b": 0.9019607843137255,
+                  "a": 1
+                }
+              },
+              "opacity": {
+                "kind": "constant",
+                "value": 1
+              }
+            }
+          }
+        },
+        "home0": {
+          "id": "home0",
+          "name": "home0",
+          "visible": true,
+          "inTick": 0,
+          "outTick": 336,
+          "opacity": {
+            "kind": "constant",
+            "value": 1
+          },
+          "transform": {
+            "position": {
+              "kind": "constant",
+              "value": {
+                "x": 68.66666666666666,
+                "y": 127.5,
+                "z": 0
+              }
+            },
+            "anchor": {
+              "kind": "constant",
+              "value": {
+                "x": 68.66666666666666,
+                "y": 127.5,
+                "z": 0
+              }
+            },
+            "scale": {
+              "kind": "keyframed",
+              "keyframes": [
+                {
+                  "id": "home0.scale.0",
+                  "tick": 0,
+                  "value": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                  },
+                  "interpolation": "bezier",
+                  "easing": {
+                    "x1": 0.55,
+                    "y1": 0,
+                    "x2": 0.8,
+                    "y2": 0.4
+                  }
+                },
+                {
+                  "id": "home0.scale.1",
+                  "tick": 48,
+                  "value": {
+                    "x": 0.6,
+                    "y": 0.6,
+                    "z": 1
+                  },
+                  "interpolation": "hold"
+                },
+                {
+                  "id": "home0.scale.2",
+                  "tick": 164,
+                  "value": {
+                    "x": 0.6,
+                    "y": 0.6,
+                    "z": 1
+                  },
+                  "interpolation": "bezier",
+                  "easing": {
+                    "x1": 0.34,
+                    "y1": 1.28,
+                    "x2": 0.64,
+                    "y2": 1
+                  }
+                },
+                {
+                  "id": "home0.scale.3",
+                  "tick": 244,
+                  "value": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                  },
+                  "interpolation": "hold"
+                }
+              ]
+            },
+            "rotation": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "skew": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0
+              }
+            }
+          },
+          "blendMode": "normal",
+          "type": "path",
+          "path": {
+            "kind": "constant",
+            "value": {
+              "contours": [
+                {
+                  "closed": true,
+                  "vertices": [
+                    {
+                      "point": {
+                        "x": 56.66666666666666,
+                        "y": 127.5
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": -2.2,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 52.66666666666666,
+                        "y": 123.5
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 2.2
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 52.66666666666666,
+                        "y": 111.5
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": -2.2
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 55.67697344549417,
+                        "y": 104.86598156852592
+                      },
+                      "inTangent": {
+                        "x": -1.6556687283551321,
+                        "y": 1.4487101373107416
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 65.65635988783914,
+                        "y": 96.13401843147408
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 1.6556687283551321,
+                        "y": -1.4487101373107416
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 71.67697344549417,
+                        "y": 96.13401843147408
+                      },
+                      "inTangent": {
+                        "x": -1.6556687283551321,
+                        "y": -1.4487101373107416
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 81.65635988783914,
+                        "y": 104.86598156852592
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 1.6556687283551321,
+                        "y": 1.4487101373107416
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 84.66666666666666,
+                        "y": 111.5
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": -2.2
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 84.66666666666666,
+                        "y": 123.5
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 2.2
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 80.66666666666666,
+                        "y": 127.5
+                      },
+                      "inTangent": {
+                        "x": 2.2,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "style": {
+            "fill": {
+              "color": {
+                "kind": "constant",
+                "value": {
+                  "r": 0.7843137254901961,
+                  "g": 0.3333333333333333,
+                  "b": 0.22745098039215686,
+                  "a": 1
+                }
+              },
+              "opacity": {
+                "kind": "keyframed",
+                "keyframes": [
+                  {
+                    "id": "home0.op.0",
+                    "tick": 0,
+                    "value": 1,
+                    "interpolation": "bezier",
+                    "easing": {
+                      "x1": 0.55,
+                      "y1": 0,
+                      "x2": 0.8,
+                      "y2": 0.4
+                    }
+                  },
+                  {
+                    "id": "home0.op.1",
+                    "tick": 48,
+                    "value": 0,
+                    "interpolation": "hold"
+                  },
+                  {
+                    "id": "home0.op.2",
+                    "tick": 164,
+                    "value": 0,
+                    "interpolation": "bezier",
+                    "easing": {
+                      "x1": 0.4,
+                      "y1": 0,
+                      "x2": 0.2,
+                      "y2": 1
+                    }
+                  },
+                  {
+                    "id": "home0.op.3",
+                    "tick": 208,
+                    "value": 1,
+                    "interpolation": "hold"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "tile1": {
+          "id": "tile1",
+          "name": "tile1",
+          "visible": true,
+          "inTick": 0,
+          "outTick": 336,
+          "opacity": {
+            "kind": "constant",
+            "value": 1
+          },
+          "transform": {
+            "position": {
+              "kind": "constant",
+              "value": {
+                "x": 144,
+                "y": 108.5,
+                "z": 0
+              }
+            },
+            "anchor": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "scale": {
+              "kind": "constant",
+              "value": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+              }
+            },
+            "rotation": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "skew": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0
+              }
+            }
+          },
+          "blendMode": "normal",
+          "type": "rect",
+          "size": {
+            "kind": "keyframed",
+            "keyframes": [
+              {
+                "id": "tile1.size.0",
+                "tick": 0,
+                "value": {
+                  "width": 65.33333333333333,
+                  "height": 73
+                },
+                "interpolation": "bezier",
+                "easing": {
+                  "x1": 0.4,
+                  "y1": 0,
+                  "x2": 0.2,
+                  "y2": 1
+                }
+              },
+              {
+                "id": "tile1.size.1",
+                "tick": 80,
+                "value": {
+                  "width": 76.33333333333333,
+                  "height": 84
+                },
+                "interpolation": "hold"
+              },
+              {
+                "id": "tile1.size.2",
+                "tick": 112,
+                "value": {
+                  "width": 76.33333333333333,
+                  "height": 84
+                },
+                "interpolation": "bezier",
+                "easing": {
+                  "x1": 0.23,
+                  "y1": 1,
+                  "x2": 0.32,
+                  "y2": 1
+                }
+              },
+              {
+                "id": "tile1.size.3",
+                "tick": 200,
+                "value": {
+                  "width": 65.33333333333333,
+                  "height": 73
+                },
+                "interpolation": "hold"
+              }
+            ]
+          },
+          "cornerRadius": {
+            "kind": "keyframed",
+            "keyframes": [
+              {
+                "id": "tile1.r.0",
+                "tick": 0,
+                "value": 12,
+                "interpolation": "bezier",
+                "easing": {
+                  "x1": 0.4,
+                  "y1": 0,
+                  "x2": 0.2,
+                  "y2": 1
+                }
+              },
+              {
+                "id": "tile1.r.1",
+                "tick": 80,
+                "value": 0,
+                "interpolation": "hold"
+              },
+              {
+                "id": "tile1.r.2",
+                "tick": 112,
+                "value": 0,
+                "interpolation": "bezier",
+                "easing": {
+                  "x1": 0.23,
+                  "y1": 1,
+                  "x2": 0.32,
+                  "y2": 1
+                }
+              },
+              {
+                "id": "tile1.r.3",
+                "tick": 200,
+                "value": 12,
+                "interpolation": "hold"
+              }
+            ]
+          },
+          "style": {
+            "fill": {
+              "color": {
+                "kind": "constant",
+                "value": {
+                  "r": 0.8823529411764706,
+                  "g": 0.9372549019607843,
+                  "b": 0.9019607843137255,
+                  "a": 1
+                }
+              },
+              "opacity": {
+                "kind": "constant",
+                "value": 1
+              }
+            }
+          }
+        },
+        "home1": {
+          "id": "home1",
+          "name": "home1",
+          "visible": true,
+          "inTick": 0,
+          "outTick": 336,
+          "opacity": {
+            "kind": "constant",
+            "value": 1
+          },
+          "transform": {
+            "position": {
+              "kind": "constant",
+              "value": {
+                "x": 144,
+                "y": 127.5,
+                "z": 0
+              }
+            },
+            "anchor": {
+              "kind": "constant",
+              "value": {
+                "x": 144,
+                "y": 127.5,
+                "z": 0
+              }
+            },
+            "scale": {
+              "kind": "keyframed",
+              "keyframes": [
+                {
+                  "id": "home1.scale.0",
+                  "tick": 0,
+                  "value": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                  },
+                  "interpolation": "bezier",
+                  "easing": {
+                    "x1": 0.55,
+                    "y1": 0,
+                    "x2": 0.8,
+                    "y2": 0.4
+                  }
+                },
+                {
+                  "id": "home1.scale.1",
+                  "tick": 48,
+                  "value": {
+                    "x": 0.6,
+                    "y": 0.6,
+                    "z": 1
+                  },
+                  "interpolation": "hold"
+                },
+                {
+                  "id": "home1.scale.2",
+                  "tick": 176,
+                  "value": {
+                    "x": 0.6,
+                    "y": 0.6,
+                    "z": 1
+                  },
+                  "interpolation": "bezier",
+                  "easing": {
+                    "x1": 0.34,
+                    "y1": 1.28,
+                    "x2": 0.64,
+                    "y2": 1
+                  }
+                },
+                {
+                  "id": "home1.scale.3",
+                  "tick": 256,
+                  "value": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                  },
+                  "interpolation": "hold"
+                }
+              ]
+            },
+            "rotation": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "skew": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0
+              }
+            }
+          },
+          "blendMode": "normal",
+          "type": "path",
+          "path": {
+            "kind": "constant",
+            "value": {
+              "contours": [
+                {
+                  "closed": true,
+                  "vertices": [
+                    {
+                      "point": {
+                        "x": 132,
+                        "y": 127.5
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": -2.2,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 128,
+                        "y": 123.5
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 2.2
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 128,
+                        "y": 111.5
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": -2.2
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 131.0103067788275,
+                        "y": 104.86598156852592
+                      },
+                      "inTangent": {
+                        "x": -1.6556687283551244,
+                        "y": 1.4487101373107416
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 140.9896932211725,
+                        "y": 96.13401843147408
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 1.6556687283551244,
+                        "y": -1.4487101373107416
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 147.0103067788275,
+                        "y": 96.13401843147408
+                      },
+                      "inTangent": {
+                        "x": -1.6556687283551244,
+                        "y": -1.4487101373107416
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 156.9896932211725,
+                        "y": 104.86598156852592
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 1.6556687283551244,
+                        "y": 1.4487101373107416
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 160,
+                        "y": 111.5
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": -2.2
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 160,
+                        "y": 123.5
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 2.2
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 156,
+                        "y": 127.5
+                      },
+                      "inTangent": {
+                        "x": 2.2,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "style": {
+            "fill": {
+              "color": {
+                "kind": "constant",
+                "value": {
+                  "r": 0.7843137254901961,
+                  "g": 0.3333333333333333,
+                  "b": 0.22745098039215686,
+                  "a": 1
+                }
+              },
+              "opacity": {
+                "kind": "keyframed",
+                "keyframes": [
+                  {
+                    "id": "home1.op.0",
+                    "tick": 0,
+                    "value": 1,
+                    "interpolation": "bezier",
+                    "easing": {
+                      "x1": 0.55,
+                      "y1": 0,
+                      "x2": 0.8,
+                      "y2": 0.4
+                    }
+                  },
+                  {
+                    "id": "home1.op.1",
+                    "tick": 48,
+                    "value": 0,
+                    "interpolation": "hold"
+                  },
+                  {
+                    "id": "home1.op.2",
+                    "tick": 176,
+                    "value": 0,
+                    "interpolation": "bezier",
+                    "easing": {
+                      "x1": 0.4,
+                      "y1": 0,
+                      "x2": 0.2,
+                      "y2": 1
+                    }
+                  },
+                  {
+                    "id": "home1.op.3",
+                    "tick": 220,
+                    "value": 1,
+                    "interpolation": "hold"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "tile2": {
+          "id": "tile2",
+          "name": "tile2",
+          "visible": true,
+          "inTick": 0,
+          "outTick": 336,
+          "opacity": {
+            "kind": "constant",
+            "value": 1
+          },
+          "transform": {
+            "position": {
+              "kind": "constant",
+              "value": {
+                "x": 219.33333333333331,
+                "y": 108.5,
+                "z": 0
+              }
+            },
+            "anchor": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "scale": {
+              "kind": "constant",
+              "value": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+              }
+            },
+            "rotation": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "skew": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0
+              }
+            }
+          },
+          "blendMode": "normal",
+          "type": "rect",
+          "size": {
+            "kind": "keyframed",
+            "keyframes": [
+              {
+                "id": "tile2.size.0",
+                "tick": 0,
+                "value": {
+                  "width": 65.33333333333333,
+                  "height": 73
+                },
+                "interpolation": "bezier",
+                "easing": {
+                  "x1": 0.4,
+                  "y1": 0,
+                  "x2": 0.2,
+                  "y2": 1
+                }
+              },
+              {
+                "id": "tile2.size.1",
+                "tick": 80,
+                "value": {
+                  "width": 76.33333333333333,
+                  "height": 84
+                },
+                "interpolation": "hold"
+              },
+              {
+                "id": "tile2.size.2",
+                "tick": 112,
+                "value": {
+                  "width": 76.33333333333333,
+                  "height": 84
+                },
+                "interpolation": "bezier",
+                "easing": {
+                  "x1": 0.23,
+                  "y1": 1,
+                  "x2": 0.32,
+                  "y2": 1
+                }
+              },
+              {
+                "id": "tile2.size.3",
+                "tick": 200,
+                "value": {
+                  "width": 65.33333333333333,
+                  "height": 73
+                },
+                "interpolation": "hold"
+              }
+            ]
+          },
+          "cornerRadius": {
+            "kind": "keyframed",
+            "keyframes": [
+              {
+                "id": "tile2.r.0",
+                "tick": 0,
+                "value": 12,
+                "interpolation": "bezier",
+                "easing": {
+                  "x1": 0.4,
+                  "y1": 0,
+                  "x2": 0.2,
+                  "y2": 1
+                }
+              },
+              {
+                "id": "tile2.r.1",
+                "tick": 80,
+                "value": 0,
+                "interpolation": "hold"
+              },
+              {
+                "id": "tile2.r.2",
+                "tick": 112,
+                "value": 0,
+                "interpolation": "bezier",
+                "easing": {
+                  "x1": 0.23,
+                  "y1": 1,
+                  "x2": 0.32,
+                  "y2": 1
+                }
+              },
+              {
+                "id": "tile2.r.3",
+                "tick": 200,
+                "value": 12,
+                "interpolation": "hold"
+              }
+            ]
+          },
+          "style": {
+            "fill": {
+              "color": {
+                "kind": "constant",
+                "value": {
+                  "r": 0.8823529411764706,
+                  "g": 0.9372549019607843,
+                  "b": 0.9019607843137255,
+                  "a": 1
+                }
+              },
+              "opacity": {
+                "kind": "constant",
+                "value": 1
+              }
+            }
+          }
+        },
+        "home2": {
+          "id": "home2",
+          "name": "home2",
+          "visible": true,
+          "inTick": 0,
+          "outTick": 336,
+          "opacity": {
+            "kind": "constant",
+            "value": 1
+          },
+          "transform": {
+            "position": {
+              "kind": "constant",
+              "value": {
+                "x": 219.33333333333331,
+                "y": 127.5,
+                "z": 0
+              }
+            },
+            "anchor": {
+              "kind": "constant",
+              "value": {
+                "x": 219.33333333333331,
+                "y": 127.5,
+                "z": 0
+              }
+            },
+            "scale": {
+              "kind": "keyframed",
+              "keyframes": [
+                {
+                  "id": "home2.scale.0",
+                  "tick": 0,
+                  "value": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                  },
+                  "interpolation": "bezier",
+                  "easing": {
+                    "x1": 0.55,
+                    "y1": 0,
+                    "x2": 0.8,
+                    "y2": 0.4
+                  }
+                },
+                {
+                  "id": "home2.scale.1",
+                  "tick": 48,
+                  "value": {
+                    "x": 0.6,
+                    "y": 0.6,
+                    "z": 1
+                  },
+                  "interpolation": "hold"
+                },
+                {
+                  "id": "home2.scale.2",
+                  "tick": 188,
+                  "value": {
+                    "x": 0.6,
+                    "y": 0.6,
+                    "z": 1
+                  },
+                  "interpolation": "bezier",
+                  "easing": {
+                    "x1": 0.34,
+                    "y1": 1.28,
+                    "x2": 0.64,
+                    "y2": 1
+                  }
+                },
+                {
+                  "id": "home2.scale.3",
+                  "tick": 268,
+                  "value": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                  },
+                  "interpolation": "hold"
+                }
+              ]
+            },
+            "rotation": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "skew": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0
+              }
+            }
+          },
+          "blendMode": "normal",
+          "type": "path",
+          "path": {
+            "kind": "constant",
+            "value": {
+              "contours": [
+                {
+                  "closed": true,
+                  "vertices": [
+                    {
+                      "point": {
+                        "x": 207.33333333333331,
+                        "y": 127.5
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": -2.2,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 203.33333333333331,
+                        "y": 123.5
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 2.2
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 203.33333333333331,
+                        "y": 111.5
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": -2.2
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 206.3436401121608,
+                        "y": 104.86598156852592
+                      },
+                      "inTangent": {
+                        "x": -1.6556687283551244,
+                        "y": 1.4487101373107416
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 216.32302655450582,
+                        "y": 96.13401843147408
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 1.6556687283551244,
+                        "y": -1.4487101373107416
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 222.3436401121608,
+                        "y": 96.13401843147408
+                      },
+                      "inTangent": {
+                        "x": -1.6556687283551244,
+                        "y": -1.4487101373107416
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 232.32302655450582,
+                        "y": 104.86598156852592
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 1.6556687283551244,
+                        "y": 1.4487101373107416
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 235.33333333333331,
+                        "y": 111.5
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": -2.2
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 235.33333333333331,
+                        "y": 123.5
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 2.2
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 231.33333333333331,
+                        "y": 127.5
+                      },
+                      "inTangent": {
+                        "x": 2.2,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "style": {
+            "fill": {
+              "color": {
+                "kind": "constant",
+                "value": {
+                  "r": 0.7843137254901961,
+                  "g": 0.3333333333333333,
+                  "b": 0.22745098039215686,
+                  "a": 1
+                }
+              },
+              "opacity": {
+                "kind": "keyframed",
+                "keyframes": [
+                  {
+                    "id": "home2.op.0",
+                    "tick": 0,
+                    "value": 1,
+                    "interpolation": "bezier",
+                    "easing": {
+                      "x1": 0.55,
+                      "y1": 0,
+                      "x2": 0.8,
+                      "y2": 0.4
+                    }
+                  },
+                  {
+                    "id": "home2.op.1",
+                    "tick": 48,
+                    "value": 0,
+                    "interpolation": "hold"
+                  },
+                  {
+                    "id": "home2.op.2",
+                    "tick": 188,
+                    "value": 0,
+                    "interpolation": "bezier",
+                    "easing": {
+                      "x1": 0.4,
+                      "y1": 0,
+                      "x2": 0.2,
+                      "y2": 1
+                    }
+                  },
+                  {
+                    "id": "home2.op.3",
+                    "tick": 232,
+                    "value": 1,
+                    "interpolation": "hold"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "tile3": {
+          "id": "tile3",
+          "name": "tile3",
+          "visible": true,
+          "inTick": 0,
+          "outTick": 336,
+          "opacity": {
+            "kind": "constant",
+            "value": 1
+          },
+          "transform": {
+            "position": {
+              "kind": "constant",
+              "value": {
+                "x": 68.66666666666666,
+                "y": 191.5,
+                "z": 0
+              }
+            },
+            "anchor": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "scale": {
+              "kind": "constant",
+              "value": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+              }
+            },
+            "rotation": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "skew": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0
+              }
+            }
+          },
+          "blendMode": "normal",
+          "type": "rect",
+          "size": {
+            "kind": "keyframed",
+            "keyframes": [
+              {
+                "id": "tile3.size.0",
+                "tick": 0,
+                "value": {
+                  "width": 65.33333333333333,
+                  "height": 73
+                },
+                "interpolation": "bezier",
+                "easing": {
+                  "x1": 0.4,
+                  "y1": 0,
+                  "x2": 0.2,
+                  "y2": 1
+                }
+              },
+              {
+                "id": "tile3.size.1",
+                "tick": 80,
+                "value": {
+                  "width": 76.33333333333333,
+                  "height": 84
+                },
+                "interpolation": "hold"
+              },
+              {
+                "id": "tile3.size.2",
+                "tick": 112,
+                "value": {
+                  "width": 76.33333333333333,
+                  "height": 84
+                },
+                "interpolation": "bezier",
+                "easing": {
+                  "x1": 0.23,
+                  "y1": 1,
+                  "x2": 0.32,
+                  "y2": 1
+                }
+              },
+              {
+                "id": "tile3.size.3",
+                "tick": 200,
+                "value": {
+                  "width": 65.33333333333333,
+                  "height": 73
+                },
+                "interpolation": "hold"
+              }
+            ]
+          },
+          "cornerRadius": {
+            "kind": "keyframed",
+            "keyframes": [
+              {
+                "id": "tile3.r.0",
+                "tick": 0,
+                "value": 12,
+                "interpolation": "bezier",
+                "easing": {
+                  "x1": 0.4,
+                  "y1": 0,
+                  "x2": 0.2,
+                  "y2": 1
+                }
+              },
+              {
+                "id": "tile3.r.1",
+                "tick": 80,
+                "value": 0,
+                "interpolation": "hold"
+              },
+              {
+                "id": "tile3.r.2",
+                "tick": 112,
+                "value": 0,
+                "interpolation": "bezier",
+                "easing": {
+                  "x1": 0.23,
+                  "y1": 1,
+                  "x2": 0.32,
+                  "y2": 1
+                }
+              },
+              {
+                "id": "tile3.r.3",
+                "tick": 200,
+                "value": 12,
+                "interpolation": "hold"
+              }
+            ]
+          },
+          "style": {
+            "fill": {
+              "color": {
+                "kind": "constant",
+                "value": {
+                  "r": 0.8823529411764706,
+                  "g": 0.9372549019607843,
+                  "b": 0.9019607843137255,
+                  "a": 1
+                }
+              },
+              "opacity": {
+                "kind": "constant",
+                "value": 1
+              }
+            }
+          }
+        },
+        "home3": {
+          "id": "home3",
+          "name": "home3",
+          "visible": true,
+          "inTick": 0,
+          "outTick": 336,
+          "opacity": {
+            "kind": "constant",
+            "value": 1
+          },
+          "transform": {
+            "position": {
+              "kind": "constant",
+              "value": {
+                "x": 68.66666666666666,
+                "y": 210.5,
+                "z": 0
+              }
+            },
+            "anchor": {
+              "kind": "constant",
+              "value": {
+                "x": 68.66666666666666,
+                "y": 210.5,
+                "z": 0
+              }
+            },
+            "scale": {
+              "kind": "keyframed",
+              "keyframes": [
+                {
+                  "id": "home3.scale.0",
+                  "tick": 0,
+                  "value": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                  },
+                  "interpolation": "bezier",
+                  "easing": {
+                    "x1": 0.55,
+                    "y1": 0,
+                    "x2": 0.8,
+                    "y2": 0.4
+                  }
+                },
+                {
+                  "id": "home3.scale.1",
+                  "tick": 48,
+                  "value": {
+                    "x": 0.6,
+                    "y": 0.6,
+                    "z": 1
+                  },
+                  "interpolation": "hold"
+                },
+                {
+                  "id": "home3.scale.2",
+                  "tick": 200,
+                  "value": {
+                    "x": 0.6,
+                    "y": 0.6,
+                    "z": 1
+                  },
+                  "interpolation": "bezier",
+                  "easing": {
+                    "x1": 0.34,
+                    "y1": 1.28,
+                    "x2": 0.64,
+                    "y2": 1
+                  }
+                },
+                {
+                  "id": "home3.scale.3",
+                  "tick": 280,
+                  "value": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                  },
+                  "interpolation": "hold"
+                }
+              ]
+            },
+            "rotation": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "skew": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0
+              }
+            }
+          },
+          "blendMode": "normal",
+          "type": "path",
+          "path": {
+            "kind": "constant",
+            "value": {
+              "contours": [
+                {
+                  "closed": true,
+                  "vertices": [
+                    {
+                      "point": {
+                        "x": 56.66666666666666,
+                        "y": 210.5
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": -2.2,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 52.66666666666666,
+                        "y": 206.5
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 2.2
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 52.66666666666666,
+                        "y": 194.5
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": -2.2
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 55.67697344549417,
+                        "y": 187.86598156852594
+                      },
+                      "inTangent": {
+                        "x": -1.6556687283551321,
+                        "y": 1.4487101373107338
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 65.65635988783914,
+                        "y": 179.13401843147406
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 1.6556687283551321,
+                        "y": -1.4487101373107338
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 71.67697344549417,
+                        "y": 179.13401843147406
+                      },
+                      "inTangent": {
+                        "x": -1.6556687283551321,
+                        "y": -1.4487101373107338
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 81.65635988783914,
+                        "y": 187.86598156852594
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 1.6556687283551321,
+                        "y": 1.4487101373107338
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 84.66666666666666,
+                        "y": 194.5
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": -2.2
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 84.66666666666666,
+                        "y": 206.5
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 2.2
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 80.66666666666666,
+                        "y": 210.5
+                      },
+                      "inTangent": {
+                        "x": 2.2,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "style": {
+            "fill": {
+              "color": {
+                "kind": "constant",
+                "value": {
+                  "r": 0.7843137254901961,
+                  "g": 0.3333333333333333,
+                  "b": 0.22745098039215686,
+                  "a": 1
+                }
+              },
+              "opacity": {
+                "kind": "keyframed",
+                "keyframes": [
+                  {
+                    "id": "home3.op.0",
+                    "tick": 0,
+                    "value": 1,
+                    "interpolation": "bezier",
+                    "easing": {
+                      "x1": 0.55,
+                      "y1": 0,
+                      "x2": 0.8,
+                      "y2": 0.4
+                    }
+                  },
+                  {
+                    "id": "home3.op.1",
+                    "tick": 48,
+                    "value": 0,
+                    "interpolation": "hold"
+                  },
+                  {
+                    "id": "home3.op.2",
+                    "tick": 200,
+                    "value": 0,
+                    "interpolation": "bezier",
+                    "easing": {
+                      "x1": 0.4,
+                      "y1": 0,
+                      "x2": 0.2,
+                      "y2": 1
+                    }
+                  },
+                  {
+                    "id": "home3.op.3",
+                    "tick": 244,
+                    "value": 1,
+                    "interpolation": "hold"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "tile4": {
+          "id": "tile4",
+          "name": "tile4",
+          "visible": true,
+          "inTick": 0,
+          "outTick": 336,
+          "opacity": {
+            "kind": "constant",
+            "value": 1
+          },
+          "transform": {
+            "position": {
+              "kind": "constant",
+              "value": {
+                "x": 144,
+                "y": 191.5,
+                "z": 0
+              }
+            },
+            "anchor": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "scale": {
+              "kind": "constant",
+              "value": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+              }
+            },
+            "rotation": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "skew": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0
+              }
+            }
+          },
+          "blendMode": "normal",
+          "type": "rect",
+          "size": {
+            "kind": "keyframed",
+            "keyframes": [
+              {
+                "id": "tile4.size.0",
+                "tick": 0,
+                "value": {
+                  "width": 65.33333333333333,
+                  "height": 73
+                },
+                "interpolation": "bezier",
+                "easing": {
+                  "x1": 0.4,
+                  "y1": 0,
+                  "x2": 0.2,
+                  "y2": 1
+                }
+              },
+              {
+                "id": "tile4.size.1",
+                "tick": 80,
+                "value": {
+                  "width": 76.33333333333333,
+                  "height": 84
+                },
+                "interpolation": "hold"
+              },
+              {
+                "id": "tile4.size.2",
+                "tick": 112,
+                "value": {
+                  "width": 76.33333333333333,
+                  "height": 84
+                },
+                "interpolation": "bezier",
+                "easing": {
+                  "x1": 0.23,
+                  "y1": 1,
+                  "x2": 0.32,
+                  "y2": 1
+                }
+              },
+              {
+                "id": "tile4.size.3",
+                "tick": 200,
+                "value": {
+                  "width": 65.33333333333333,
+                  "height": 73
+                },
+                "interpolation": "hold"
+              }
+            ]
+          },
+          "cornerRadius": {
+            "kind": "keyframed",
+            "keyframes": [
+              {
+                "id": "tile4.r.0",
+                "tick": 0,
+                "value": 12,
+                "interpolation": "bezier",
+                "easing": {
+                  "x1": 0.4,
+                  "y1": 0,
+                  "x2": 0.2,
+                  "y2": 1
+                }
+              },
+              {
+                "id": "tile4.r.1",
+                "tick": 80,
+                "value": 0,
+                "interpolation": "hold"
+              },
+              {
+                "id": "tile4.r.2",
+                "tick": 112,
+                "value": 0,
+                "interpolation": "bezier",
+                "easing": {
+                  "x1": 0.23,
+                  "y1": 1,
+                  "x2": 0.32,
+                  "y2": 1
+                }
+              },
+              {
+                "id": "tile4.r.3",
+                "tick": 200,
+                "value": 12,
+                "interpolation": "hold"
+              }
+            ]
+          },
+          "style": {
+            "fill": {
+              "color": {
+                "kind": "constant",
+                "value": {
+                  "r": 0.8823529411764706,
+                  "g": 0.9372549019607843,
+                  "b": 0.9019607843137255,
+                  "a": 1
+                }
+              },
+              "opacity": {
+                "kind": "constant",
+                "value": 1
+              }
+            }
+          }
+        },
+        "home4": {
+          "id": "home4",
+          "name": "home4",
+          "visible": true,
+          "inTick": 0,
+          "outTick": 336,
+          "opacity": {
+            "kind": "constant",
+            "value": 1
+          },
+          "transform": {
+            "position": {
+              "kind": "constant",
+              "value": {
+                "x": 144,
+                "y": 210.5,
+                "z": 0
+              }
+            },
+            "anchor": {
+              "kind": "constant",
+              "value": {
+                "x": 144,
+                "y": 210.5,
+                "z": 0
+              }
+            },
+            "scale": {
+              "kind": "keyframed",
+              "keyframes": [
+                {
+                  "id": "home4.scale.0",
+                  "tick": 0,
+                  "value": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                  },
+                  "interpolation": "bezier",
+                  "easing": {
+                    "x1": 0.55,
+                    "y1": 0,
+                    "x2": 0.8,
+                    "y2": 0.4
+                  }
+                },
+                {
+                  "id": "home4.scale.1",
+                  "tick": 48,
+                  "value": {
+                    "x": 0.6,
+                    "y": 0.6,
+                    "z": 1
+                  },
+                  "interpolation": "hold"
+                },
+                {
+                  "id": "home4.scale.2",
+                  "tick": 212,
+                  "value": {
+                    "x": 0.6,
+                    "y": 0.6,
+                    "z": 1
+                  },
+                  "interpolation": "bezier",
+                  "easing": {
+                    "x1": 0.34,
+                    "y1": 1.28,
+                    "x2": 0.64,
+                    "y2": 1
+                  }
+                },
+                {
+                  "id": "home4.scale.3",
+                  "tick": 292,
+                  "value": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                  },
+                  "interpolation": "hold"
+                }
+              ]
+            },
+            "rotation": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "skew": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0
+              }
+            }
+          },
+          "blendMode": "normal",
+          "type": "path",
+          "path": {
+            "kind": "constant",
+            "value": {
+              "contours": [
+                {
+                  "closed": true,
+                  "vertices": [
+                    {
+                      "point": {
+                        "x": 132,
+                        "y": 210.5
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": -2.2,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 128,
+                        "y": 206.5
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 2.2
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 128,
+                        "y": 194.5
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": -2.2
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 131.0103067788275,
+                        "y": 187.86598156852594
+                      },
+                      "inTangent": {
+                        "x": -1.6556687283551244,
+                        "y": 1.4487101373107338
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 140.9896932211725,
+                        "y": 179.13401843147406
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 1.6556687283551244,
+                        "y": -1.4487101373107338
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 147.0103067788275,
+                        "y": 179.13401843147406
+                      },
+                      "inTangent": {
+                        "x": -1.6556687283551244,
+                        "y": -1.4487101373107338
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 156.9896932211725,
+                        "y": 187.86598156852594
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 1.6556687283551244,
+                        "y": 1.4487101373107338
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 160,
+                        "y": 194.5
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": -2.2
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 160,
+                        "y": 206.5
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 2.2
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 156,
+                        "y": 210.5
+                      },
+                      "inTangent": {
+                        "x": 2.2,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "style": {
+            "fill": {
+              "color": {
+                "kind": "constant",
+                "value": {
+                  "r": 0.7843137254901961,
+                  "g": 0.3333333333333333,
+                  "b": 0.22745098039215686,
+                  "a": 1
+                }
+              },
+              "opacity": {
+                "kind": "keyframed",
+                "keyframes": [
+                  {
+                    "id": "home4.op.0",
+                    "tick": 0,
+                    "value": 1,
+                    "interpolation": "bezier",
+                    "easing": {
+                      "x1": 0.55,
+                      "y1": 0,
+                      "x2": 0.8,
+                      "y2": 0.4
+                    }
+                  },
+                  {
+                    "id": "home4.op.1",
+                    "tick": 48,
+                    "value": 0,
+                    "interpolation": "hold"
+                  },
+                  {
+                    "id": "home4.op.2",
+                    "tick": 212,
+                    "value": 0,
+                    "interpolation": "bezier",
+                    "easing": {
+                      "x1": 0.4,
+                      "y1": 0,
+                      "x2": 0.2,
+                      "y2": 1
+                    }
+                  },
+                  {
+                    "id": "home4.op.3",
+                    "tick": 256,
+                    "value": 1,
+                    "interpolation": "hold"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "tile5": {
+          "id": "tile5",
+          "name": "tile5",
+          "visible": true,
+          "inTick": 0,
+          "outTick": 336,
+          "opacity": {
+            "kind": "constant",
+            "value": 1
+          },
+          "transform": {
+            "position": {
+              "kind": "constant",
+              "value": {
+                "x": 219.33333333333331,
+                "y": 191.5,
+                "z": 0
+              }
+            },
+            "anchor": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "scale": {
+              "kind": "constant",
+              "value": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+              }
+            },
+            "rotation": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "skew": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0
+              }
+            }
+          },
+          "blendMode": "normal",
+          "type": "rect",
+          "size": {
+            "kind": "keyframed",
+            "keyframes": [
+              {
+                "id": "tile5.size.0",
+                "tick": 0,
+                "value": {
+                  "width": 65.33333333333333,
+                  "height": 73
+                },
+                "interpolation": "bezier",
+                "easing": {
+                  "x1": 0.4,
+                  "y1": 0,
+                  "x2": 0.2,
+                  "y2": 1
+                }
+              },
+              {
+                "id": "tile5.size.1",
+                "tick": 80,
+                "value": {
+                  "width": 76.33333333333333,
+                  "height": 84
+                },
+                "interpolation": "hold"
+              },
+              {
+                "id": "tile5.size.2",
+                "tick": 112,
+                "value": {
+                  "width": 76.33333333333333,
+                  "height": 84
+                },
+                "interpolation": "bezier",
+                "easing": {
+                  "x1": 0.23,
+                  "y1": 1,
+                  "x2": 0.32,
+                  "y2": 1
+                }
+              },
+              {
+                "id": "tile5.size.3",
+                "tick": 200,
+                "value": {
+                  "width": 65.33333333333333,
+                  "height": 73
+                },
+                "interpolation": "hold"
+              }
+            ]
+          },
+          "cornerRadius": {
+            "kind": "keyframed",
+            "keyframes": [
+              {
+                "id": "tile5.r.0",
+                "tick": 0,
+                "value": 12,
+                "interpolation": "bezier",
+                "easing": {
+                  "x1": 0.4,
+                  "y1": 0,
+                  "x2": 0.2,
+                  "y2": 1
+                }
+              },
+              {
+                "id": "tile5.r.1",
+                "tick": 80,
+                "value": 0,
+                "interpolation": "hold"
+              },
+              {
+                "id": "tile5.r.2",
+                "tick": 112,
+                "value": 0,
+                "interpolation": "bezier",
+                "easing": {
+                  "x1": 0.23,
+                  "y1": 1,
+                  "x2": 0.32,
+                  "y2": 1
+                }
+              },
+              {
+                "id": "tile5.r.3",
+                "tick": 200,
+                "value": 12,
+                "interpolation": "hold"
+              }
+            ]
+          },
+          "style": {
+            "fill": {
+              "color": {
+                "kind": "constant",
+                "value": {
+                  "r": 0.8823529411764706,
+                  "g": 0.9372549019607843,
+                  "b": 0.9019607843137255,
+                  "a": 1
+                }
+              },
+              "opacity": {
+                "kind": "constant",
+                "value": 1
+              }
+            }
+          }
+        },
+        "home5": {
+          "id": "home5",
+          "name": "home5",
+          "visible": true,
+          "inTick": 0,
+          "outTick": 336,
+          "opacity": {
+            "kind": "constant",
+            "value": 1
+          },
+          "transform": {
+            "position": {
+              "kind": "constant",
+              "value": {
+                "x": 219.33333333333331,
+                "y": 210.5,
+                "z": 0
+              }
+            },
+            "anchor": {
+              "kind": "constant",
+              "value": {
+                "x": 219.33333333333331,
+                "y": 210.5,
+                "z": 0
+              }
+            },
+            "scale": {
+              "kind": "keyframed",
+              "keyframes": [
+                {
+                  "id": "home5.scale.0",
+                  "tick": 0,
+                  "value": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                  },
+                  "interpolation": "bezier",
+                  "easing": {
+                    "x1": 0.55,
+                    "y1": 0,
+                    "x2": 0.8,
+                    "y2": 0.4
+                  }
+                },
+                {
+                  "id": "home5.scale.1",
+                  "tick": 48,
+                  "value": {
+                    "x": 0.6,
+                    "y": 0.6,
+                    "z": 1
+                  },
+                  "interpolation": "hold"
+                },
+                {
+                  "id": "home5.scale.2",
+                  "tick": 224,
+                  "value": {
+                    "x": 0.6,
+                    "y": 0.6,
+                    "z": 1
+                  },
+                  "interpolation": "bezier",
+                  "easing": {
+                    "x1": 0.34,
+                    "y1": 1.28,
+                    "x2": 0.64,
+                    "y2": 1
+                  }
+                },
+                {
+                  "id": "home5.scale.3",
+                  "tick": 304,
+                  "value": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                  },
+                  "interpolation": "hold"
+                }
+              ]
+            },
+            "rotation": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "skew": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0
+              }
+            }
+          },
+          "blendMode": "normal",
+          "type": "path",
+          "path": {
+            "kind": "constant",
+            "value": {
+              "contours": [
+                {
+                  "closed": true,
+                  "vertices": [
+                    {
+                      "point": {
+                        "x": 207.33333333333331,
+                        "y": 210.5
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": -2.2,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 203.33333333333331,
+                        "y": 206.5
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 2.2
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 203.33333333333331,
+                        "y": 194.5
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": -2.2
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 206.3436401121608,
+                        "y": 187.86598156852594
+                      },
+                      "inTangent": {
+                        "x": -1.6556687283551244,
+                        "y": 1.4487101373107338
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 216.32302655450582,
+                        "y": 179.13401843147406
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 1.6556687283551244,
+                        "y": -1.4487101373107338
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 222.3436401121608,
+                        "y": 179.13401843147406
+                      },
+                      "inTangent": {
+                        "x": -1.6556687283551244,
+                        "y": -1.4487101373107338
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 232.32302655450582,
+                        "y": 187.86598156852594
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 1.6556687283551244,
+                        "y": 1.4487101373107338
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 235.33333333333331,
+                        "y": 194.5
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": -2.2
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 235.33333333333331,
+                        "y": 206.5
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 2.2
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 231.33333333333331,
+                        "y": 210.5
+                      },
+                      "inTangent": {
+                        "x": 2.2,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "style": {
+            "fill": {
+              "color": {
+                "kind": "constant",
+                "value": {
+                  "r": 0.7843137254901961,
+                  "g": 0.3333333333333333,
+                  "b": 0.22745098039215686,
+                  "a": 1
+                }
+              },
+              "opacity": {
+                "kind": "keyframed",
+                "keyframes": [
+                  {
+                    "id": "home5.op.0",
+                    "tick": 0,
+                    "value": 1,
+                    "interpolation": "bezier",
+                    "easing": {
+                      "x1": 0.55,
+                      "y1": 0,
+                      "x2": 0.8,
+                      "y2": 0.4
+                    }
+                  },
+                  {
+                    "id": "home5.op.1",
+                    "tick": 48,
+                    "value": 0,
+                    "interpolation": "hold"
+                  },
+                  {
+                    "id": "home5.op.2",
+                    "tick": 224,
+                    "value": 0,
+                    "interpolation": "bezier",
+                    "easing": {
+                      "x1": 0.4,
+                      "y1": 0,
+                      "x2": 0.2,
+                      "y2": 1
+                    }
+                  },
+                  {
+                    "id": "home5.op.3",
+                    "tick": 268,
+                    "value": 1,
+                    "interpolation": "hold"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "tiles": {
+          "id": "tiles",
+          "name": "tiles",
+          "visible": true,
+          "inTick": 0,
+          "outTick": 336,
+          "opacity": {
+            "kind": "constant",
+            "value": 1
+          },
+          "transform": {
+            "position": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "anchor": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "scale": {
+              "kind": "constant",
+              "value": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+              }
+            },
+            "rotation": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "skew": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0
+              }
+            }
+          },
+          "blendMode": "normal",
+          "type": "group",
+          "children": [
+            "tile0",
+            "tile1",
+            "tile2",
+            "tile3",
+            "tile4",
+            "tile5"
+          ],
+          "clipPathId": "lotClip"
+        }
+      },
+      "rootNodeIds": [
+        "tiles",
+        "home0",
+        "home1",
+        "home2",
+        "home3",
+        "home4",
+        "home5"
+      ]
+    }
+  },
+  "rootCompositionId": "main",
+  "components": {},
+  "markers": [
+    {
+      "id": "rest",
+      "name": "Rest",
+      "tick": 0,
+      "durationTicks": 0
+    },
+    {
+      "id": "play",
+      "name": "Play",
+      "tick": 0,
+      "durationTicks": 328
+    }
+  ],
+  "design": {
+    "tokens": {
+      "looping": false
+    }
+  },
+  "capabilities": {
+    "required": [],
+    "optional": [],
+    "unsupportedPolicy": "warn"
+  },
+  "stateMachine": {
+    "version": 1,
+    "initialStateId": "state-rest",
+    "states": [
+      {
+        "id": "state-rest",
+        "name": "rest",
+        "entryMarkerId": "rest"
+      },
+      {
+        "id": "state-play",
+        "name": "play",
+        "entryMarkerId": "play",
+        "playback": "once"
+      }
+    ],
+    "transitions": [
+      {
+        "id": "transition-play-to-rest-complete",
+        "fromStateId": "state-play",
+        "toStateId": "state-rest",
+        "trigger": "complete"
+      }
+    ]
+  }
+}

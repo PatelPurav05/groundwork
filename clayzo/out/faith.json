@@ -1,0 +1,1570 @@
+{
+  "version": 2,
+  "id": "lens-faith",
+  "revision": "sha256:cdad2a18e7fbd2b3caf65600bcbb0b5b20b2dd8d1790e594bb4a23c86d87d191",
+  "name": "Church land (SB 4)",
+  "canvas": {
+    "width": 288,
+    "height": 288,
+    "pixelAspectRatio": 1,
+    "backgroundColor": {
+      "r": 0.9607843137254902,
+      "g": 0.9490196078431372,
+      "b": 0.9254901960784314,
+      "a": 0
+    }
+  },
+  "timing": {
+    "ticksPerSecond": 240,
+    "frameRate": {
+      "numerator": 60,
+      "denominator": 1
+    },
+    "durationTicks": 296,
+    "displayStartTick": 0
+  },
+  "assets": {},
+  "compositions": {
+    "main": {
+      "id": "main",
+      "name": "Main",
+      "width": 288,
+      "height": 288,
+      "durationTicks": 296,
+      "nodes": {
+        "lot": {
+          "id": "lot",
+          "name": "lot",
+          "visible": true,
+          "inTick": 0,
+          "outTick": 296,
+          "opacity": {
+            "kind": "constant",
+            "value": 1
+          },
+          "transform": {
+            "position": {
+              "kind": "constant",
+              "value": {
+                "x": 144,
+                "y": 214,
+                "z": 0
+              }
+            },
+            "anchor": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "scale": {
+              "kind": "constant",
+              "value": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+              }
+            },
+            "rotation": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "skew": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0
+              }
+            }
+          },
+          "blendMode": "normal",
+          "type": "rect",
+          "size": {
+            "kind": "constant",
+            "value": {
+              "width": 240,
+              "height": 40
+            }
+          },
+          "cornerRadius": {
+            "kind": "constant",
+            "value": 16
+          },
+          "style": {
+            "fill": {
+              "color": {
+                "kind": "constant",
+                "value": {
+                  "r": 0.9058823529411765,
+                  "g": 0.8862745098039215,
+                  "b": 0.8470588235294118,
+                  "a": 1
+                }
+              },
+              "opacity": {
+                "kind": "constant",
+                "value": 1
+              }
+            }
+          }
+        },
+        "stripes": {
+          "id": "stripes",
+          "name": "stripes",
+          "visible": true,
+          "inTick": 0,
+          "outTick": 296,
+          "opacity": {
+            "kind": "constant",
+            "value": 1
+          },
+          "transform": {
+            "position": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "anchor": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "scale": {
+              "kind": "constant",
+              "value": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+              }
+            },
+            "rotation": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "skew": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0
+              }
+            }
+          },
+          "blendMode": "normal",
+          "type": "path",
+          "path": {
+            "kind": "constant",
+            "value": {
+              "contours": [
+                {
+                  "closed": false,
+                  "vertices": [
+                    {
+                      "point": {
+                        "x": 182,
+                        "y": 200
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 182,
+                        "y": 224
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "closed": false,
+                  "vertices": [
+                    {
+                      "point": {
+                        "x": 204,
+                        "y": 200
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 204,
+                        "y": 224
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "closed": false,
+                  "vertices": [
+                    {
+                      "point": {
+                        "x": 226,
+                        "y": 200
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 226,
+                        "y": 224
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "style": {
+            "stroke": {
+              "color": {
+                "kind": "constant",
+                "value": {
+                  "r": 0.10588235294117647,
+                  "g": 0.10196078431372549,
+                  "b": 0.09019607843137255,
+                  "a": 1
+                }
+              },
+              "opacity": {
+                "kind": "keyframed",
+                "keyframes": [
+                  {
+                    "id": "stripes.op.0",
+                    "tick": 0,
+                    "value": 0,
+                    "interpolation": "bezier",
+                    "easing": {
+                      "x1": 0.4,
+                      "y1": 0,
+                      "x2": 0.2,
+                      "y2": 1
+                    }
+                  },
+                  {
+                    "id": "stripes.op.1",
+                    "tick": 56,
+                    "value": 0.32,
+                    "interpolation": "hold"
+                  },
+                  {
+                    "id": "stripes.op.2",
+                    "tick": 128,
+                    "value": 0.32,
+                    "interpolation": "bezier",
+                    "easing": {
+                      "x1": 0.4,
+                      "y1": 0,
+                      "x2": 0.2,
+                      "y2": 1
+                    }
+                  },
+                  {
+                    "id": "stripes.op.3",
+                    "tick": 184,
+                    "value": 0,
+                    "interpolation": "hold"
+                  }
+                ]
+              },
+              "width": {
+                "kind": "constant",
+                "value": 5
+              },
+              "lineCap": "round",
+              "lineJoin": "round",
+              "miterLimit": 4
+            }
+          }
+        },
+        "steeple": {
+          "id": "steeple",
+          "name": "steeple",
+          "visible": true,
+          "inTick": 0,
+          "outTick": 296,
+          "opacity": {
+            "kind": "constant",
+            "value": 1
+          },
+          "transform": {
+            "position": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "anchor": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "scale": {
+              "kind": "constant",
+              "value": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+              }
+            },
+            "rotation": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "skew": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0
+              }
+            }
+          },
+          "blendMode": "normal",
+          "type": "path",
+          "path": {
+            "kind": "constant",
+            "value": {
+              "contours": [
+                {
+                  "closed": true,
+                  "vertices": [
+                    {
+                      "point": {
+                        "x": 108.31555477418148,
+                        "y": 43.62803587099373
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 0.9264448742001868,
+                        "y": -1.9954197290465503
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 111.68444522581852,
+                        "y": 43.62803587099373
+                      },
+                      "inTangent": {
+                        "x": -0.9264448742001868,
+                        "y": -1.9954197290465503
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 121.31555477418148,
+                        "y": 64.37196412900627
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 0.9264448742001868,
+                        "y": 1.9954197290465503
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 123,
+                        "y": 72
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": -2.2
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 123,
+                        "y": 108
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 2.2
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 119,
+                        "y": 112
+                      },
+                      "inTangent": {
+                        "x": 2.2,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 101,
+                        "y": 112
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": -2.2,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 97,
+                        "y": 108
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 2.2
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 97,
+                        "y": 72
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": -2.2
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 98.68444522581852,
+                        "y": 64.37196412900627
+                      },
+                      "inTangent": {
+                        "x": -0.9264448742001868,
+                        "y": 1.9954197290465503
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "style": {
+            "fill": {
+              "color": {
+                "kind": "constant",
+                "value": {
+                  "r": 0.10588235294117647,
+                  "g": 0.10196078431372549,
+                  "b": 0.09019607843137255,
+                  "a": 1
+                }
+              },
+              "opacity": {
+                "kind": "constant",
+                "value": 1
+              }
+            }
+          }
+        },
+        "chapel": {
+          "id": "chapel",
+          "name": "chapel",
+          "visible": true,
+          "inTick": 0,
+          "outTick": 296,
+          "opacity": {
+            "kind": "constant",
+            "value": 1
+          },
+          "transform": {
+            "position": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "anchor": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "scale": {
+              "kind": "constant",
+              "value": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+              }
+            },
+            "rotation": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "skew": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0
+              }
+            }
+          },
+          "blendMode": "normal",
+          "type": "path",
+          "path": {
+            "kind": "constant",
+            "value": {
+              "contours": [
+                {
+                  "closed": true,
+                  "vertices": [
+                    {
+                      "point": {
+                        "x": 75,
+                        "y": 208
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": -3.8500000000000005,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 68,
+                        "y": 201
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 3.8500000000000005
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 68,
+                        "y": 141
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": -3.8500000000000005
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 73.31479621655707,
+                        "y": 129.4444603858082
+                      },
+                      "inTangent": {
+                        "x": -2.923137919106389,
+                        "y": 2.505546787805483
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 104.68520378344293,
+                        "y": 102.55553961419179
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 2.923137919106389,
+                        "y": -2.505546787805483
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 115.31479621655707,
+                        "y": 102.55553961419179
+                      },
+                      "inTangent": {
+                        "x": -2.923137919106389,
+                        "y": -2.505546787805483
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 146.68520378344292,
+                        "y": 129.4444603858082
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 2.923137919106397,
+                        "y": 2.505546787805483
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 152,
+                        "y": 141
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": -3.8500000000000005
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 152,
+                        "y": 201
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 3.8500000000000005
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 145,
+                        "y": 208
+                      },
+                      "inTangent": {
+                        "x": 3.8500000000000005,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "style": {
+            "fill": {
+              "color": {
+                "kind": "constant",
+                "value": {
+                  "r": 0.10588235294117647,
+                  "g": 0.10196078431372549,
+                  "b": 0.09019607843137255,
+                  "a": 1
+                }
+              },
+              "opacity": {
+                "kind": "constant",
+                "value": 1
+              }
+            }
+          }
+        },
+        "rose": {
+          "id": "rose",
+          "name": "rose",
+          "visible": true,
+          "inTick": 0,
+          "outTick": 296,
+          "opacity": {
+            "kind": "constant",
+            "value": 1
+          },
+          "transform": {
+            "position": {
+              "kind": "constant",
+              "value": {
+                "x": 110,
+                "y": 146,
+                "z": 0
+              }
+            },
+            "anchor": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "scale": {
+              "kind": "constant",
+              "value": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+              }
+            },
+            "rotation": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "skew": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0
+              }
+            }
+          },
+          "blendMode": "normal",
+          "type": "ellipse",
+          "size": {
+            "kind": "constant",
+            "value": {
+              "width": 18,
+              "height": 18
+            }
+          },
+          "style": {
+            "fill": {
+              "color": {
+                "kind": "constant",
+                "value": {
+                  "r": 0.9607843137254902,
+                  "g": 0.9490196078431372,
+                  "b": 0.9254901960784314,
+                  "a": 1
+                }
+              },
+              "opacity": {
+                "kind": "constant",
+                "value": 1
+              }
+            }
+          }
+        },
+        "door": {
+          "id": "door",
+          "name": "door",
+          "visible": true,
+          "inTick": 0,
+          "outTick": 296,
+          "opacity": {
+            "kind": "constant",
+            "value": 1
+          },
+          "transform": {
+            "position": {
+              "kind": "constant",
+              "value": {
+                "x": 110,
+                "y": 192,
+                "z": 0
+              }
+            },
+            "anchor": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "scale": {
+              "kind": "constant",
+              "value": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+              }
+            },
+            "rotation": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "skew": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0
+              }
+            }
+          },
+          "blendMode": "normal",
+          "type": "rect",
+          "size": {
+            "kind": "constant",
+            "value": {
+              "width": 24,
+              "height": 36
+            }
+          },
+          "cornerRadius": {
+            "kind": "constant",
+            "value": 11
+          },
+          "style": {
+            "fill": {
+              "color": {
+                "kind": "constant",
+                "value": {
+                  "r": 0.9607843137254902,
+                  "g": 0.9490196078431372,
+                  "b": 0.9254901960784314,
+                  "a": 1
+                }
+              },
+              "opacity": {
+                "kind": "constant",
+                "value": 1
+              }
+            }
+          }
+        },
+        "house": {
+          "id": "house",
+          "name": "house",
+          "visible": true,
+          "inTick": 0,
+          "outTick": 296,
+          "opacity": {
+            "kind": "keyframed",
+            "keyframes": [
+              {
+                "id": "house.op.0",
+                "tick": 0,
+                "value": 1,
+                "interpolation": "bezier",
+                "easing": {
+                  "x1": 0.55,
+                  "y1": 0,
+                  "x2": 0.8,
+                  "y2": 0.4
+                }
+              },
+              {
+                "id": "house.op.1",
+                "tick": 56,
+                "value": 0,
+                "interpolation": "hold"
+              },
+              {
+                "id": "house.op.2",
+                "tick": 112,
+                "value": 0,
+                "interpolation": "bezier",
+                "easing": {
+                  "x1": 0.4,
+                  "y1": 0,
+                  "x2": 0.2,
+                  "y2": 1
+                }
+              },
+              {
+                "id": "house.op.3",
+                "tick": 168,
+                "value": 1,
+                "interpolation": "hold"
+              }
+            ]
+          },
+          "transform": {
+            "position": {
+              "kind": "keyframed",
+              "keyframes": [
+                {
+                  "id": "house.pos.0",
+                  "tick": 0,
+                  "value": {
+                    "x": 204,
+                    "y": 208,
+                    "z": 0
+                  },
+                  "interpolation": "hold"
+                },
+                {
+                  "id": "house.pos.1",
+                  "tick": 112,
+                  "value": {
+                    "x": 204,
+                    "y": 224,
+                    "z": 0
+                  },
+                  "interpolation": "bezier",
+                  "easing": {
+                    "x1": 0.23,
+                    "y1": 1,
+                    "x2": 0.32,
+                    "y2": 1
+                  }
+                },
+                {
+                  "id": "house.pos.2",
+                  "tick": 232,
+                  "value": {
+                    "x": 204,
+                    "y": 208,
+                    "z": 0
+                  },
+                  "interpolation": "hold"
+                }
+              ]
+            },
+            "anchor": {
+              "kind": "constant",
+              "value": {
+                "x": 204,
+                "y": 208,
+                "z": 0
+              }
+            },
+            "scale": {
+              "kind": "keyframed",
+              "keyframes": [
+                {
+                  "id": "house.scale.0",
+                  "tick": 0,
+                  "value": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                  },
+                  "interpolation": "bezier",
+                  "easing": {
+                    "x1": 0.55,
+                    "y1": 0,
+                    "x2": 0.8,
+                    "y2": 0.4
+                  }
+                },
+                {
+                  "id": "house.scale.1",
+                  "tick": 56,
+                  "value": {
+                    "x": 0.6,
+                    "y": 0.6,
+                    "z": 1
+                  },
+                  "interpolation": "hold"
+                },
+                {
+                  "id": "house.scale.2",
+                  "tick": 112,
+                  "value": {
+                    "x": 0.6,
+                    "y": 0.6,
+                    "z": 1
+                  },
+                  "interpolation": "bezier",
+                  "easing": {
+                    "x1": 0.34,
+                    "y1": 1.28,
+                    "x2": 0.64,
+                    "y2": 1
+                  }
+                },
+                {
+                  "id": "house.scale.3",
+                  "tick": 232,
+                  "value": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                  },
+                  "interpolation": "hold"
+                }
+              ]
+            },
+            "rotation": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "skew": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0
+              }
+            }
+          },
+          "blendMode": "normal",
+          "type": "group",
+          "children": [
+            "houseBody",
+            "houseDoor"
+          ],
+          "isolation": true
+        },
+        "houseBody": {
+          "id": "houseBody",
+          "name": "houseBody",
+          "visible": true,
+          "inTick": 0,
+          "outTick": 296,
+          "opacity": {
+            "kind": "constant",
+            "value": 1
+          },
+          "transform": {
+            "position": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "anchor": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "scale": {
+              "kind": "constant",
+              "value": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+              }
+            },
+            "rotation": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "skew": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0
+              }
+            }
+          },
+          "blendMode": "normal",
+          "type": "path",
+          "path": {
+            "kind": "constant",
+            "value": {
+              "contours": [
+                {
+                  "closed": true,
+                  "vertices": [
+                    {
+                      "point": {
+                        "x": 182,
+                        "y": 208
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": -3.3000000000000003,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 176,
+                        "y": 202
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 3.3000000000000003
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 176,
+                        "y": 166
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": -3.3000000000000003
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 180.3967609497578,
+                        "y": 155.91729340379632
+                      },
+                      "inTangent": {
+                        "x": -2.418218522366793,
+                        "y": 2.245488627912023
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 199.6032390502422,
+                        "y": 138.08270659620368
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 2.418218522366793,
+                        "y": -2.245488627912023
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 208.3967609497578,
+                        "y": 138.08270659620368
+                      },
+                      "inTangent": {
+                        "x": -2.418218522366793,
+                        "y": -2.245488627912023
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 227.6032390502422,
+                        "y": 155.91729340379632
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 2.418218522366793,
+                        "y": 2.245488627912023
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 232,
+                        "y": 166
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": -3.3000000000000003
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 232,
+                        "y": 202
+                      },
+                      "inTangent": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 3.3000000000000003
+                      }
+                    },
+                    {
+                      "point": {
+                        "x": 226,
+                        "y": 208
+                      },
+                      "inTangent": {
+                        "x": 3.3000000000000003,
+                        "y": 0
+                      },
+                      "outTangent": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "style": {
+            "fill": {
+              "color": {
+                "kind": "constant",
+                "value": {
+                  "r": 0.7843137254901961,
+                  "g": 0.3333333333333333,
+                  "b": 0.22745098039215686,
+                  "a": 1
+                }
+              },
+              "opacity": {
+                "kind": "constant",
+                "value": 1
+              }
+            }
+          }
+        },
+        "houseDoor": {
+          "id": "houseDoor",
+          "name": "houseDoor",
+          "visible": true,
+          "inTick": 0,
+          "outTick": 296,
+          "opacity": {
+            "kind": "constant",
+            "value": 1
+          },
+          "transform": {
+            "position": {
+              "kind": "constant",
+              "value": {
+                "x": 204,
+                "y": 206,
+                "z": 0
+              }
+            },
+            "anchor": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 12,
+                "z": 0
+              }
+            },
+            "scale": {
+              "kind": "keyframed",
+              "keyframes": [
+                {
+                  "id": "houseDoor.scale.0",
+                  "tick": 0,
+                  "value": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                  },
+                  "interpolation": "hold"
+                },
+                {
+                  "id": "houseDoor.scale.1",
+                  "tick": 56,
+                  "value": {
+                    "x": 0.6,
+                    "y": 0.6,
+                    "z": 1
+                  },
+                  "interpolation": "hold"
+                },
+                {
+                  "id": "houseDoor.scale.2",
+                  "tick": 176,
+                  "value": {
+                    "x": 0.6,
+                    "y": 0.6,
+                    "z": 1
+                  },
+                  "interpolation": "bezier",
+                  "easing": {
+                    "x1": 0.23,
+                    "y1": 1,
+                    "x2": 0.32,
+                    "y2": 1
+                  }
+                },
+                {
+                  "id": "houseDoor.scale.3",
+                  "tick": 248,
+                  "value": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                  },
+                  "interpolation": "hold"
+                }
+              ]
+            },
+            "rotation": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              }
+            },
+            "skew": {
+              "kind": "constant",
+              "value": {
+                "x": 0,
+                "y": 0
+              }
+            }
+          },
+          "blendMode": "normal",
+          "type": "rect",
+          "size": {
+            "kind": "constant",
+            "value": {
+              "width": 14,
+              "height": 24
+            }
+          },
+          "cornerRadius": {
+            "kind": "constant",
+            "value": 5
+          },
+          "style": {
+            "fill": {
+              "color": {
+                "kind": "constant",
+                "value": {
+                  "r": 0.9607843137254902,
+                  "g": 0.9490196078431372,
+                  "b": 0.9254901960784314,
+                  "a": 1
+                }
+              },
+              "opacity": {
+                "kind": "keyframed",
+                "keyframes": [
+                  {
+                    "id": "houseDoor.op.0",
+                    "tick": 0,
+                    "value": 1,
+                    "interpolation": "bezier",
+                    "easing": {
+                      "x1": 0.55,
+                      "y1": 0,
+                      "x2": 0.8,
+                      "y2": 0.4
+                    }
+                  },
+                  {
+                    "id": "houseDoor.op.1",
+                    "tick": 40,
+                    "value": 0,
+                    "interpolation": "hold"
+                  },
+                  {
+                    "id": "houseDoor.op.2",
+                    "tick": 176,
+                    "value": 0,
+                    "interpolation": "bezier",
+                    "easing": {
+                      "x1": 0.4,
+                      "y1": 0,
+                      "x2": 0.2,
+                      "y2": 1
+                    }
+                  },
+                  {
+                    "id": "houseDoor.op.3",
+                    "tick": 224,
+                    "value": 1,
+                    "interpolation": "hold"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "rootNodeIds": [
+        "lot",
+        "stripes",
+        "steeple",
+        "chapel",
+        "rose",
+        "door",
+        "house"
+      ]
+    }
+  },
+  "rootCompositionId": "main",
+  "components": {},
+  "markers": [
+    {
+      "id": "rest",
+      "name": "Rest",
+      "tick": 0,
+      "durationTicks": 0
+    },
+    {
+      "id": "play",
+      "name": "Play",
+      "tick": 0,
+      "durationTicks": 288
+    }
+  ],
+  "design": {
+    "tokens": {
+      "looping": false
+    }
+  },
+  "capabilities": {
+    "required": [],
+    "optional": [],
+    "unsupportedPolicy": "warn"
+  },
+  "stateMachine": {
+    "version": 1,
+    "initialStateId": "state-rest",
+    "states": [
+      {
+        "id": "state-rest",
+        "name": "rest",
+        "entryMarkerId": "rest"
+      },
+      {
+        "id": "state-play",
+        "name": "play",
+        "entryMarkerId": "play",
+        "playback": "once"
+      }
+    ],
+    "transitions": [
+      {
+        "id": "transition-play-to-rest-complete",
+        "fromStateId": "state-play",
+        "toStateId": "state-rest",
+        "trigger": "complete"
+      }
+    ]
+  }
+}
