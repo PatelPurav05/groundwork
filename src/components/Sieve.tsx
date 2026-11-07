@@ -146,7 +146,7 @@ export function Receipt({ sieve, progress = Infinity, compact }: { sieve: SieveR
               visible ? "translate-y-0 opacity-100 blur-0" : "translate-y-1 opacity-0 blur-[2px]",
             )}
           >
-            <span className="tnum pt-px text-right font-mono text-[13px] font-medium text-coral-ink">
+            <span className={clsx("tnum pt-px text-right font-mono text-[13px] font-medium", s.removed ? "text-coral-ink" : "text-muted")}>
               −{n(Math.round(s.removed * (active ? easeOut(local) : 1)))}
             </span>
             <span className="text-[14px] leading-snug text-ink">{s.step.cut}</span>

@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import clsx from "clsx";
-import { useStore, type PassReason } from "@/lib/store";
+import { useStore, type PassReason, type ResearchFinding } from "@/lib/store";
 import { evaluate, findSource, rowForApn, type CheckResult, type Evaluation } from "@/lib/rules/engine";
 import { LENSES, type Lens, type Row } from "@/lib/rules/lenses";
 import { DOCS, CHECKED } from "@/lib/rules/cites";
@@ -13,6 +13,7 @@ import { acres, displayApn, n, shortDate, siteTitle } from "@/lib/format";
 import type { CityData } from "@/lib/data";
 import { AssumedTag, Button, IconBack, IconBookmark, IconBookmarkFilled, IconButton, IconChevron, IconExternal, IconX, ScoreStamp, SheetHeading, StatusMark, Tag } from "./ui";
 import { DraftLetter } from "./DraftLetter";
+import { FindingNote, ResearchBar, useResearch, type ResearchState } from "./Research";
 import { LensIcon } from "./LensIcon";
 
 const EASE = [0.23, 1, 0.32, 1] as const;
@@ -73,7 +74,7 @@ export function SiteDetail({ address }: { address: string | null }) {
       <VerdictBlock ev={primary} score={score?.score ?? null} units={primary.verdict !== "no" ? est.units : 0} basis={est.basis} />
 
       <section className="px-6 pt-7">
-        <ChecksBlock ev={primary} row={row} data={data} />
+        <PrimaryChecks ev={primary} row={row} data={data} title={title} />
       </section>
 
       <section className="mx-6 mt-8 flex flex-col gap-3 border-t border-hairline pt-6">
@@ -170,7 +171,13 @@ function VerdictBlock({ ev, score, units, basis }: { ev: Evaluation; score: numb
   );
 }
 
-function ChecksBlock({ ev, row, data }: { ev: Evaluation; row: Row; data: CityData }) {
+/** The current lens's checks, with on-demand research for the open questions. */
+function PrimaryChecks({ ev, row, data, title }: { ev: Evaluation; row: Row; data: CityData; title: string }) {
+  const research = useResearch(ev.lens, row, title, data.city.name, ev.unknown);
+  return <ChecksBlock ev={ev} row={row} data={data} research={research} />;
+}
+
+function ChecksBlock({ ev, row, data, research }: { ev: Evaluation; row: Row; data: CityData; research?: ResearchState }) {
   const groups: { title: string; items: CheckResult[] }[] = [
     { title: "Didn't pass", items: ev.failed },
     { title: "Passed", items: ev.passed },
@@ -183,9 +190,10 @@ function ChecksBlock({ ev, row, data }: { ev: Evaluation; row: Row; data: CityDa
         .map((g) => (
           <div key={g.title} className="flex flex-col">
             <SheetHeading aside={<span className="tnum font-mono text-[12px] text-muted">{g.items.length}</span>}>{g.title}</SheetHeading>
+            {research && g.items === ev.unknown && <ResearchBar r={research} />}
             <ul className="flex flex-col">
               {g.items.map((c) => (
-                <CheckRow key={c.step.id} c={c} data={data} />
+                <CheckRow key={c.step.id} c={c} data={data} finding={research?.findings.get(c.step.id)} />
               ))}
             </ul>
           </div>
@@ -200,7 +208,7 @@ function ChecksBlock({ ev, row, data }: { ev: Evaluation; row: Row; data: CityDa
   );
 }
 
-function CheckRow({ c, data }: { c: CheckResult; data: CityData }) {
+function CheckRow({ c, data, finding }: { c: CheckResult; data: CityData; finding?: ResearchFinding }) {
   const [open, setOpen] = useState(false);
   const srcs = [...new Map(c.step.sources.map((id) => findSource(data, id)).filter((s): s is NonNullable<typeof s> => !!s).map((s) => [s.id, s])).values()];
   return (
@@ -214,6 +222,11 @@ function CheckRow({ c, data }: { c: CheckResult; data: CityData }) {
         {c.step.kind === "practical" && <Tag tone="dotted">our call</Tag>}
         <IconChevron size={14} className={clsx("mt-1 shrink-0 text-muted transition-transform duration-200", open && "rotate-90")} />
       </button>
+      {finding && (
+        <div className="pb-3 pl-8">
+          <FindingNote f={finding} />
+        </div>
+      )}
       <AnimatePresence initial={false}>
         {open && (
           <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.2, ease: EASE }} className="overflow-hidden">
@@ -260,6 +273,8 @@ function GoodToKnow({ row }: { row: Row }) {
       ? { k: "Transit", v: "In a high-quality transit area, so likely no parking minimum (AB 2097; proxy)" }
       : { k: "Transit", v: "Not in a mapped high-quality transit area" },
   );
+  if (has(row.flags, F.freeway500)) items.push({ k: "Freeway", v: "Within 500 ft of a freeway: AB 2011 projects need air filtration and other building features (AB 2243)", warn: true });
+  if (has(row.flags, F.conservation)) items.push({ k: "Open space", v: s?.enrich?.conservationName ? `On or next to ${s.enrich.conservationName} (protected open space)` : "On protected open space (parks, school fields)", warn: true });
   if (has(row.flags, F.liquefaction)) items.push({ k: "Ground", v: "Liquefaction zone: expect a geotechnical study", warn: true });
   if (has(row.flags, F.landslide)) items.push({ k: "Ground", v: "Landslide zone", warn: true });
   if (s?.ces.percentile != null) items.push({ k: "Pollution", v: `CalEnviroScreen ${ordinal(Math.round(s.ces.percentile))} percentile` });

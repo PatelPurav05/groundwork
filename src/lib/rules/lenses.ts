@@ -25,6 +25,8 @@ export interface Step {
   kind: StepKind;
   /** Dataset ids (sources.json). If any failed to load, the step returns unknown. */
   sources: string[];
+  /** Key in parcels.json `known`; if that layer didn't load, the step is unknown. */
+  layer?: string;
   cite?: Cite;
   /** Practical steps are our judgement, not the law. Always shown with this text. */
   assumption?: string;
@@ -127,6 +129,112 @@ const minLot = (sqft: number, why: string): Step => ({
   detail: (r) => (lotKnown(r) ? `${fmt(Math.round(r.lot))} sq ft lot (from parcel outline)` : null),
 });
 
+
+/* ---------------- enrichment checks (pipeline bits 13–22) ---------------- */
+
+/** A mapped exclusion zone: in it = fail (cuts), out of it = pass, layer missing = unknown. */
+const notInLayer = (o: { id: string; label: string; cut: string; bit: number; layer: string; sources: string[]; cite: Cite; detail?: Step["detail"] }): Step => ({
+  id: o.id,
+  label: o.label,
+  cut: o.cut,
+  kind: "law",
+  sources: o.sources,
+  layer: o.layer,
+  cite: o.cite,
+  test: (r) => (has(r.flags, o.bit) ? "fail" : "pass"),
+  detail: o.detail ?? ((_r, st) => (st === "fail" ? "Inside a mapped zone" : "Outside every mapped zone")),
+});
+
+const notFault = (cite: Cite) =>
+  notInLayer({ id: "x_fault", label: "Not in an earthquake fault zone", cut: "in an earthquake fault zone", bit: F.faultZone, layer: "fault_zone", sources: ["ap_fault"], cite, detail: (_r, st) => (st === "fail" ? "Inside an Alquist-Priolo fault zone" : "No Alquist-Priolo fault zone touches Santa Ana") });
+
+const notWetland = (cite: Cite) =>
+  notInLayer({ id: "x_wetland", label: "Not on a mapped wetland", cut: "on a mapped wetland", bit: F.wetland, layer: "wetland", sources: ["nwi"], cite: { ...cite, caveat: "National Wetlands Inventory; includes channels and ponds" } });
+
+const notFarmland = (cite: Cite) =>
+  notInLayer({ id: "x_farmland", label: "Not on mapped farmland", cut: "on mapped farmland", bit: F.farmland, layer: "farmland", sources: ["fmmp"], cite });
+
+const noHeavyIndustry: Step = {
+  ...notInLayer({ id: "x_heavy_industry", label: "Not within 1,200 ft of heavy industry", cut: "within 1,200 ft of heavy industry", bit: F.heavyIndustry1200, layer: "heavy_industry_1200", sources: ["derived_industry", "zoning"], cite: { doc: "SB4", page: "p2", caveat: "Proxy: M2 (heavy industrial) zoning stands in for a site permitted for heavy industrial use" } }),
+  detail: (r) => {
+    const ft = r.site?.enrich?.nearestHeavyIndustryFt;
+    return ft == null ? null : ft === 0 ? "Zoned heavy industrial itself" : `Nearest heavy-industrial zone is ${fmt(Math.round(ft))} ft away`;
+  },
+};
+
+const noEasement: Step = {
+  id: "x_easement",
+  label: "No conservation easement",
+  cut: "under a conservation easement",
+  kind: "law",
+  sources: ["cced"],
+  cite: { doc: "SB4", page: "p2" },
+  // CCED has no easements anywhere in Santa Ana, so this is a sourced pass, not an assumption.
+  test: () => "pass",
+  detail: () => "The California Conservation Easement Database lists none in Santa Ana",
+};
+
+const urbanEdge: Step = {
+  id: "x_urban_edge",
+  label: "At least 75% of the edge borders urban uses",
+  cut: "less than 75% of its edge borders urban uses",
+  kind: "law",
+  sources: ["derived_urban_perimeter", "scag-landuse"],
+  cite: { doc: "SB4", page: "p2", caveat: "Our measure: neighbors' SCAG land use sampled every 5 m along the edge, across streets" },
+  test: (r) => {
+    const pct = r.site?.enrich?.urbanPerimeterPct;
+    return pct == null ? "unknown" : pct >= 75 ? "pass" : "fail";
+  },
+  detail: (r) => {
+    const pct = r.site?.enrich?.urbanPerimeterPct;
+    return pct == null ? null : `${Math.round(pct)}% of the edge borders developed land`;
+  },
+};
+
+/** Proxies that point at an exclusion but can't prove it: shown on the lot, never cut. */
+const historicFlag = (cite: Cite): Step => ({
+  id: "f_historic",
+  label: "Not a historic resource",
+  cut: "on a historic register or in a historic district",
+  kind: "flag",
+  sources: ["historic_props", "historic_districts", "nrhp_points", "nrhp_polys"],
+  layer: "historic",
+  cite: { ...cite, caveat: "Being in a district doesn't prove the building contributes; the California Register isn't mapped" },
+  test: (r) => (has(r.flags, F.historic) ? "fail" : "pass"),
+  detail: (r, st) => {
+    const h = r.site?.enrich?.historic;
+    if (st !== "fail") return "Not on the Santa Ana or National Register, not in a historic district";
+    return h ? `${h.name ?? "Listed"} · ${h.source}` : "On a historic register or inside a historic district";
+  },
+});
+
+const hazwasteFlag = (cite: Cite): Step => ({
+  id: "f_hazwaste",
+  label: "No open contamination case on or next to the lot",
+  cut: "has an open contamination case",
+  kind: "flag",
+  sources: ["envirostor"],
+  layer: "hazwaste",
+  cite: { ...cite, caveat: "DTSC EnviroStor open cases; GeoTracker isn't mapped publicly. A Phase I ESA is required anyway" },
+  test: (r) => (has(r.flags, F.hazwaste) ? "fail" : "pass"),
+  detail: (r, st) => {
+    const h = r.site?.enrich?.hazwaste;
+    return st === "fail" && h ? `${h.name ?? "EnviroStor site"} · ${h.status ?? "open"} (EnviroStor ${h.id})` : st === "pass" ? "No open EnviroStor case within 50 ft" : null;
+  },
+});
+
+const industrialNeighborFlag = (cite: Cite): Step => ({
+  id: "f_adj_industrial",
+  label: "Not next to an industrial use",
+  cut: "next to industrially zoned land",
+  kind: "flag",
+  sources: ["derived_industry", "zoning"],
+  layer: "adj_industrial",
+  cite: { ...cite, caveat: "Proxy: an M1/M2-zoned neighbor within 15 ft; the law asks about actual industrial use" },
+  test: (r) => (has(r.flags, F.adjIndustrial) ? "fail" : "pass"),
+  detail: (_r, st) => (st === "fail" ? "An industrially zoned parcel borders this lot" : "No industrially zoned neighbor"),
+});
+
 /* ---------------- lenses ---------------- */
 
 const SB4: Cite = { doc: "SB4", page: "p1–3", section: "Gov Code 65913.16" };
@@ -158,12 +266,17 @@ const faith: Lens = {
     },
     notFireZone({ doc: "SB4", page: "p2" }),
     notFloodZone({ doc: "SB4", page: "p2" }),
+    notFault({ doc: "SB4", page: "p2" }),
+    notWetland({ doc: "SB4", page: "p2" }),
+    noHeavyIndustry,
+    urbanEdge,
+    noEasement,
     minLot(10000, "Our assumption: about a quarter acre is the smallest site where ~7 homes at SB 4's 30 homes/acre minimum make sense for a nonprofit."),
+    hazwasteFlag({ doc: "SB4", page: "p2" }),
+    industrialNeighborFlag({ doc: "SB4", page: "p2" }),
     cantCheck("sb4_owner", "Owned by the institution since Jan 1, 2024", { doc: "SB4", page: "p1" }),
-    cantCheck("sb4_fault", "Not in an earthquake fault zone", { doc: "SB4", page: "p2" }),
-    cantCheck("sb4_perimeter", "At least 75% of the edge borders urban uses", { doc: "SB4", page: "p2" }),
-    cantCheck("sb4_industry", "Not within 1,200 ft of heavy industry", { doc: "SB4", page: "p2" }),
-    cantCheck("sb4_env", "No wetlands, habitat or hazardous waste", { doc: "SB4", page: "p2" }),
+    cantCheck("sb4_titlev", "Not within 1,600 ft of a Title V facility or 3,200 ft of a refinery", { doc: "SB4", page: "p2" }),
+    cantCheck("sb4_habitat", "No protected-species habitat or conservation-plan land", { doc: "SB4", page: "p2" }),
   ],
   estimate: (r) => {
     const acres = r.lot / SQFT_PER_ACRE;
@@ -237,6 +350,7 @@ const publicLand: Lens = {
       test: (r) => surplusWindow(r).status,
       detail: (r) => surplusWindow(r).text,
     },
+    hazwasteFlag({ doc: "SLAG", page: "p23" }),
     cantCheck("sla_exempt", "Declared surplus, not exempt surplus", { doc: "SLAG", page: "p23" }),
   ],
   estimate: (r) => ({
@@ -270,10 +384,22 @@ const commercial: Lens = {
     },
     redevelopable,
     minLot(10000, "Our assumption: under ~10,000 sq ft rarely pencils for a prevailing-wage project."),
-    cantCheck("ab2011_env", "Passes AB 2011's environmental criteria", { doc: "FS", page: "p5", caveat: "List not in HCD's sheet" }),
-    cantCheck("ab2011_industrial", "Not next to an industrial use", { doc: "FS", page: "p53" }),
+    {
+      id: "f_ab2011_env",
+      label: "No mapped wetland, fault zone or open contamination case",
+      cut: "on a wetland, fault zone or open contamination case",
+      kind: "flag",
+      sources: ["nwi", "ap_fault", "envirostor"],
+      cite: { doc: "FS", page: "p5", caveat: "AB 2011's full environmental list isn't in HCD's sheet; these are the ones we can map" },
+      test: (r) => (has(r.flags, F.wetland) || has(r.flags, F.faultZone) || has(r.flags, F.hazwaste) ? "fail" : "pass"),
+      detail: (r, st) =>
+        st === "pass"
+          ? "None mapped on this lot"
+          : [has(r.flags, F.wetland) && "mapped wetland", has(r.flags, F.faultZone) && "fault zone", has(r.flags, F.hazwaste) && (r.site?.enrich?.hazwaste?.name ?? "open EnviroStor case")].filter(Boolean).join(" · "),
+    },
+    industrialNeighborFlag({ doc: "FS", page: "p53" }),
+    historicFlag({ doc: "FS", caveat: "AB 2011's historic exclusion is unverified (from memory)" }),
     cantCheck("ab2011_exempt", "Not exempted by Santa Ana's AB 2011 ordinance", { doc: "FS", page: "p6" }),
-    cantCheck("ab2011_historic", "Not a historic resource", { doc: "FS", caveat: "Unverified" }),
   ],
   estimate: (r) => ({
     units: Math.max(0, Math.floor((r.lot / SQFT_PER_ACRE) * 30)),
@@ -320,11 +446,20 @@ const starter: Lens = {
       detail: (r) => (lotKnown(r) ? `${(r.lot / SQFT_PER_ACRE).toFixed(2)} acres` : null),
     },
     notFireZone({ doc: "FS", page: "p67" }),
+    notFault({ doc: "DD684", caveat: "Secondary source" }),
+    notWetland({ doc: "FS", page: "p67" }),
+    notFarmland({ doc: "FS", page: "p67" }),
     redevelopable,
     minLot(6000, "Our assumption: ~6,000 sq ft fits 10 parcels at the 600 sq ft minimum (CalMatters SB 684), before streets and setbacks."),
+    {
+      ...urbanEdge,
+      id: "f_shra_surrounded",
+      label: "Substantially surrounded by urban uses",
+      cut: "less than 75% surrounded by urban uses",
+      kind: "flag",
+      cite: { doc: "DD684", caveat: "The law doesn't define \"substantially\"; we flag below 75%, same measure as SB 4" },
+    },
     cantCheck("shra_tenant", "No tenants in the last 5 years", { doc: "DD684", caveat: "Secondary source" }),
-    cantCheck("shra_surrounded", "Substantially surrounded by urban uses", { doc: "DD684" }),
-    cantCheck("shra_env", "No wetlands, farmland or fault zone", { doc: "FS", page: "p67" }),
   ],
   estimate: (r) => {
     const per = r.zone === "single_family" ? 1200 : 600;
@@ -377,8 +512,10 @@ const backyard: Lens = {
       cut: "lot already mostly built",
       test: (r) => (has(r.flags, F.lowCover) || has(r.flags, F.vacant) ? "pass" : "fail"),
     },
+    notFault({ doc: "SB9FS", page: "p5" }),
+    notWetland({ doc: "SB9FS", page: "p5" }),
+    historicFlag({ doc: "FS", page: "p50" }),
     cantCheck("sb9_tenant", "Not rented in the last 3 years", { doc: "FS", page: "p50" }),
-    cantCheck("sb9_historic", "Not historic", { doc: "FS", page: "p50" }),
     cantCheck("sb9_rent", "Not rent-controlled or covenant-restricted", { doc: "FS", page: "p49" }),
   ],
   estimate: () => ({

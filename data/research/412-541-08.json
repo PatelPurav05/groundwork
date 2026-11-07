@@ -1,0 +1,39 @@
+{
+  "SB 4": {
+    "apn": "412-541-08",
+    "law": "SB 4",
+    "at": "2026-11-07T21:42:12.319Z",
+    "questions": [
+      {
+        "id": "sb4_owner",
+        "label": "Owned by the institution since Jan 1, 2024"
+      }
+    ],
+    "findings": [
+      {
+        "id": "sb4_owner",
+        "answer": "yes",
+        "summary": "The Roman Catholic Diocese of Orange bought the Alton Avenue property in November 2002 and still holds the roughly 8-acre remainder as the Christ Our Savior parish campus; a separate portion sold in 2017 is now housing. County deed and assessor records tying the APN to the Diocese were not checked, so the exact title holder is unconfirmed.",
+        "sources": [
+          {
+            "title": "Diocese of Orange to Dedicate New Church for Santa Ana, Costa Mesa Communities - Roman Catholic Diocese of Orange",
+            "url": "https://www.rcbo.org/newsroom-archive/diocese-of-orange-to-dedicate-new-church-for-santa-ana-costa-mesa-communities/"
+          },
+          {
+            "title": "DESIGNS UNVEILED FOR NEW CHURCH FOR CHRIST OUR SAVIOR PARISH COMMUNITY",
+            "url": "https://www.occatholic.com/designs-unveiled-for-new-church-for-christ-our-savior-parish-community%E2%80%AF/"
+          },
+          {
+            "title": "First church built in Santa Ana since 2006",
+            "url": "https://www.cal-catholic.com/first-church-built-in-santa-ana-since-2006/"
+          },
+          {
+            "title": "Structural Concrete",
+            "url": "https://sunpeak.com/portfolio/christ-our-savior-structural-concrete/"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ]
+  }
+}

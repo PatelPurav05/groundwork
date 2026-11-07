@@ -77,6 +77,30 @@ for (const apn of sample) {
   attempt(`probe/${apn}`, () => <SiteDetail address={null} />);
 }
 
+// A lot with stored web-research findings (every answer kind, with and without sources).
+{
+  const lot = getSieve(data, "faith")!.survivorApns[0];
+  set({
+    lensId: "faith",
+    mode: "site",
+    selectedApn: lot,
+    probeApn: null,
+    research: {
+      [lot]: {
+        at: 0,
+        law: "SB 4",
+        findings: [
+          { id: "sb4_owner", answer: "yes", summary: "Test.", sources: [{ title: "t", url: "https://example.org/a" }], confidence: "high" },
+          { id: "sb4_fault", answer: "no", summary: "Test.", sources: [{ title: "", url: "https://example.org/b" }], confidence: "low" },
+          { id: "sb4_perimeter", answer: "unclear", summary: "Test.", sources: [], confidence: "low" },
+        ],
+      },
+    },
+  });
+  attempt("site with research findings", () => <SiteDetail address={null} />);
+  set({ research: {} });
+}
+
 // Screens mid-exit: the state they read has already been cleared (AnimatePresence keeps them mounted).
 set({ mode: "list", lensId: null, selectedApn: null, probeApn: null });
 attempt("exiting/list(no lens)", () => <Shortlist onPrint={() => {}} />);

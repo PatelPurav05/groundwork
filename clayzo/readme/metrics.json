@@ -1,6 +1,15 @@
 {
  "ui|21|500|no place of worship mapped": 260,
- "ui|21|500|in a very high fire zone": 205,
  "ui|21|500|in a FEMA flood zone": 193,
- "ui|21|500|smaller than 10,000 sq ft": 226
+ "ui|21|500|within 1,200 ft of heavy industry": 294,
+ "ui|21|500|under 75% urban edge": 208,
+ "ui|21|500|smaller than 10,000 sq ft": 226,
+ "ui|19|500|reads plain-language search · drafts owner letters": 413,
+ "ui|19|500|researches each lot’s open questions (saved)": 375,
+ "mono|18|500|HCD surplus notices": 204,
+ "mono|18|500|parcels.json · 57,926": 226,
+ "ui|19|500|23-bit flags + enrichment": 211,
+ "ui|19|500|Site page · every check sourced": 265,
+ "ui|20|500|Also checked, none cut: fire zone, fault zone, wetland, easement": 563,
+ "ui|20|500|Not near a Title V facility or refinery": 307
 }

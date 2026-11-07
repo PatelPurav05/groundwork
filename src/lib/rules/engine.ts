@@ -61,6 +61,8 @@ export function rowFromSite(s: Site): Row {
 
 function runStep(data: CityData, step: Step, r: Row): CheckStatus {
   if (step.sources.some((id) => sourceFailed(data, id))) return "unknown";
+  // A layer that didn't load can't vouch for "not in a zone".
+  if (step.layer && data.parcels.known && data.parcels.known[step.layer] === false) return "unknown";
   return step.test(r);
 }
 

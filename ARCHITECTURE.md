@@ -127,6 +127,18 @@ if a layer failed to load, sources.json says so and the UI marks that test unkno
 | 10 | `underused` improvement value < land value | Santa Ana Assessor |
 | 11 | `ces_high` CalEnviroScreen percentile ≥ 75 | CalEnviroScreen 5.0 |
 | 12 | `commercial_corridor` fronts a commercial corridor (if derivable) | derived |
+| 13 | `heavy_industry_1200` zoned M2, or within 1,200 ft of an M2-zoned parcel (proxy) | derived: SA zoning + parcels |
+| 14 | `adj_industrial` within 15 ft of an M1/M2-zoned parcel (proxy) | derived: SA zoning + parcels |
+| 15 | `fault_zone` Alquist-Priolo earthquake fault zone | CGS AP Fault Zones |
+| 16 | `historic` SA Register property, SA/NRHP historic district, or NRHP listing | SA PBA_HistoricResource, NPS NRHP |
+| 17 | `hazwaste` open EnviroStor cleanup site in or within 50 ft of the parcel | DTSC EnviroStor (GeoTracker not available) |
+| 18 | `wetland` NWI polygon (any type) | USFWS NWI |
+| 19 | `farmland` FMMP Prime or Statewide Importance | CA DOC FMMP 2022 |
+| 20 | `conservation` CPAD holding or CCED easement | CPAD, CCED |
+| 21 | `freeway_500` State Highway Network line within 500 ft | Caltrans SHN |
+| 22 | `urban_perimeter_ok` ≥ 75% of the perimeter adjoins urban uses (sites.json only; 0 in parcels.json) | derived: SCAG land use |
+
+`parcels.json` also carries `known: { <flagName>: boolean }`: false means the layer did not load (or, for `urban_perimeter_ok`, is not computed per parcel), so the test is unknown rather than "not in zone".
 
 ### `public/data/sites.json` — candidates with detail
 

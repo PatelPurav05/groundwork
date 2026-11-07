@@ -1,0 +1,10 @@
+# Keep local-only and confidential files out of deployments.
+.seam/
+.agents/
+.claude/
+data/raw/
+clayzo/demo/footage/
+clayzo/demo/out/
+clayzo/readme/out/
+.env*
+!.env.example

@@ -19,6 +19,7 @@
  */
 import { C, FRAME, HAIR_A, IN, OUT, both, buildDoc, constant, ellipse, group, line, marker, path, polyline, rect, run, s, sec, solid, text, tr, v3, type Nodes } from "./kit";
 import type { PathContour } from "@clayzo/animation/authoring";
+import { CLAUDE_LINES, CLAUDE_TEXT } from "./strings";
 
 export const W = 1600;
 export const H = 900;
@@ -48,12 +49,11 @@ export function architecture() {
   const TOP = 146; // column titles
   const BODY = 212; // cards start
   const BUS = 380; // the connector line between cards
-  const cols = [
-    { x: 56, w: 280, title: "Public data" },
-    { x: 400, w: 312, title: "Pipeline" },
-    { x: 776, w: 284, title: "Rules engine" },
-    { x: 1124, w: 420, title: "App" },
-  ];
+  // Widths: the App card is sized so the widest Claude line fits on one line at 19 px.
+  const GAP_X = 52;
+  const widths = [268, 304, 260, 500];
+  const titles = ["Public data", "Pipeline", "Rules engine", "App"];
+  const cols = widths.map((w, i) => ({ x: 56 + widths.slice(0, i).reduce((a, b) => a + b, 0) + i * GAP_X, w, title: titles[i] }));
   const colT = (i: number) => 0.2 + i * 0.3;
 
   // Entrance helpers -------------------------------------------------------
@@ -95,7 +95,7 @@ export function architecture() {
   const CG = 10;
   const chipY = (k: number) => BODY + k * (CH + CG);
   const c0 = cols[0];
-  [...sources, "+8 more"].forEach((name, k) => {
+  [...sources, "+18 more"].forEach((name, k) => {
     const id = `chip${k}`;
     const more = k === sources.length;
     nodes[`${id}.bg`] = rect(`${id}.bg`, D, {
@@ -117,14 +117,14 @@ export function architecture() {
     roots.push(id);
   });
   const cap0Y = chipY(sources.length + 1) + 8;
-  label("cap0.t", 0, 0, c0.w, "16 public sources · cached once", { color: C.muted, size: 19 });
+  label("cap0.t", 0, 0, c0.w + 120, "26 public sources · cached once", { color: C.muted, size: 19 });
   nodes.cap0 = group("cap0", D, ["cap0.t"], fadeIn("cap0", colT(0) + 0.6, 6, c0.x, cap0Y));
   roots.push("cap0");
 
   // 2. Pipeline ------------------------------------------------------------
   const c1 = cols[1];
   const P = 24;
-  const pRows = ["centroids + lot area", "point-in-polygon joins", "flags bitmask"];
+  const pRows = ["centroids + lot area", "point-in-polygon joins", "23-bit flags + enrichment"];
   const pH = P + 28 + 18 + pRows.length * 44 + 10 + 26 + 10 + 2 * 50 + P - 10;
   card("pipe.card", 0, 0, c1.w, pH);
   label("pipe.title", P, P - 2, c1.w - 2 * P, "scripts/data", { font: "mono", size: 20, weight: 600 });
@@ -254,9 +254,11 @@ export function architecture() {
     const contoursBlue: PathContour[] = [];
     const coral: Pt[] = [];
     let idx = 0;
+    const blocksX = Math.floor((mw - 40 + 11) / 41);
+    const mx0 = Math.round((mw - (blocksX * 41 - 11)) / 2);
     for (let by = 0; by < 5; by++)
-      for (let bx = 0; bx < 8; bx++) {
-        const x0 = P + 28 + bx * 41;
+      for (let bx = 0; bx < blocksX; bx++) {
+        const x0 = P + mx0 + bx * 41;
         const y0 = P + 17 + by * 29;
         for (let j = 0; j < 2; j++)
           for (let i = 0; i < 3; i++) {
@@ -287,13 +289,12 @@ export function architecture() {
   const cy0 = P + mapH + 14 + aRows.length * AR + 16;
   nodes["app.claude.bg"] = rect("app.claude.bg", D, { x: P + mw / 2, y: cy0 + claudeH / 2, w: mw, h: claudeH, r: 10, style: solid(C.coralTint) });
   nodes["app.claude"] = text("app.claude", D, {
-    x: P + 18,
+    x: P + 16,
     y: cy0 + 12,
-    w: mw - 36,
+    w: mw - 32,
     runs: [
       run({ text: "Claude", font: "ui", size: 19, weight: 600, color: C.ink, lineHeight: 26 }),
-      run({ text: "reads plain-language search ·", font: "ui", size: 19, weight: 500, color: C.ink, lineHeight: 26 }),
-      run({ text: "drafts owner letters (never sends)", font: "ui", size: 19, weight: 500, color: C.ink, lineHeight: 26 }),
+      ...CLAUDE_LINES.map((t) => run({ text: t, ...CLAUDE_TEXT, color: C.ink, lineHeight: 26 })),
     ],
   });
   appKids.push("app.claude.bg", "app.claude");

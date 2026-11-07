@@ -20,6 +20,8 @@ import { getCity, CITIES, scagCodeToCategory } from './cities.mjs';
 import { fetchArcgis } from './fetch-arcgis.mjs';
 import { fetchOsm } from './fetch-osm.mjs';
 import { fetchSla } from './fetch-sla.mjs';
+import { fetchEnrich } from './fetch-enrich.mjs';
+import { enrich, ENRICH_FLAGS } from './enrich.mjs';
 
 const args = process.argv.slice(2);
 const city = getCity(args.find((a) => !a.startsWith('--')) || 'santa-ana');
@@ -31,6 +33,7 @@ if (!args.includes('--no-fetch')) {
   await fetchArcgis(city);
   await fetchSla(city);
   await fetchOsm(city);
+  await fetchEnrich(city);
 }
 
 // ---------------------------------------------------------------- helpers
@@ -39,6 +42,7 @@ const FLAG = {
   fire_vhfhsz: 1 << 0, flood_sfha: 1 << 1, liquefaction: 1 << 2, landslide: 1 << 3, hqta: 1 << 4,
   worship: 1 << 5, surplus: 1 << 6, he_site: 1 << 7, vacant: 1 << 8, low_cover: 1 << 9,
   underused: 1 << 10, ces_high: 1 << 11, commercial_corridor: 1 << 12,
+  ...ENRICH_FLAGS,
 };
 const SQFT_PER_M2 = 10.7639104;
 const r5 = (x) => Math.round(x * 1e5) / 1e5;
@@ -384,6 +388,20 @@ for (const f of heFeats) {
 const heCityRecords = heFeats.filter((f) => String(f.attributes.Jurisdiction || '').toUpperCase() === city.heJurisdiction).length;
 console.log(`HE: ${heFeats.length} features in bbox, ${heCityRecords} with Jurisdiction=${city.heJurisdiction}, ${heSites.size} parcels matched`, heJurisdictions);
 
+// ---------------------------------------------------------------- 7b. enrichment (industry, fault, historic, hazwaste, wetland, farmland, conservation, freeway)
+const E = enrich({ parcels, city, loadPages, polygonLayer, ok, log: (...a) => console.log(...a) });
+parcels.forEach((p, i) => { p.flags |= E.out[i].flags; });
+
+// which flag layers actually loaded (so the app can tell "not in a zone" from "layer missing")
+const known = {
+  fire_vhfhsz: ok('fire') || ok('fire_calfire'), flood_sfha: ok('flood'), liquefaction: ok('liquefaction'), landslide: ok('landslide'),
+  hqta: ok('hqta'), worship: ok('osm_worship') || ok('scag_landuse'), surplus: ok('hcd_sla'), he_site: false, vacant: ok('scag_landuse'),
+  low_cover: ok('footprints'), underused: ok('parcels'), ces_high: ok('ces'), commercial_corridor: ok('zoning'),
+  ...E.known,
+  urban_perimeter_ok: false, // computed for sites.json only; never set in parcels.json
+};
+if (heFeats.filter((f) => String(f.attributes.Jurisdiction || '').toUpperCase() === city.heJurisdiction).length > 0) known.he_site = ok('scag_he');
+
 // ---------------------------------------------------------------- 8. parcels.json
 ensureDir(outDir);
 let bbox = [Infinity, Infinity, -Infinity, -Infinity];
@@ -395,6 +413,7 @@ const parcelsJson = {
   count: parcels.length,
   bbox,
   zoneCodes: ZONE_CATS,
+  known,
   columns: {
     apn: parcels.map((p) => p.apn),
     lng: parcels.map((p) => r5(p.c[0])),
@@ -461,6 +480,7 @@ function outline(g, maxV = 40) {
 const status = (id) => meta(id)?.status || 'failed';
 const fireStatus = status('fire') === 'ok' || status('fire_calfire') === 'ok';
 let OUTLINE_MAX = 40;
+let upStats = [];
 const makeSites = () => candIdx.map((i) => {
   const p = parcels[i];
   const s = {
@@ -485,17 +505,37 @@ const makeSites = () => candIdx.map((i) => {
     ces: { percentile: p.cesPct, tract: p.cesTract },
     signals: {},
     flags: p.flags,
+    enrich: { urbanPerimeterPct: null, historic: E.out[i].historic, hazwaste: E.out[i].hazwaste, conservationName: E.out[i].conservationName, nearestHeavyIndustryFt: E.nearestHeavyFt(i) },
   };
+  const up = E.urbanPerimeter(i);
+  s.enrich.urbanPerimeterPct = up ? up.pct : null;
+  if (up && up.pct != null && up.pct >= 75) s.flags |= FLAG.urban_perimeter_ok;
+  upStats.push(up);
   if (worship.has(i)) s.signals.worship = worship.get(i);
   if (surplus.has(i)) s.signals.surplus = surplus.get(i);
   if (heSites.has(i)) s.signals.heSite = heSites.get(i);
   return s;
 });
 let sites = makeSites();
-if (JSON.stringify(sites).length > 6e6) { OUTLINE_MAX = 24; sites = makeSites(); }
+if (JSON.stringify(sites).length > 6e6) { OUTLINE_MAX = 24; upStats = []; sites = makeSites(); }
 writeJSON(path.join(outDir, 'sites.json'), sites);
 
 // ---------------------------------------------------------------- 10. sources.json
+const SOURCES_URL_LANDUSE = 'https://maps.scag.ca.gov/scaggis/rest/services/LDX/Existinglanduse_poly_OR/MapServer/0';
+const hst = E.stats.historic;
+const ENRICH_NOTES = {
+  ap_fault: 'fault_zone (bit 15): parcel centroid inside an Alquist-Priolo Earthquake Fault Zone polygon. No zone polygon intersects the city bbox, so every parcel is outside a mapped zone. Liquefaction/landslide are NOT used for this test.',
+  historic_props: `historic (bit 16): matched to parcels by APN (${hst.register} listings matched, ${hst.registerByPoint} of them by point-in-parcel when the APN did not match). All categories (Landmark, Key, Contributive, uncategorized) count. A listing on the local register, not a determination of eligibility.`,
+  historic_districts: `historic (bit 16): parcel centroid inside a city historic district (${hst.district} parcels). PROXY: SB 9 excludes contributing structures in a district; being inside the district boundary does not mean the structure contributes.`,
+  nrhp_points: `historic (bit 16): NRHP point inside the parcel (${hst.nrhpPoint} points matched).`,
+  nrhp_polys: `historic (bit 16): parcel centroid inside an NRHP district/property polygon (${hst.nrhpPoly} parcels).`,
+  envirostor: `hazwaste (bit 17): EnviroStor cleanup site point inside the parcel or within 50 ft of its boundary, counting only open statuses (Active, Backlog, Inactive - Needs Evaluation, Inactive - Action Required, Certified O&M - Land Use Restrictions). Closed/referred sites (No Further Action, Certified, Refer: *, No Action Required, Withdrawn) are ignored. ${E.stats.hazwaste.activeStatus} open of ${E.stats.hazwaste.sitesInBbox} sites in bbox; ${E.stats.hazwaste.matchedToParcel} matched a parcel. PROXY for the Cortese list (Gov. Code 65962.5): GeoTracker (water board) cases are not included. Staff names are not fetched.`,
+  nwi: 'wetland (bit 18): parcel centroid inside any NWI polygon (all types: riverine, freshwater pond, emergent, forested/shrub, lake). NWI is not a jurisdictional delineation; riverine and lake polygons include deepwater habitat.',
+  fmmp: 'farmland (bit 19): parcel centroid in FMMP 2022 Prime Farmland (P) or Farmland of Statewide Importance (S). Other FMMP classes (urban D, grazing G, other X) are not counted.',
+  cpad: 'conservation (bit 20): parcel centroid in a CPAD holding. CPAD includes ordinary city parks and school fields; it is protected open space, not necessarily an NCCP or easement. Also see cced.',
+  cced: 'conservation (bit 20): parcel centroid in a CCED conservation easement. No easement intersects the city bbox.',
+  shn: `freeway_500 (bit 21): any State Highway Network centerline segment within 500 ft of the parcel boundary (planar distance). Every SHN route in and around ${city.name} (I-5, SR-22, SR-55, SR-57, I-405) is a freeway; for other cities, check that SHN routes there are freeways.`,
+};
 const fpMeta = meta('footprints');
 const entry = (id, extra = {}) => {
   const m = meta(id) || { name: id, url: '', status: 'failed', records: 0 };
@@ -523,6 +563,11 @@ const sources = [
   entry('footprints', { note: `${fpMeta?.note || ''} Coverage = sum of footprint Shape.STArea() (ft²) for footprints whose centroid falls in the parcel ÷ parcel lot area (approximation; footprints straddling lot lines count fully for one parcel; stacked condo polygons each receive the footprint). ${fpAssigned}/${fpTotal} footprints assigned. low_cover = coverage < 0.25. Footprint capture date unknown.`.trim() }),
   { id: 'derived_corridor', name: 'Commercial corridor (derived from local zoning)', url: city.zoning.url, checked: CHECKED, status: 'partial',
     note: `commercial_corridor bit set when the local zone is a named corridor/arterial district (${[...CORRIDOR_ZONES].join(', ')}). Proxy only: AB 2011 street right-of-way width (70–150 ft) is NOT tested.` },
+  { id: 'derived_industry', name: 'Industrial proximity (derived from local zoning + parcel polygons)', url: city.zoning.url, checked: CHECKED, status: ok('zoning') ? 'partial' : 'failed', records: E.stats.industry.heavyParcels,
+    note: `heavy_industry_1200 (bit 13): parcel is zoned ${(city.heavyIndustrialZones || []).join('/')} (ZONEDESC "Heavy Industrial") or its boundary is within 1,200 ft of a parcel whose centroid zone is ${(city.heavyIndustrialZones || []).join('/')} (${E.stats.industry.heavyParcels} parcels). adj_industrial (bit 14): boundary within 15 ft of another parcel zoned ${(city.industrialZones || []).join('/')} (${E.stats.industry.industrialParcels} parcels; covers touching lots and lots split only by a lot-line gap). PROXY: SB 4 tests "a site permitted for heavy industrial use" and "more than one-third of the square footage dedicated to light industrial use"; zoning is used in place of permits/actual use. Industrial parcels outside ${city.name} are not in the parcel set and are not considered. Distances are planar (local equirectangular projection).` },
+  { id: 'derived_urban_perimeter', name: 'Urban perimeter share (derived, sites only)', url: SOURCES_URL_LANDUSE, checked: CHECKED, status: ok('scag_landuse') ? 'partial' : 'failed', records: sites.length,
+    note: 'urbanPerimeterPct: the site boundary is sampled every 5 m (or perimeter/400 if longer); from each sample we step outward 1–60 m and take the first other parcel hit. Neighbour is urban unless its SCAG LU24 is vacant (19xx, 3xxx), agriculture (2xxx), water (4xxx), open space (18xx) or flood channel (1437); neighbours with no LU24 use their zone category (open_space = non-urban, other/unknown = unclassified). pct = urban / (urban + non-urban) samples; samples finding no parcel within 60 m (wide freeways, city edge) or unclassified neighbours are excluded; pct is null if fewer than half the samples are classified. Streets are crossed: parcels separated only by a street are treated as adjoining (the SB 35 rule, as recalled, unverified for SB 4). urban_perimeter_ok (bit 22) = pct ≥ 75, sites.json only (0 in parcels.json).' },
+  ...['ap_fault', 'historic_props', 'historic_districts', 'nrhp_points', 'nrhp_polys', 'ca_register', 'envirostor', 'geotracker', 'nwi', 'fmmp', 'cpad', 'cced', 'shn'].map((id) => entry(id, { note: [meta(id)?.note, ENRICH_NOTES[id]].filter(Boolean).join(' ') })),
 ];
 writeJSON(path.join(outDir, 'sources.json'), sources);
 
@@ -536,6 +581,17 @@ writeJSON(citiesPath, cities.sort((a, b) => a.name.localeCompare(b.name)));
 
 // ---------------------------------------------------------------- 12. report
 const flagCounts = Object.fromEntries(Object.entries(FLAG).map(([k, b]) => [k, parcels.filter((p) => p.flags & b).length]));
+const siteFlagCounts = Object.fromEntries(Object.entries(ENRICH_FLAGS).map(([k, b]) => [k, sites.filter((x) => x.flags & b).length]));
+const ups = sites.map((x) => x.enrich.urbanPerimeterPct);
+const upVals = ups.filter((v) => v != null).sort((a, b) => a - b);
+const q = (f) => upVals[Math.min(upVals.length - 1, Math.floor(f * upVals.length))];
+const urbanPerimeterDist = {
+  null: ups.length - upVals.length, n: upVals.length, min: upVals[0], p10: q(0.1), p25: q(0.25), median: q(0.5), p75: q(0.75), p90: q(0.9), max: upVals.at(-1),
+  ge75: upVals.filter((v) => v >= 75).length, eq100: upVals.filter((v) => v === 100).length,
+  buckets: Object.fromEntries(['0-24', '25-49', '50-74', '75-89', '90-99', '100'].map((b) => [b, 0])),
+  meanGapShare: Math.round(100 * upStats.reduce((a, s2) => a + (s2 && s2.total ? s2.gap / s2.total : 0), 0) / upStats.length) + '%',
+};
+for (const v of upVals) urbanPerimeterDist.buckets[v < 25 ? '0-24' : v < 50 ? '25-49' : v < 75 ? '50-74' : v < 90 ? '75-89' : v < 100 ? '90-99' : '100']++;
 const sigCounts = { worshipOsm: 0, worshipScag: 0, worshipBoth: 0, worship: 0, surplus: 0, he: 0, vacant: 0, ab2011: 0, sb684: 0, sb9: 0 };
 for (const i of candIdx) { const r = reasons(parcels[i], i); for (const k in r) if (r[k]) sigCounts[k]++; const w = worship.get(i); if (w) sigCounts[{ osm: 'worshipOsm', 'scag-landuse': 'worshipScag', both: 'worshipBoth' }[w.source]]++; }
 const worshipApns = new Set([...worship.keys()].map((i) => parcels[i].apnN || `idx${i}`));
@@ -543,7 +599,7 @@ const siteApns = new Set(candIdx.map((i) => parcels[i].apnN || `idx${i}`));
 const worshipMissing = [...worshipApns].filter((k) => !siteApns.has(k)).length;
 const sizes = Object.fromEntries(['parcels.json', 'sites.json', 'sources.json', 'addresses.json'].map((f) => [f, `${(fs.statSync(path.join(outDir, f)).size / 1e6).toFixed(2)} MB`]));
 const report = {
-  city: SLUG, capNote, parcels: parcels.length, flagCounts, candidates: sites.length, candidatesBySignal: sigCounts,
+  city: SLUG, parcels: parcels.length, flagCounts, siteFlagCounts, known, urbanPerimeterDist, enrichStats: E.stats, candidates: sites.length, candidatesBySignal: sigCounts,
   zoneCategoryCounts: Object.fromEntries([...ZONE_CATS, null].map((c) => [c ?? 'unknown', parcels.filter((p) => p.zoneCat === c).length])),
   zoneCategorySource: zoneSource, unmappedLocalCodes: unmappedLocal,
   localZoneCodeCounts: Object.fromEntries(Object.entries(zoneCodeCounts).sort((a, b) => b[1] - a[1])),
