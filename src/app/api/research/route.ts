@@ -11,6 +11,9 @@ import { researchStore, validApn } from "@/lib/server/researchStore";
 
 const MODEL = "claude-opus-5-5";
 
+/** Research searches and reads pages for about a minute; give it room on serverless hosts. */
+export const maxDuration = 300;
+
 export interface ResearchQuestion {
   id: string;
   label: string;

@@ -53,3 +53,7 @@ node_modules/
 # built Clayzo documents (regenerate: npx tsx clayzo/readme/build.ts)
 /clayzo/readme/out/
 !.env.example
+
+# raw demo footage (re-record: scripts/demo/record.mjs) and built demo documents
+/clayzo/demo/footage/
+/clayzo/demo/out/
