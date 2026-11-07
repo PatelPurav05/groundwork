@@ -1,0 +1,72 @@
+// SKY. The input is the clear sky only (gradient, the glow where light breaks through). The clouds
+// are painted here from a density field that repeats every canvasW in x, and the whole stroke
+// field drifts by exactly canvasW x driftLoops per loop: clouds float off one edge, new ones come
+// in at the other, and the loop closes. Strokes are long and loose. Cloud tops facing up are lit
+// (warmer where they pass in front of a glow), bellies shaded.
+//
+// Where the sky input's alpha is below 0.7 the pass draws nothing: the bake script marks sky that
+// solid layers in front always hide (alpha 0.4, colour kept) so no work is spent there.
+uniform shader inputImage;
+uniform float phase;
+uniform float windDir;        // +1 clouds drift right, -1 left
+uniform float driftLoops;     // whole canvas widths the clouds travel per loop (1 = slow)
+uniform float cell;           // stroke pitch; canvasW / cell must be a whole number
+uniform float relief;
+uniform float lightAngle;
+uniform float canvasW;
+uniform float skyBottom;      // lowest row of the sky input
+uniform float cloudTop;       // clouds thin out below this
+uniform float coverage;       // more clouds as it rises (0.1 broken, 0.2 overcast)
+uniform half4 cloudLit;
+uniform half4 cloudMid;
+uniform half4 cloudShadow;
+uniform half4 cloudGlow;      // lit tops in front of a bright glow
+uniform float boundsPadding;
+uniform float2 renderScale;
+//#hooks
+bool hookAlive(float2 c, float4 A, float4 B) { return true; }
+float3 hookShape(float2 c, float seed, float4 A, float4 B) {
+  float n = pnoise(c / 200.0, canvasW / 200.0);
+  return float3((n - 0.5) * 1.5 - 0.12 + (seed - 0.5) * 0.7, 1.7, 0.5);
+}
+float hookSway(float2 c, float2 dir, float seed, float4 A, float4 B) { return 0.0; }
+//#main
+float cloudField(float2 r) {
+  float d = 0.62 * pnoise(r / float2(400.0, 190.0), canvasW / 400.0)
+          + 0.24 * pnoise(r / float2(200.0, 90.0) + float2(3.1, 5.3), canvasW / 200.0)
+          + 0.10 * pnoise(r / float2(100.0, 40.0) + float2(7.7, 1.9), canvasW / 100.0)
+          + 0.04 * pnoise(r / float2(50.0, 22.0) + float2(1.3, 8.4), canvasW / 50.0);
+  return d + coverage * (1.0 - smoothstep(40.0, cloudTop, r.y)) - 0.04;
+}
+
+float3 skyColour(float2 r, float3 base) {
+  float D = cloudField(r);
+  float up = cloudField(r - float2(0.0, 26.0));
+  float dn = cloudField(r + float2(0.0, 26.0));
+  float lit = clamp(0.55 + (dn - up) * 3.5, 0.0, 1.0);
+  float glow = smoothstep(0.78, 0.95, lum(base));
+  float3 litC = mix(float3(cloudLit.rgb), float3(cloudGlow.rgb), glow);
+  float3 cloud = lit < 0.5 ? mix(float3(cloudShadow.rgb), float3(cloudMid.rgb), lit * 2.0)
+                           : mix(float3(cloudMid.rgb), litC, lit * 2.0 - 1.0);
+  return mix(base, cloud, smoothstep(0.5, 0.7, D) * 0.9);
+}
+
+half4 main(float2 p) {
+  float2 q = p / renderScale.x;
+  if (src(q).a < 0.7) { return half4(0.0); }   // always hidden behind something solid
+  float drift = canvasW * driftLoops * windDir * phase / 6.2831853;
+  float2 r = float2(q.x - drift, q.y);
+
+  float2 C; float2 D; float2 Da; float2 T; float L; float Wd; float seed; float edge;
+  float z = findStroke(r, cell, 0.0, canvasW / cell, float4(0), float4(0), C, D, Da, T, L, Wd, seed, edge);
+  if (z < 0.0) {
+    float3 g = skyColour(r, float3(src(q).rgb)) * 0.9 + canvasWeave(q) * 1.6;
+    return half4(half3(saturate(g)), 1.0);
+  }
+  float2 sp = strokeSamplePoint(C, D, T, L, Wd);
+  float2 lo = float2(0.5, 0.5);
+  float2 hi = float2(canvasW - 0.5, skyBottom - 0.5);
+  float3 col = skyColour(sp, float3(src(clamp(sp + float2(drift, 0.0), lo, hi)).rgb));
+  float3 lit = shadeStroke(col, T, C, seed, L, Wd, Da, edge, relief, lightAngle) + canvasWeave(q) * 0.3;
+  return half4(half3(saturate(lit)), 1.0);
+}

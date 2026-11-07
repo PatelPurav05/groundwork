@@ -1,0 +1,47 @@
+// ---- dither common: tone sampling, ordered thresholds, ink/paper output ----
+// Prepended to every technique. Uniforms declared in dither-head.sksl and the
+// technique file come first; renderScale is always the last uniform.
+
+float luma(half3 c) { return dot(float3(c), float3(0.2126, 0.7152, 0.0722)); }
+
+// Ink coverage at a composition-space point: 0 = bare paper, 1 = solid ink.
+// Tone mapping happens BEFORE any threshold (exposure, contrast, gamma, invert).
+float2 coverageAt(float2 cp) {
+  half4 u = unpremul(inputImage.eval(cp * renderScale));
+  float l = luma(u.rgb);
+  l = clamp((l - 0.5) * contrast + 0.5 + exposure, 0.0, 1.0);
+  l = pow(l, gamma);
+  float k = mix(1.0 - l, l, invert);   // invert=1: bright input becomes ink
+  return float2(k, float(u.a));
+}
+
+// Four taps inside one dither cell, so detail smaller than a cell averages
+// instead of aliasing.
+float2 coverageCell(float2 c, float size) {
+  float o = size * 0.25;
+  return 0.25 * (coverageAt(c + float2(-o, -o)) + coverageAt(c + float2(o, -o)) +
+                 coverageAt(c + float2(-o, o)) + coverageAt(c + float2(o, o)));
+}
+
+// Ordered (Bayer) thresholds, recursive form. Inputs are integer cell indices.
+float bayer2(float2 a) { a = floor(a); return fract(a.x * 0.5 + a.y * a.y * 0.75); }
+float bayer4(float2 a) { return bayer2(0.5 * a) * 0.25 + bayer2(a); }
+float bayer8(float2 a) { return bayer4(0.5 * a) * 0.25 + bayer2(a); }
+float bayer16(float2 a) { return bayer8(0.5 * a) * 0.25 + bayer2(a); }
+
+// Interleaved gradient noise: blue-noise-like, no texture needed, stable per cell.
+float ign(float2 a) { return fract(52.9829189 * fract(dot(floor(a), float2(0.06711056, 0.00583715)))); }
+
+float2 rot(float2 v, float deg) {
+  float r = radians(deg); float c = cos(r); float s = sin(r);
+  return float2(c * v.x - s * v.y, s * v.x + c * v.y);
+}
+
+// Premultiplied out. k = ink amount (0..1), a = alpha (0..1).
+half4 inkPaper(float k, float a) {
+  half4 c = mix(paper, ink, half(k));
+  return half4(c.rgb * c.a * half(a), c.a * half(a));
+}
+
+// One composition pixel, for anti-aliasing analytic edges at any render scale.
+float px() { return 1.0 / renderScale.x; }

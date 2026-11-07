@@ -1,0 +1,83 @@
+// FIELD. A meadow, lawn, crop or reed bed seen in perspective from `farY` (the far edge, still)
+// to `nearY` (full depth). The wind moves it two ways: the whole field leans with each gust (a
+// smooth warp up to `lean` units, stronger toward the viewer), and every upright stroke, a grass
+// blade, swings about its own root by up to `bladeSway` radians. Far away strokes are flat dabs;
+// near the viewer they stand up as blades.
+//
+// Small flowers in the field: paint whose colour leans toward `accent` (its chroma direction;
+// alpha 0 turns this off) is read as petals, which radiate from each flower's centre (found
+// from the gradient of accent) and flutter.
+uniform shader inputImage;
+uniform float phase;
+uniform float windA;          // wind(): three whole-number gust rates and a direction
+uniform float windB;
+uniform float windC;
+uniform float windDir;
+uniform float cell;
+uniform float relief;
+uniform float lightAngle;
+uniform float detail;
+uniform float farY;
+uniform float nearY;
+uniform float lean;           // units the near field leans in a full gust
+uniform float bladeSway;      // radians a near blade swings in a full gust
+uniform half4 accent;         // petal colour family; alpha 0 = no petals
+uniform float boundsPadding;
+uniform float2 renderScale;
+//#hooks
+bool hookAlive(float2 c, float4 A, float4 B) { return src(c).a > 0.5; }
+float depthAt(float y) { return smoothstep(farY + 20.0, nearY, y); }
+float3 windK() { return float3(windA, windB, windC); }
+// How strongly a colour leans toward the accent: its chroma projected on the accent's chroma.
+float accentness(float3 m) {
+  float3 a = float3(accent.rgb) - lum(float3(accent.rgb));
+  return dot(m - lum(m), normalize(a + 1e-4)) * accent.a;
+}
+float3 hookShape(float2 c, float seed, float4 A, float4 B) {
+  float d = depthAt(c.y);
+  if (accentness(float3(src(c).rgb)) > 0.12) {
+    float e = 3.0 + 5.0 * d;
+    float gx = accentness(float3(src(c + float2(e, 0)).rgb)) - accentness(float3(src(c - float2(e, 0)).rgb));
+    float gy = accentness(float3(src(c + float2(0, e)).rgb)) - accentness(float3(src(c - float2(0, e)).rgb));
+    if (length(float2(gx, gy)) > 0.05) { return float3(atan(-gy, -gx) + (seed - 0.5) * 0.4, 0.95, 0.4); }
+  }
+  if (h1(c * 0.37 + 4.1) < d * 1.1 - 0.05) {
+    return float3(-1.5708 + (seed - 0.5) * 0.9 + (vnoise(c / 60.0) - 0.5) * 0.5, 1.2 + 0.6 * d * h1(c + 2.2), 0.3);
+  }
+  return float3((seed - 0.5) * 0.5 + (vnoise(c / 120.0) - 0.5) * 0.4, 1.1, 0.42);
+}
+float hookSway(float2 c, float2 dir, float seed, float4 A, float4 B) {
+  float d = depthAt(c.y);
+  float upright = smoothstep(0.4, 0.95, -dir.y);
+  float w = windAt(c.x, phase, windK(), windDir);
+  float blade = upright * (0.17 + d) * bladeSway * (w - 0.3) * windDir;
+  float flutter = (0.02 + 0.05 * d) * sin(windC * phase + seed * 6.2832);
+  return blade + flutter;
+}
+//#main
+half4 main(float2 p) {
+  float2 q = p / renderScale.x;
+  float leanBy = lean * pow(depthAt(q.y), 1.3) * (windAt(q.x, phase, windK(), windDir) - 0.25) * windDir;
+  float2 rq = q - float2(leanBy, 0.0);
+
+  float2 C; float2 D; float2 Da; float2 T; float L; float Wd; float seed; float edge;
+  float z = findStroke(rq, cell, 0.0, 0.0, float4(0), float4(0), C, D, Da, T, L, Wd, seed, edge);
+  if (z >= 0.0) {
+    float2 nr = float2(-D.y, D.x);
+    float3 m0 = float3(src(C).rgb);
+    float k = max(max(distance(float3(src(C + D * L * 0.6).rgb), m0), distance(float3(src(C - D * L * 0.6).rgb), m0)),
+                  max(distance(float3(src(C + nr * Wd * 1.2).rgb), m0), distance(float3(src(C - nr * Wd * 1.2).rgb), m0)));
+    if (k > detail) {
+      float2 C2; float2 D2; float2 Da2; float2 T2; float L2; float W2; float sd2; float e2;
+      z = findStroke(rq, cell * 0.5, 101.0, 0.0, float4(0), float4(0), C2, D2, Da2, T2, L2, W2, sd2, e2);
+      C = C2; D = D2; Da = Da2; T = T2; L = L2; Wd = W2; seed = sd2; edge = e2;
+    }
+  }
+  if (z < 0.0) { return underpaint(rq, q, 0.82, 0.8); }
+  float3 col = strokeColour(C, D, T, L, Wd);
+  // A gust lays the grass over and its paler side catches the light.
+  float sheen = depthAt(C.y) * smoothstep(0.55, 1.0, windAt(C.x, phase, windK(), windDir)) * smoothstep(0.4, 0.95, -D.y);
+  col = mix(col, col * 1.12 + float3(0.03, 0.04, 0.0), sheen * 0.6);
+  float3 lit = shadeStroke(col, T, C, seed, L, Wd, Da, edge, relief, lightAngle) + canvasWeave(q) * 0.3;
+  return half4(half3(saturate(lit)), 1.0);
+}

@@ -1,0 +1,111 @@
+// ---------------------------------------------------------------------------------------------
+// Impasto paint library, part 1: hashes, noise, wind, the canvas, and lighting a stroke.
+// paint.ts assembles every pass as: the pass's uniforms (ending with renderScale), this file,
+// the pass's stroke hooks, paint-strokes.sksl, then the pass's main.
+// All lengths are composition units; renderScale converts from device pixels.
+// ---------------------------------------------------------------------------------------------
+
+float h1(float2 c) { return fract(sin(dot(c, float2(127.1, 311.7))) * 43758.5453); }
+float2 h2(float2 c) {
+  return fract(sin(float2(dot(c, float2(127.1, 311.7)), dot(c, float2(269.5, 183.3)))) * 43758.5453);
+}
+
+// Value noise, and a version that repeats every `period` lattice cells in x (for wrapping skies).
+float vnoise(float2 x) {
+  float2 i = floor(x);
+  float2 f = fract(x);
+  f = f * f * (3.0 - 2.0 * f);
+  return mix(mix(h1(i), h1(i + float2(1, 0)), f.x), mix(h1(i + float2(0, 1)), h1(i + float2(1, 1)), f.x), f.y);
+}
+float pnoise(float2 x, float period) {
+  float2 i = floor(x);
+  float2 f = fract(x);
+  f = f * f * (3.0 - 2.0 * f);
+  float x0 = mod(i.x, period);
+  float x1 = mod(i.x + 1.0, period);
+  float a = h1(float2(x0, i.y)), b = h1(float2(x1, i.y));
+  float c = h1(float2(x0, i.y + 1.0)), d = h1(float2(x1, i.y + 1.0));
+  return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
+}
+
+float2 rot(float2 v, float a) {
+  float c = cos(a), s = sin(a);
+  return float2(c * v.x - s * v.y, s * v.x + c * v.y);
+}
+
+float lum(float3 c) { return dot(c, float3(0.3, 0.55, 0.15)); }
+
+half4 src(float2 q) { return unpremul(inputImage.eval(q * renderScale.x)); }
+
+// The wind: gusts rolling across the scene, roughly 0 (lull) to 1 (gust). k holds three whole
+// numbers (gusts per loop, ~3.1 s, ~1.4 s and ~0.75 s apart) so the wind repeats exactly when
+// phase runs 0 -> 2pi; dir is +1 for wind blowing left to right, -1 for right to left. paint.ts
+// computes both from the loop length (wind()).
+float windAt(float x, float ph, float3 k, float dir) {
+  float xs = x * dir;
+  return 0.5 + 0.30 * sin(k.x * ph - xs * 0.0045)
+             + 0.14 * sin(k.y * ph - xs * 0.011 + 1.7)
+             + 0.06 * sin(k.z * ph - xs * 0.023 + 0.4);
+}
+
+// Canvas weave: fixed to the screen, because the canvas does not move when the paint does.
+float canvasWeave(float2 q) {
+  float a = sin(q.x * 2.1) * sin(q.y * 2.1) * 0.5 + 0.5;
+  float b = sin(q.x * 2.1 + 1.57) * 0.5 + 0.5;
+  return (a * 0.6 + b * 0.4 - 0.5) * 0.06;
+}
+
+// Height of a knife stroke in its own frame: t = (u/L, v/W), each -1..1. A flat laid body, paint
+// squeezed up at the sides, faint drag grooves, a lip where the knife lifted, a thin scraped tail.
+// More than ~6 grooves across the width reads as corduroy, not paint.
+float strokeHeight(float2 t, float seed) {
+  float av = abs(t.y);
+  float plateau = 1.0 - smoothstep(0.62, 1.0, av);
+  float rimD = (av - 0.8) / 0.12;
+  float rim = exp(-rimD * rimD) * 0.32;
+  float groove = sin(t.y * 6.0 + seed * 31.0 + sin(t.x * 1.7 + seed * 9.0) * 1.2) * 0.07;
+  float lip = smoothstep(0.5, 0.9, t.x) * (1.0 - smoothstep(0.9, 1.0, t.x)) * 0.7;
+  float dry = 1.0 - smoothstep(-0.1, -1.0, t.x) * 0.6;
+  return (plateau * 0.6 + rim + groove + lip) * dry;
+}
+
+// Light the stroke: per-knife colour jitter, bristle streaks, then the height lit by a low warm
+// light from `lightAngle` (radians, screen space; -2.24 is the upper left). `dirA` is the
+// stroke's current (animated) direction, so a stroke that sways turns its ridges to and from
+// the light, which is what makes moving paint glint.
+float3 shadeStroke(float3 col, float2 T, float2 C, float seed, float L, float Wd, float2 dirA,
+                   float edge, float relief, float lightAngle) {
+  float jit = h1(C + 2.7) - 0.5;
+  float jit2 = h1(C + 8.1) - 0.5;
+  col *= 1.0 + jit * 0.12;
+  col += float3(jit2, jit2 * 0.4, -jit2) * 0.035;
+  float streak = sin(T.y * 6.0 + seed * 31.0 + sin(T.x * 1.7 + seed * 9.0) * 1.2);
+  col *= 1.0 + streak * 0.025;
+
+  float e = 0.04;
+  float h = strokeHeight(T, seed);
+  float hu = (strokeHeight(T + float2(e, 0), seed) - strokeHeight(T - float2(e, 0), seed)) / (2.0 * e * L);
+  float hv = (strokeHeight(T + float2(0, e), seed) - strokeHeight(T - float2(0, e), seed)) / (2.0 * e * Wd);
+  float2 nrmA = float2(-dirA.y, dirA.x);
+  float2 grad = (dirA * hu + nrmA * hv) * relief;
+  float3 n = normalize(float3(-grad.x, -grad.y, 1.0));
+  float3 ld = normalize(float3(cos(lightAngle), sin(lightAngle), 0.8));
+  float diff = dot(n, ld);
+  float3 r = reflect(-ld, n);
+  float spec = pow(max(0.0, r.z), 22.0);
+  float seam = smoothstep(0.8, 1.0, edge);
+  float3 lit = col * (0.76 + 0.32 * diff) + float3(1.0, 0.96, 0.9) * spec * 0.13;
+  lit *= 1.0 - seam * 0.08;
+  lit += h * 0.02;
+  return lit;
+}
+
+// Thin underpainting showing between strokes: the picture softened and darkened, weave showing.
+// Averaged premultiplied, so a layer's edge does not darken toward black.
+half4 underpaint(float2 rq, float2 q, float darken, float weave) {
+  float s = renderScale.x;
+  half4 g = unpremul((inputImage.eval(rq * s) + inputImage.eval((rq + float2(5, 3)) * s)
+                    + inputImage.eval((rq - float2(5, 3)) * s) + inputImage.eval((rq + float2(-4, 6)) * s)) * 0.25);
+  float3 under = float3(g.rgb) * darken + canvasWeave(q) * weave;
+  return half4(half3(saturate(under)) * g.a, g.a);
+}

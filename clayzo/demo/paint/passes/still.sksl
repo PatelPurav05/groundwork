@@ -1,0 +1,60 @@
+// STILL. Paints a picture that does not move: a whole landscape in one pass, or one layer of
+// one (mountains, a forest, a building) over others. Where the picture has an edge, strokes run
+// along it (ridges, slopes, roof lines); dark regions below `verticalLuma` get upright strokes
+// (conifers, trunks, reeds); elsewhere strokes lie at `baseAngle`, and above `horizonY` they are
+// the long loose diagonals of a sky. Where a stroke would straddle detail it is repainted with
+// small strokes. Only the light can move (lightSwing over phase: paint glinting as the light
+// swings); with lightSwing 0 the pass is static and can be baked to an image.
+uniform shader inputImage;
+uniform float phase;
+uniform float cell;           // stroke pitch
+uniform float relief;         // paint thickness
+uniform float detail;         // colour contrast above which a stroke becomes small strokes
+uniform float lightAngle;
+uniform float lightSwing;     // radians the light swings over the loop; 0 = still
+uniform float horizonY;       // above it: sky strokes; set 0 for none
+uniform float baseAngle;      // stroke angle where the picture has no edge
+uniform float verticalLuma;   // darker than this: upright strokes; 0 = never
+uniform float boundsPadding;
+uniform float2 renderScale;
+//#hooks
+bool hookAlive(float2 c, float4 A, float4 B) { return src(c).a > 0.5; }
+float3 hookShape(float2 c, float seed, float4 A, float4 B) {
+  float3 m = float3(src(c).rgb);
+  if (lum(m) < verticalLuma) { return float3(-1.5708 + (seed - 0.5) * 0.55, 1.0, 0.36); }
+  float sky = 1.0 - smoothstep(horizonY - 30.0, horizonY + 30.0, c.y);
+  if (sky > 0.5) {
+    float n = vnoise(c / 240.0);
+    return float3((n - 0.5) * 1.9 + (seed - 0.5) * 0.8 - 0.3, mix(1.35, 2.1, h1(c + 3.1)), 0.5);
+  }
+  float gx = lum(float3(src(c + float2(6, 0)).rgb)) - lum(float3(src(c - float2(6, 0)).rgb));
+  float gy = lum(float3(src(c + float2(0, 6)).rgb)) - lum(float3(src(c - float2(0, 6)).rgb));
+  float ang = length(float2(gx, gy)) > 0.05
+    ? atan(gy, gx) + 1.5708 + (seed - 0.5) * 0.3
+    : baseAngle + (seed - 0.5) * 0.6 + (vnoise(c / 240.0) - 0.5) * 0.55;
+  return float3(ang, 1.3, 0.42);
+}
+float hookSway(float2 c, float2 dir, float seed, float4 A, float4 B) { return 0.0; }
+//#main
+half4 main(float2 p) {
+  float2 q = p / renderScale.x;
+  float la = lightAngle + lightSwing * sin(phase);
+  float2 C; float2 D; float2 Da; float2 T; float L; float Wd; float seed; float edge;
+  float z = findStroke(q, cell, 0.0, 0.0, float4(0), float4(0), C, D, Da, T, L, Wd, seed, edge);
+  if (z >= 0.0) {
+    float sky = 1.0 - smoothstep(horizonY - 30.0, horizonY + 30.0, C.y);
+    float2 nr = float2(-D.y, D.x);
+    float3 m0 = float3(src(C).rgb);
+    float k = max(max(distance(float3(src(C + D * L * 0.6).rgb), m0), distance(float3(src(C - D * L * 0.6).rgb), m0)),
+                  max(distance(float3(src(C + nr * Wd * 1.2).rgb), m0), distance(float3(src(C - nr * Wd * 1.2).rgb), m0)));
+    if (k > detail * mix(1.0, 3.0, sky)) {   // skies keep their broad strokes
+      float2 C2; float2 D2; float2 Da2; float2 T2; float L2; float W2; float sd2; float e2;
+      z = findStroke(q, cell * 0.45, 101.0, 0.0, float4(0), float4(0), C2, D2, Da2, T2, L2, W2, sd2, e2);
+      C = C2; D = D2; Da = Da2; T = T2; L = L2; Wd = W2; seed = sd2; edge = e2;
+    }
+  }
+  if (z < 0.0) { return underpaint(q, q, 0.86, 1.6); }
+  float3 col = strokeColour(C, D, T, L, Wd);
+  float3 lit = shadeStroke(col, T, C, seed, L, Wd, Da, edge, relief, la) + canvasWeave(q) * 0.3;
+  return half4(half3(saturate(lit)), 1.0);
+}

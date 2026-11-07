@@ -1,0 +1,64 @@
+// Riso print. Re-draws its input as a two-ink risograph: a blue plate from the picture's
+// darkness and a coral plate from its warmth, each an AM halftone on its own screen angle,
+// overprinted (multiplied) on stock with the coral plate a little out of register.
+//
+// The print is revealed by a front that grows from `center`; its edge is a band of chunky
+// Bayer-dithered cells, so the painting turns to print a pixel at a time. Outside the front
+// the input passes through untouched. Uniforms after the shared head, in order.
+uniform float angle;      // blue screen angle, degrees; coral runs at angle + 30
+uniform float softness;   // dot edge softness, composition px
+uniform float2 center;    // device px: where the print starts
+uniform float progress;   // 0 = all painting, 1 = all print
+uniform float reach;      // radius at progress 1, composition px
+uniform float band;       // width of the dithered edge, composition px
+uniform float bandCell;   // size of the band's dither cells, composition px
+uniform float2 origin;    // device px: the screens scale about this point
+uniform float warmGain;   // how strongly warm colour becomes coral ink
+uniform float2 misreg;    // device px offset of the coral plate
+uniform half4 coral;
+//#body
+// Warmth of a colour: how much red leads blue, gated by saturation, tone-mapped like luma.
+float warmthAt(float2 cp) {
+  half4 u = unpremul(inputImage.eval(cp * renderScale));
+  float3 c = float3(u.rgb);
+  float w = clamp((c.r - c.b) * warmGain + (c.r - c.g) * 0.6 * warmGain, 0.0, 1.0);
+  return w * float(u.a);
+}
+float warmthCell(float2 c, float size) {
+  float o = size * 0.25;
+  return 0.25 * (warmthAt(c + float2(-o, -o)) + warmthAt(c + float2(o, -o)) + warmthAt(c + float2(-o, o)) + warmthAt(c + float2(o, o)));
+}
+
+// One AM screen: ink amount at cp for a plate on screen `ang`, tone from `which` (0 blue, 1 coral).
+float plate(float2 cp, float ang, float which) {
+  float2 o = origin / renderScale;
+  float2 r = rot(cp - o, ang);
+  float2 idx = floor(r / cell);
+  float2 ctr = rot((idx + 0.5) * cell, -ang) + o;
+  float k = which < 0.5 ? coverageCell(ctr, cell).x : warmthCell(ctr, cell);
+  float2 w = 6.2831853 * r / cell;
+  float spot = 0.5 + 0.25 * (cos(w.x) + cos(w.y));
+  float aa = softness * px() * 3.1416 / cell;
+  return smoothstep(spot - aa, spot + aa, k);
+}
+
+half4 main(float2 p) {
+  float2 cp = p / renderScale;
+  half4 src = inputImage.eval(p);
+
+  // The front, dithered in chunky cells.
+  float2 q = floor(cp / bandCell);
+  float2 cc = (q + 0.5) * bandCell;
+  float2 d = cc - center / renderScale;
+  float ang = atan(d.y, d.x);
+  float dist = max(0.0, length(d) + 26.0 * (sin(ang * 5.0 + phase * 6.2831853) + 0.5 * sin(ang * 9.0 - phase * 12.566)));
+  float v = clamp((progress * (reach + band) - dist) / band, 0.0, 1.0);
+  if (step(bayer8(q) + 0.5 / 64.0, v) < 0.5) { return src; }
+
+  float kb = plate(cp, angle, 0.0);
+  float kc = plate(cp - misreg / renderScale, angle + 30.0, 1.0);
+  half3 blueLayer = mix(half3(1.0), ink.rgb, half(kb));
+  half3 coralLayer = mix(half3(1.0), coral.rgb, half(kc));
+  half3 c = paper.rgb * blueLayer * coralLayer;
+  return half4(c, 1.0);
+}

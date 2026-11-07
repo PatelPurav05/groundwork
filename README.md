@@ -15,6 +15,11 @@
   <a href="#what-to-trust">What to trust</a>
 </p>
 
+<p align="center">
+  <a href="docs/media/groundwork-demo.mp4"><img src="docs/media/demo-poster.jpg" alt="Groundwork demo video: an oil painting of Orange County prints as a riso poster, becomes the Santa Ana parcel map, and is sieved down to 90 lots worth a call" width="100%"></a><br>
+  <sub><a href="docs/media/groundwork-demo.mp4"><b>Watch the 30-second demo</b></a> (MP4, with sound). Every number in it comes from the app's own engine over the Santa Ana data; built with Clayzo in <a href="clayzo/demo/"><code>clayzo/demo/</code></a>.</sub>
+</p>
+
 ---
 
 ## The problem
