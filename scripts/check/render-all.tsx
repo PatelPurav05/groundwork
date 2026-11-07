@@ -14,6 +14,8 @@ import { SieveScreen } from "@/components/Sieve";
 import { Shortlist } from "@/components/Shortlist";
 import { SiteDetail } from "@/components/SiteDetail";
 import { BoardBrief } from "@/components/BoardBrief";
+import { SearchPalette } from "@/components/Search";
+import { parseLocal } from "@/lib/query";
 
 const slug = process.argv[2] ?? "santa-ana";
 const base = `public/data/${slug}`;
@@ -82,6 +84,23 @@ attempt("exiting/sieve(no lens)", () => <SieveScreen />);
 attempt("exiting/site(no apn)", () => <SiteDetail address={null} />);
 set({ selectedApn: "does-not-exist" });
 attempt("site(unknown apn)", () => <SiteDetail address={null} />);
+
+// Search palette, and the local reader on the examples it suggests.
+attempt("search", () => <SearchPalette onClose={() => {}} />);
+const expect: [string, string | null][] = [
+  ["Church land near transit", "faith"],
+  ["Empty lots for 10 starter homes", "starter"],
+  ["Vacant lots for 10+ homes", null],
+  ["Strip malls near a bus line", "commercial"],
+  ["Public land for sale", "public"],
+  ["split my backyard", "backyard"],
+  ["starter homes on a small lot", "starter"],
+];
+for (const [q, lens] of expect) {
+  const p = parseLocal(q);
+  if (p.lens !== lens) failures.push(`parseLocal("${q}") → ${p.lens}, expected ${lens}`);
+}
+if (parseLocal("Vacant lots for 10+ homes").filters.minHomes !== 10) failures.push("parseLocal minHomes");
 
 // Board brief with every site saved.
 set({ saved: Object.fromEntries(data.sites.map((s) => [s.apn, { at: 0 }])) });

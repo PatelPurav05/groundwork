@@ -81,7 +81,15 @@ export function Shortlist({ onPrint }: { onPrint: () => void }) {
 
         <div className="flex flex-col gap-3 px-6 pt-3 pb-4">
           <h2 className="display text-[34px] leading-[0.95] text-blue">
-            <span className="tnum">{n(ranked.length)}</span> {ranked.length === 1 ? "lot" : "lots"} worth a call
+            {filtered.length === ranked.length ? (
+              <>
+                <span className="tnum">{n(ranked.length)}</span> {ranked.length === 1 ? "lot" : "lots"} worth a call
+              </>
+            ) : (
+              <>
+                <span className="tnum">{n(filtered.length)}</span> of {n(ranked.length)} lots match
+              </>
+            )}
           </h2>
           <button onClick={() => setShowHow((v) => !v)} aria-expanded={showHow} className="press flex items-center gap-1 self-start text-[13px] text-muted hover:text-ink">
             Sifted from {n(sieve.total)} parcels. See the cuts
@@ -107,8 +115,8 @@ export function Shortlist({ onPrint }: { onPrint: () => void }) {
             <FilterChip on={filters.vacant} onClick={() => setFilter("vacant", !filters.vacant)}>
               Open land
             </FilterChip>
-            <FilterChip on={filters.minHomes === 10} onClick={() => setFilter("minHomes", filters.minHomes === 10 ? null : 10)}>
-              10+ homes
+            <FilterChip on={!!filters.minHomes} onClick={() => setFilter("minHomes", filters.minHomes ? null : 10)}>
+              {filters.minHomes ?? 10}+ homes
             </FilterChip>
           </div>
         </div>

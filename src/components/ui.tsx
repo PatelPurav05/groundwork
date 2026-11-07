@@ -169,4 +169,10 @@ export const IconCopy = icon(
     <path d="M4 12.5V5.5A1.5 1.5 0 015.5 4h7" />
   </>,
 );
-export const IconPrint = icon(<path d="M6 7.5V3.5h8v4M6 13.5H4.5v-6h11v6H14M6 11.5h8v5H6z" />);
+export const IconPin = icon(
+  <>
+    <path d="M10 17.5s5.5-4.9 5.5-9.25a5.5 5.5 0 0 0-11 0C4.5 12.6 10 17.5 10 17.5Z" />
+    <circle cx="10" cy="8.25" r="2" />
+  </>,
+);
+export const IconPrint =icon(<path d="M6 7.5V3.5h8v4M6 13.5H4.5v-6h11v6H14M6 11.5h8v5H6z" />);
