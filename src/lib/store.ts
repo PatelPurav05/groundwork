@@ -8,6 +8,18 @@ import type { LensId } from "./rules/lenses";
 export type Mode = "home" | "sieve" | "list" | "site";
 export type PassReason = "too_small" | "hazard" | "wont_sell" | "already_built" | "other";
 export type ListTab = "review" | "saved" | "passed";
+export interface ResearchFinding {
+  id: string;
+  answer: "yes" | "no" | "unclear";
+  summary: string;
+  sources: { title: string; url: string }[];
+  confidence: "low" | "medium" | "high";
+}
+export interface ResearchRecord {
+  at: number;
+  law: string;
+  findings: ResearchFinding[];
+}
 export interface Filters {
   transit: boolean;
   vacant: boolean;
@@ -28,6 +40,9 @@ interface State {
   /** "Check an address" opens a single-parcel report even if it is not a candidate. */
   probeApn: string | null;
   saved: Record<string, { at: number }>;
+  /** Claude web research per lot, kept in this browser. Evidence to verify, never a pass. */
+  research: Record<string, ResearchRecord>;
+  setResearch: (apn: string, r: ResearchRecord) => void;
   filters: Filters;
   setFilter: <K extends keyof Filters>(k: K, v: Filters[K]) => void;
   setFilters: (f: Partial<Filters>) => void;
@@ -62,6 +77,8 @@ export const useStore = create<State>()(
       probeApn: null,
       saved: {},
       passed: {},
+      research: {},
+      setResearch: (apn, r) => set((s) => ({ research: { ...s.research, [apn]: r } })),
       filters: NO_FILTERS,
       setFilter: (k, v) => set((s) => ({ filters: { ...s.filters, [k]: v } })),
       setFilters: (f) => set({ filters: { ...NO_FILTERS, ...f } }),
@@ -107,7 +124,7 @@ export const useStore = create<State>()(
     }),
     {
       name: "groundwork",
-      partialize: (s) => ({ saved: s.saved, passed: s.passed }),
+      partialize: (s) => ({ saved: s.saved, passed: s.passed, research: s.research }),
     },
   ),
 );

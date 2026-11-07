@@ -90,6 +90,12 @@ export const CITIES = {
     heJurisdiction: 'SANTA ANA',    // SCAG HE layer Jurisdiction value (not present in the layer as of 2026-11-07)
     slaCity: 'Santa Ana',           // HCD SLA CSV "City" / "Local Agency"
     footprintsCity: 'SANTA ANA',
+    historic: {
+      properties: 'https://gis.santa-ana.org/server/rest/services/Public/PBA_HistoricResource/FeatureServer/0',
+      districts: 'https://gis.santa-ana.org/server/rest/services/Public/PBA_HistoricResource/FeatureServer/1',
+    },
+    heavyIndustrialZones: ['M2'],              // ZONEDESC "Heavy Industrial"
+    industrialZones: ['M1', 'M2'],             // ZONEDESC "Light Industrial" / "Heavy Industrial"
   },
 
   // Config stub only; NOT fetched or built. Parcel/zoning layer URLs and field names must be

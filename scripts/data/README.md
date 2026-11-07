@@ -12,7 +12,7 @@ node scripts/data/build.mjs santa-ana --no-fetch   # rebuild from the cache only
 node scripts/data/build.mjs --no-fetch --debug     # also print zoning agreement and coverage stats
 ```
 
-You can run the fetchers on their own: `node scripts/data/fetch-arcgis.mjs [city]`, `fetch-sla.mjs`, `fetch-osm.mjs`.
+You can run the fetchers on their own: `node scripts/data/fetch-arcgis.mjs [city]`, `fetch-sla.mjs`, `fetch-osm.mjs`, `fetch-enrich.mjs`. The enrichment maths lives in `enrich.mjs`.
 To force one source to fetch again, delete `data/raw/<city>/<source>/`.
 
 Deps (installed in `scripts/data/`): `@turf/turf`, `flatbush` (spatial index) and `csv-parse`.
@@ -89,5 +89,41 @@ Deps (installed in `scripts/data/`): `@turf/turf`, `flatbush` (spatial index) an
 Sites are keyed by normalised APN. When several parcels share one APN, the one with the largest lot is kept, and parcels with a null APN are kept individually. Distinct APNs that share an identical centroid and lot (condo records) are all kept, because the app dedupes by geometry. The build report counts these groups. Order: hard signals first, then lot size descending.
 - The outline is the outer ring of the largest polygon, simplified with `turf.simplify` (high quality, rising tolerance) until it has ≤ 40 vertices (≤ 24 if sites.json would exceed 6 MB).
 - `existingUse` is the SCAG LU24 code plus its label (from the SCAG land-use legend as recalled), and `existingUseCode` is the raw LU24 code.
+
+**Enrichment (bits 13–22, `parcels.json.known`, `Site.enrich`)**
+
+All distances are planar, in a local equirectangular projection (metres) centred on the city.
+
+- **`known`:** parcels.json carries `known: {flagName: bool}`. It is true when the layer behind that bit loaded. `he_site` and `urban_perimeter_ok` are false.
+- **Bit 13, `heavy_industry_1200`:** the parcel is zoned M2 (ZONEDESC "Heavy Industrial"), or its boundary is within 1,200 ft of any parcel whose centroid zone is M2 (108 parcels).
+  - This is a proxy: SB 4 says "permitted for heavy industrial use", and we use M2 zoning in its place.
+  - Industrial land outside the city is not in the parcel set and is not considered.
+  - `enrich.nearestHeavyIndustryFt` is the boundary-to-boundary distance to the nearest M2 parcel; 0 means the parcel itself is M2.
+- **Bit 14, `adj_industrial`:** the boundary is within 15 ft of another M1- or M2-zoned parcel (2,293 parcels). This is a proxy for SB 4's light-industrial adjacency and for AB 2011's "on or adjacent to industrial use"; it tests zoning, not the actual square footage in use.
+- **Bit 15, `fault_zone`:** the centroid is in a CGS Alquist-Priolo Fault Zone. None intersect Santa Ana, so the bit is 0 with the layer loaded.
+- **Bit 16, `historic`:** the first match wins, and `enrich.historic = {name, source}`. In order:
+  1. Santa Ana Register property (matched by APN, with point-in-parcel as fallback; all categories count)
+  2. NRHP point inside the parcel
+  3. NRHP polygon containing the centroid
+  4. Santa Ana historic district containing the centroid
+
+  Being inside a district is a proxy for "contributing structure". The California Register is not available as GIS and is not checked.
+- **Bit 17, `hazwaste`:** a DTSC EnviroStor cleanup site with an open status is inside the parcel or within 50 ft of it, and `enrich.hazwaste = {name, id, status, source}`.
+  - Open statuses: Active, Backlog, Inactive - Needs Evaluation, Inactive - Action Required, Certified O&M - Land Use Restrictions.
+  - Closed and referred sites are ignored.
+  - This is a Cortese-list proxy. GeoTracker failed (no official REST service was found), so only the DTSC half is checked.
+- **Bit 18, `wetland`:** the centroid is in any USFWS NWI polygon. NWI is not a delineation, and its riverine and lake polygons include deepwater habitat.
+- **Bit 19, `farmland`:** the centroid is in FMMP 2022 Prime (P) or Statewide Importance (S) farmland.
+- **Bit 20, `conservation`:** the centroid is in a CPAD holding or a CCED easement, and `enrich.conservationName` gives the name. CPAD includes ordinary city parks and school fields. CCED has no easements in the city.
+- **Bit 21, `freeway_500`:** a Caltrans SHN centerline segment is within 500 ft of the parcel boundary. All SHN routes near Santa Ana (5, 22, 55, 57, 405) are freeways.
+- **Bit 22, `urban_perimeter_ok`:** `enrich.urbanPerimeterPct` ≥ 75. This is computed for sites only and is 0 in parcels.json.
+- **How `urbanPerimeterPct` is computed:**
+  - The boundary is sampled every 5 m (or every perimeter/400 m, if that is longer).
+  - From each sample the code steps outward 1–60 m and takes the first other parcel it hits, so streets are crossed. This follows the SB 35 rule that parcels separated only by a street count as adjoining (as recalled, unverified for SB 4).
+  - A neighbour is non-urban if its SCAG LU24 is 19xx or 3xxx (vacant), 2xxx (agriculture), 4xxx (water), 18xx (open space) or 1437 (flood channel); otherwise it is urban.
+  - Neighbours with no LU24 fall back to their zone category: open_space is non-urban, and other/unknown is unclassified.
+  - pct = urban / (urban + non-urban). Samples that find no parcel within 60 m, and unclassified neighbours, are excluded.
+  - pct is null when fewer than half the samples are classified.
+- **Not fetched:** Title V facilities (1,600 ft), refineries (3,200 ft), NCCP plan lands and protected-species habitat.
 
 **Failure handling.** A source that fails after retries is written as `status: failed` in `_meta.json` and in sources.json. Its dependent fields become `"unknown"` or null and its flag bits stay 0. The build continues.

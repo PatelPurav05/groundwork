@@ -48,4 +48,40 @@ export const SOURCES = {
     name: 'OC Building Footprints',
     url: 'https://www.ocgis.com/arcpub/rest/services/Map_Layers/Building_Footprints/MapServer/0',
   },
+  ap_fault: {
+    name: 'CGS Alquist-Priolo Earthquake Fault Zones',
+    url: 'https://services2.arcgis.com/zr3KAIbsRSUyARHG/arcgis/rest/services/CGS_Alquist_Priolo_Fault_Zones/FeatureServer/0',
+  },
+  nrhp_points: {
+    name: 'National Register of Historic Places (NPS) points',
+    url: 'https://mapservices.nps.gov/arcgis/rest/services/cultural_resources/nrhp_locations/MapServer/0',
+  },
+  nrhp_polys: {
+    name: 'National Register of Historic Places (NPS) polygons',
+    url: 'https://mapservices.nps.gov/arcgis/rest/services/cultural_resources/nrhp_locations/MapServer/1',
+  },
+  envirostor: {
+    name: 'DTSC EnviroStor cleanup sites (Public Data Export)',
+    url: 'https://services3.arcgis.com/Oy2JTCD10wkoelxS/arcgis/rest/services/Envirostor_Public_Data_Export/FeatureServer/0',
+  },
+  nwi: {
+    name: 'USFWS National Wetlands Inventory',
+    url: 'https://fwspublicservices.wim.usgs.gov/wetlandsmapservice/rest/services/Wetlands/MapServer/0',
+  },
+  fmmp: {
+    name: 'CA DOC FMMP California Important Farmland 2022',
+    url: 'https://gis.conservation.ca.gov/server/rest/services/DLRP/CaliforniaImportantFarmland_2022/FeatureServer/0',
+  },
+  cpad: {
+    name: 'California Protected Areas Database (CPAD) Holdings, current release (GreenInfo Network)',
+    url: 'https://services1.arcgis.com/4ZKi1B1zTblbwgWB/arcgis/rest/services/CPAD_Holdings_Current_Release/FeatureServer/0',
+  },
+  cced: {
+    name: 'California Conservation Easement Database (CCED), CNRA',
+    url: 'https://gis.cnra.ca.gov/arcgis/rest/services/Boundaries/CCED_AccessType/MapServer/0',
+  },
+  shn: {
+    name: 'Caltrans State Highway Network (SHN Odometer lines)',
+    url: 'https://caltrans-gis.dot.ca.gov/arcgis/rest/services/CHhighway/SHN_Odometer/FeatureServer/0',
+  },
 };

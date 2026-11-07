@@ -20,6 +20,8 @@ export interface CityIndexEntry {
 /** Every parcel in the city, columnar, for the sieve. */
 export interface ParcelColumns {
   count: number;
+  /** Which layers loaded, by flag name (false = layer missing, so the check is unknown). */
+  known?: Record<string, boolean>;
   bbox: [number, number, number, number];
   zoneCodes: string[];
   columns: {
@@ -71,6 +73,13 @@ export interface Site {
     };
   };
   flags: number;
+  enrich?: {
+    urbanPerimeterPct: number | null;
+    historic: { name: string | null; source: string } | null;
+    hazwaste: { name: string | null; id: string; status: string | null; source: string } | null;
+    conservationName: string | null;
+    nearestHeavyIndustryFt: number | null;
+  };
 }
 
 export interface Source {

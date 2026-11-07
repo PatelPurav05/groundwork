@@ -10,12 +10,12 @@
  *
  * Beats (s)
  *   0.00–0.50  still: the city in blue, counter 57,926
- *   0.50 / 2.30 / 3.20 / 4.30  receipt rows write in (clip wipe + fade)
- *   0.80–1.95  step 1: 859 lots fade to a hairline tint, centre outward; 57,926 → 205
- *   step 2: −0, nothing moves (the honest beat)
- *   3.50–4.05  step 3: 5 lots fade; 205 → 178
- *   4.60–5.25  step 4: 16 lots fade; 178 → 100
- *   5.70–6.60  end: counter → 90 "lots worth a call"; 18 survivors stamp coral
+ *   0.50 / 2.20 / 3.00 / 3.80 / 4.60  five receipt rows write in (clip wipe + fade)
+ *   0.80–1.95  step 1: ~900 lots fade to a hairline tint, centre outward; 57,926 → 205
+ *   2.50 / 3.30 / 4.10 / 4.90  steps 2–5: 5, 4, 2, 13 of the 41 survivors fade;
+ *              205 → 178 → 159 → 150 → 87
+ *   5.40       "Also checked, none cut: …" fades in
+ *   5.70–6.50  end: counter → 79 "lots worth a call"; 16 survivors stamp coral
  *   6.50–7.20  "Not cut, shown as a question" + three dashed rows
  *   7.20–8.60  hold
  *   8.60–9.40  reset: receipt fades, lots refill outward, counter back to 57,926
@@ -122,9 +122,11 @@ export function sieve() {
     if (s1.every((j) => Math.hypot(lots[j].x - p.x, lots[j].y - p.y) > 62)) s1.push(i);
   }
   if (s1.length < 41) throw new Error(`only ${s1.length} survivors fit`);
-  // The 18 that end coral: farthest-point picks, so they cover the whole city.
+  // The 16 that end coral: farthest-point picks, so they cover the whole city.
+  // 41 survive step 1 (205); then 5, 4, 2, 13 and 1 fade, in proportion to
+  // 205 → 178 → 159 → 150 → 87 → 79, leaving 16.
   const final: number[] = [s1[0]];
-  while (final.length < 18) {
+  while (final.length < 16) {
     let best = -1;
     let bestD = -1;
     for (const i of s1) {
@@ -138,18 +140,18 @@ export function sieve() {
     final.push(best);
   }
   const rest = s1.filter((i) => !final.includes(i));
-  const cut3 = rest.slice(0, 5); // FEMA flood
-  const cut4 = rest.slice(5, 21); // under 10,000 sq ft
-  const cutEnd = rest.slice(21, 23); // 100 → 90
+  const CUTS: [step: number, count: number][] = [[2, 5], [3, 4], [4, 2], [5, 13], [6, 1]];
   const stepOf = new Map<number, number>();
   lots.forEach((_, i) => stepOf.set(i, 1));
   s1.forEach((i) => stepOf.set(i, 0));
-  cut3.forEach((i) => stepOf.set(i, 3));
-  cut4.forEach((i) => stepOf.set(i, 4));
-  cutEnd.forEach((i) => stepOf.set(i, 5));
+  {
+    let k = 0;
+    for (const [step, n] of CUTS) for (let j = 0; j < n; j++) stepOf.set(rest[k++], step);
+    if (k !== rest.length) throw new Error(`cuts cover ${k} of ${rest.length} step-1 survivors`);
+  }
 
   const wave = (p: { x: number; y: number }, t0: number, spread: number) => snap(sec(t0) + (Math.hypot(p.x - cx, p.y - cy) / maxD) * sec(spread));
-  const STEP_T: Record<number, [number, number]> = { 1: [0.8, 0.75], 3: [3.5, 0.4], 4: [4.6, 0.45], 5: [5.7, 0.1] };
+  const STEP_T: Record<number, [number, number]> = { 1: [0.8, 0.75], 2: [2.5, 0.35], 3: [3.3, 0.35], 4: [4.1, 0.3], 5: [4.9, 0.4], 6: [5.7, 0.05] };
   const FADE = sec(0.36);
   const lotIds: string[] = [];
   const finalOrder = [...final].sort((a, b) => lots[a].y * 0.6 + lots[a].x - (lots[b].y * 0.6 + lots[b].x));
@@ -219,11 +221,13 @@ export function sieve() {
     }
   };
   tick(57926, 205, 0.8, 0.85, 16);
-  tick(205, 178, 3.5, 0.4, 6);
-  tick(178, 100, 4.6, 0.5, 9);
-  counterKeys.push([sec(5.82), num(90), "hold"]);
+  tick(205, 178, 2.5, 0.35, 6);
+  tick(178, 159, 3.3, 0.35, 5);
+  tick(159, 150, 4.1, 0.3, 4);
+  tick(150, 87, 4.9, 0.45, 9);
+  counterKeys.push([sec(5.82), num(79), "hold"]);
   counterKeys.push([sec(9.0), num(57926), "hold"]);
-  const counterTop = CY0 + 52;
+  const counterTop = CY0 + 40;
   nodes.counter = text("counter", D, {
     x: ix - 4,
     y: counterTop,
@@ -250,21 +254,22 @@ export function sieve() {
     runs: tr("label.runs", [[0, labelRun("parcels in Santa Ana"), "hold"], [sec(5.82), labelRun("lots worth a call", C.ink), "hold"], [sec(9.0), labelRun("parcels in Santa Ana")]] as never),
     opacity: tr("label.op", [[0, 1, "hold"], [sec(5.7), 1, IN], [sec(5.82), 0, OUT], [sec(6.16), 1, "hold"], [sec(8.6), 1, IN], [sec(8.9), 0, "hold"], [sec(9.0), 0, OUT], [sec(9.35), 1]]),
   });
-  const div1 = labelTop + 58;
+  const div1 = labelTop + 54;
   nodes.div1 = rect("div1", D, { x: ix + iw / 2, y: div1, w: iw, h: 1.5, r: 0, style: solid(C.ink, HAIR_A) });
 
   // Receipt rows.
   const rows = [
-    { n: "−57,721", label: SIEVE_LABELS[0], detail: "· SB 4 p1", t: 0.5 },
-    { n: "−0", label: SIEVE_LABELS[1], detail: "", t: 2.3 },
-    { n: "−27", label: SIEVE_LABELS[2], detail: "", t: 3.2 },
-    { n: "−78", label: SIEVE_LABELS[3], detail: "· our assumption", t: 4.3 },
+    { n: "\u221257,721", label: SIEVE_LABELS[0], detail: "\u00b7 SB 4 p1", t: 0.5 },
+    { n: "\u221227", label: SIEVE_LABELS[1], detail: "", t: 2.2 },
+    { n: "\u221219", label: SIEVE_LABELS[2], detail: "", t: 3.0 },
+    { n: "\u22129", label: SIEVE_LABELS[3], detail: "", t: 3.8 },
+    { n: "\u221263", label: SIEVE_LABELS[4], detail: "\u00b7 our assumption", t: 4.6 },
   ];
-  const ROW_H = 56;
+  const ROW_H = 46;
   const NUM_W = 104;
   const rowIds: string[] = [];
   rows.forEach((r, k) => {
-    const top = div1 + 22 + k * ROW_H;
+    const top = div1 + 14 + k * ROW_H;
     const id = `row${k}`;
     const kids: string[] = [];
     nodes[`${id}.n`] = text(`${id}.n`, D, { x: ix, y: top, w: NUM_W, align: "right", runs: [run({ text: r.n, font: "mono", size: 21, weight: 500, color: C.coralInk, lineHeight: 28 })] });
@@ -279,17 +284,18 @@ export function sieve() {
     }
     // a hairline under each row except the last
     if (k < rows.length - 1) {
-      nodes[`${id}.rule`] = rect(`${id}.rule`, D, { x: ix + iw / 2, y: top + ROW_H - 14, w: iw, h: 1, r: 0, style: solid(C.ink, 0.07) });
+      // midway between this row's descenders (top + 33) and the next row's caps (top + ROW_H + 13)
+      nodes[`${id}.rule`] = rect(`${id}.rule`, D, { x: ix + iw / 2, y: top + 39, w: iw, h: 1, r: 0, style: solid(C.ink, 0.07) });
       kids.push(`${id}.rule`);
     }
     // Write in: a wipe from the left with a short fade.
     const t0 = sec(r.t);
     nodes[`${id}.clip`] = rect(`${id}.clip`, D, {
       x: ix - 8,
-      y: top + 14,
+      y: top + 20,
       anchor: { x: -(iw + 16) / 2, y: 0 },
       w: iw + 16,
-      h: 48,
+      h: 44,
       r: 0,
       scale: tr(`${id}.clip.sc`, [[t0, s(0.001, 1), OUT], [t0 + sec(0.55), s(1)]]),
       style: {},
@@ -302,9 +308,20 @@ export function sieve() {
     rowIds.push(id);
   });
 
+  // Tests that ran and cut nobody: one muted line.
+  const alsoTop = div1 + 14 + rows.length * ROW_H + 2;
+  const alsoT = 5.4;
+  nodes.also = text("also", D, {
+    x: ix,
+    y: alsoTop,
+    w: iw + 8,
+    runs: [run({ text: "Also checked, none cut: fire zone, fault zone, wetland, easement", font: "ui", size: 20, weight: 500, color: C.muted, lineHeight: 26 })],
+    opacity: tr("also.op", [[sec(alsoT), 0, OUT], [sec(alsoT + 0.4), 1, "hold"], [sec(8.6), 1, IN], [sec(8.95), 0]]),
+  });
+
   // Not cut, shown as a question.
-  const div2 = div1 + 22 + rows.length * ROW_H + 4;
-  const qTop = div2 + 26;
+  const div2 = alsoTop + 44;
+  const qTop = div2 + 16;
   const qT = 6.5;
   nodes.div2 = rect("div2", D, { x: ix + iw / 2, y: div2, w: iw, h: 1.5, r: 0, style: solid(C.ink, HAIR_A) });
   nodes.qHead = text("qHead", D, {
@@ -314,12 +331,12 @@ export function sieve() {
     runs: [run({ text: "Not cut, shown as a question", font: "ui", size: 20, weight: 600, color: C.muted, lineHeight: 26 })],
     opacity: tr("qHead.op", [[sec(qT), 0, OUT], [sec(qT + 0.35), 1, "hold"], [sec(8.6), 1, IN], [sec(8.95), 0]]),
   });
-  const qs = ["Owned by the institution since 2024", "Not in a fault zone", "Not within 1,200 ft of heavy industry"];
-  const Q_H = 46;
+  const qs = ["Owned by the institution since 2024", "Not near a Title V facility or refinery", "No protected habitat"];
+  const Q_H = 42;
   const qIds: string[] = ["qHead"];
   qs.forEach((q, k) => {
     const id = `q${k}`;
-    const cyq = qTop + 44 + k * (Q_H + 8) + Q_H / 2;
+    const cyq = qTop + 38 + k * (Q_H + 8) + Q_H / 2;
     const t0 = sec(qT + 0.12) + k * sec(0.07);
     nodes[`${id}.box`] = rect(`${id}.box`, D, { x: ix + iw / 2, y: cyq, w: iw, h: Q_H, r: 12, style: line(C.muted, 1.5, 0.55, [5, 5]) });
     nodes[`${id}.ring`] = ellipse(`${id}.ring`, D, { x: ix + 26, y: cyq, w: 26, h: 26, style: line(C.muted, 1.75, 1, [0.1, 4.2]) });
@@ -341,13 +358,14 @@ export function sieve() {
     height: H,
     duration: D,
     nodes,
-    roots: ["map", "card", "counter", "label", "div1", ...rowIds, "div2", ...qIds],
+    roots: ["map", "card", "counter", "label", "div1", ...rowIds, "also", "div2", ...qIds],
     markers: [
       marker("start", sec(0.4), { name: "City" }),
       marker("step1", sec(2.0), { name: "Step 1 landed" }),
-      marker("step2", sec(2.9), { name: "Step 2 (no change)" }),
-      marker("step3", sec(4.1), { name: "Step 3" }),
-      marker("step4", sec(5.3), { name: "Step 4" }),
+      marker("step2", sec(2.9), { name: "Step 2" }),
+      marker("step3", sec(3.7), { name: "Step 3" }),
+      marker("step4", sec(4.5), { name: "Step 4" }),
+      marker("step5", sec(5.45), { name: "Step 5" }),
       marker("found", sec(6.7), { name: "Survivors" }),
       marker("final", sec(7.6), { name: "Final receipt" }),
       marker("reset", sec(9.0), { name: "Reset" }),
