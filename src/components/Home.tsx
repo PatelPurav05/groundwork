@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useStore } from "@/lib/store";
 import { LENSES } from "@/lib/rules/lenses";
 import { n } from "@/lib/format";
-import { LensArt } from "./LensArt";
+import { LensIcon } from "./LensIcon";
 import { IconArrow, IconSearch } from "./ui";
 
 export function Home({ onSearch }: { onSearch: () => void }) {
@@ -43,7 +43,9 @@ export function Home({ onSearch }: { onSearch: () => void }) {
                 onBlur={() => setHot(null)}
                 className="group flex w-full items-center gap-4 px-6 py-3.5 text-left transition-colors duration-150 hover:bg-stock-2 focus-visible:bg-stock-2"
               >
-                <LensArt id={lens.id} playing={hot === lens.id} className="w-[84px] shrink-0" />
+                <span className="grid size-[76px] shrink-0 place-items-center rounded-[16px] bg-stock-2 transition-colors duration-200 group-hover:bg-stock-3">
+                  <LensIcon id={lens.id} playing={hot === lens.id} size={60} />
+                </span>
                 <span className="flex min-w-0 flex-1 flex-col gap-1">
                   <span className="display text-[19px] leading-tight font-bold tracking-[-0.02em] text-ink">{lens.name}</span>
                   <span className="text-[13.5px] leading-snug text-muted">{lens.hook}</span>

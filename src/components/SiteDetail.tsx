@@ -13,7 +13,7 @@ import { acres, displayApn, n, shortDate, siteTitle } from "@/lib/format";
 import type { CityData } from "@/lib/data";
 import { AssumedTag, Button, IconBack, IconBookmark, IconBookmarkFilled, IconButton, IconChevron, IconExternal, IconX, ScoreStamp, SheetHeading, StatusMark, Tag } from "./ui";
 import { DraftLetter } from "./DraftLetter";
-import { LensArt } from "./LensArt";
+import { LensIcon } from "./LensIcon";
 
 const EASE = [0.23, 1, 0.32, 1] as const;
 
@@ -147,7 +147,7 @@ function VerdictBlock({ ev, score, units, basis }: { ev: Evaluation; score: numb
     <section className={clsx("relative mx-6 overflow-hidden rounded-[14px]", yes ? "bg-blue-tint" : ev.verdict === "no" ? "bg-coral-tint" : "bg-stock-2")}>
       <div className={clsx("absolute inset-0", yes ? "halftone" : "halftone-coral")} aria-hidden />
       <div className="relative flex items-start gap-4 p-5">
-        <LensArt id={ev.lens.id} playing={false} className="w-[64px] shrink-0" />
+        <span className="grid size-[60px] shrink-0 place-items-center rounded-[14px] bg-stock/80"><LensIcon id={ev.lens.id} size={48} /></span>
         <div className="flex min-w-0 flex-1 flex-col gap-1.5">
           <p className="display text-[21px] leading-tight font-bold tracking-[-0.02em] text-ink">{v.head}</p>
           <p className="text-[13.5px] leading-snug text-ink">{v.sub}</p>

@@ -74,7 +74,7 @@ export function App() {
       >
         <header className="flex h-16 shrink-0 items-center justify-between gap-3 border-b border-hairline px-6">
           <button onClick={goHome} className="press -ml-1 rounded-lg px-1 py-1" aria-label="Groundwork, start over">
-            <Wordmark animate />
+            <Wordmark />
           </button>
           {data && (
             <button

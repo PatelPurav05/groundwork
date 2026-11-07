@@ -76,13 +76,22 @@ no third hue. No violet as a token (overprint appears only inside illustrations,
 - Ease `cubic-bezier(.23,1,.32,1)`; UI 140-260ms; keyboard actions never animate.
 - One authored moment: the sieve. Dots fall away in a wave; the counter's two ink layers slide
   into register as it lands.
-- Clayzo illustrations (lens art, logo mark, loading) play on hover or once on arrival; reduced
-  motion shows the resting frame.
+- Lens icons: coral homes rise from the ground line on hover; reduced motion shows them still.
 
 ## Logo
-A house built from halftone dots: blue layer and coral layer, the coral printed slightly out of
-register. Wordmark "Groundwork" in Bricolage Grotesque 800, tracking -0.03em, blue.
+"Foundation": a blue house standing on a coral foundation slab that runs past its walls and rises
+through the doorway as one shape, so the opening into the home is the ground it stands on.
+`src/components/LogoMark.tsx`, 32 grid; holds at 16px; a one-colour `mono` version for blue or ink
+grounds. Lockup: mark + "Groundwork" in Bricolage Grotesque 800, tracking -0.035em, ink.
+
+## Lens icons
+One pictogram system (`src/components/LensIcon.tsx`, 64 grid): front elevations on a shared ink
+ground line. Blue = what stands today, coral = the homes the law makes possible. On hover the coral
+homes sink below the ground line and rise back (clipped at the ground, ~0.9s, ease-out), so they
+emerge rather than slide. Shown on a stock-2 tile, 76px on home, 60px on the verdict.
 
 ## Changelog
 - 2026-11-07: Replaced the beige / serif first pass with the riso world (user's choice).
+- 2026-11-07: Replaced the halftone-dot logo and art direction with the solid "Foundation" mark
+  and the ground-line pictogram set (user found the dots off for a premium product).
 - 2026-11-07: Map survivor stamps scale with list size (2.6–6.5px) so large lists stay readable.
