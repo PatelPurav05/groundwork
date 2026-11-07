@@ -49,3 +49,6 @@ node_modules/
 # third-party agent skills, restored from skills-lock.json via `npx skills`
 /.agents/
 /.claude/skills
+
+# built Clayzo documents (regenerate: npx tsx clayzo/readme/build.ts)
+/clayzo/readme/out/
